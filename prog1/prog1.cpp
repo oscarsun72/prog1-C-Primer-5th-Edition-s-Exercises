@@ -7,31 +7,19 @@
 using namespace std;
 //using std::cout; using std::cin;using std::endl;
 
-string compareStrEqual() {
-
-	vector<int>ivec{2,3,4,5,6,7};	
-	int iarr[6];
-	int* p = iarr;
-	for (vector<int>::iterator i = begin(ivec); i != end(ivec); ++i)
-	{
-		*p = *i; ++p;
-	}
-	for (auto i : iarr)
-	{
-		cout<<i<<" ";
-	}
-	cout << endl;
-	return "";
-}
 
 void test() {
-	unsigned long ul1 = 3, ul2 = 7;
-	unsigned long u = ul1 || ul2;
-	//ready
-	//(a)ul1& ul2
-	//(b) 
-	//(c) 
-	//(d) ul1 || ul2
+	double s = 52.3, t = 5.23;
+	size_t szs = sizeof s, szt = sizeof t, szd{ sizeof(double) };
+	if (szs==szt)
+	{
+		if (szs== szd)
+		{
+		cout << szs << '\t' << szt << endl;
+
+		}
+	}
+	
 }
 
 int main() {
