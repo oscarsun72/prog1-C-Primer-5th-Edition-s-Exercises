@@ -25,7 +25,13 @@ string compareStrEqual() {
 }
 
 void test() {
-	cout << compareStrEqual() << endl;
+	unsigned long ul1 = 3, ul2 = 7;
+	unsigned long u = ul1 || ul2;
+	//ready
+	//(a)ul1& ul2
+	//(b) 
+	//(c) 
+	//(d) ul1 || ul2
 }
 
 int main() {
