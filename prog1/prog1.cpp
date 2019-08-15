@@ -9,25 +9,63 @@ using namespace std;
 
 
 void test() {
-	double s = 52.3, t = 5.23;
-	size_t szs = sizeof s, szt = sizeof t, szd{ sizeof(double) };
-	if (szs==szt)
+	char a;
+	int aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0;
+	int tCnt = 0, bCnt = 0, nCnt = 0;
+	while (cin>>a)
 	{
-		if (szs== szd)
+		switch (a)
 		{
-		cout << szs << '\t' << szt << endl;
-
+			case '\t':
+				++tCnt;
+				break;
+			case '\n':
+				++nCnt;
+				break;
+			case ' ':
+				++bCnt;
+				break;
+			case 'A':
+			case 'a':
+				++aCnt;
+				break;
+			case 'E':
+			case'e':
+				++eCnt;
+				break;
+			case 'I':
+			case'i':
+				++iCnt;
+				break;
+			case 'O':
+			case'o':
+				++oCnt;
+				break;
+			case'u':
+				++uCnt ;
+				break;
+			default:
+				break;
 		}
 	}
+	cout << aCnt << '\n'
+		<< eCnt << '\n'
+		<< iCnt << '\n'
+		<< oCnt << '\n'
+		<< uCnt << '\n'
+		<< "blank space:"<<bCnt << '\n'
+		<<"tab:" <<tCnt << '\n'
+		<<"new line:" <<nCnt << '\n'
+		<< endl;
+}
 	
-
-
 int main() {
+
 	test();
 	return 0;
 }
 
-
+			//printf("%i\n", i);
 			//std::cout << "Hello World!\n";
 
 
