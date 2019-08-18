@@ -15,14 +15,15 @@ void test() {
 	string r;
 	string s1, s2;
 	bool rt=0;
-	while(cin>>s1>>s2)	
+	while (cin >> s1) {
 		if (s1 == s2) {
 			rt=1; break;
 		}
-	if (rt==0)
-	{
-		cout << "there is no word was repeated." << endl;
+		s2 = s1;
 	}
+	if (rt==0)
+		cout << "there is no word was repeated." << endl;
+	else  cout << "Print the word if it occurs twice in succession:" << s2 << endl;
 }
 	
 int main() {
