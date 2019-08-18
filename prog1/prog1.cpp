@@ -8,56 +8,17 @@
 using namespace std;
 //using std::cout; using std::cin;using std::endl;
 
-
-void test() {
-	char a;
-	int aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0;
-	int tCnt = 0, bCnt = 0, nCnt = 0;
-	while (cin>>a)
-	{
-		switch (a)
-		{
-			case '\t':
-				++tCnt;
-				break;
-			case '\n':
-				++nCnt;
-				break;
-			case ' ':
-				++bCnt;
-				break;
-			case 'A':
-			case 'a':
-				++aCnt;
-				break;
-			case 'E':
-			case'e':
-				++eCnt;
-				break;
-			case 'I':
-			case'i':
-				++iCnt;
-				break;
-			case 'O':
-			case'o':
-				++oCnt;
-				break;
-			case'u':
-				++uCnt ;
-				break;
-			default:
-				break;
-		}
-	}
-	cout << aCnt << '\n'
-		<< eCnt << '\n'
-		<< iCnt << '\n'
-		<< oCnt << '\n'
-		<< uCnt << '\n'
-		<< "blank space:"<<bCnt << '\n'
-		<<"tab:" <<tCnt << '\n'
-		<<"new line:" <<nCnt << '\n'
-		<< endl;
+void test() {	
+	string rsp;
+	do {
+		cout << "please enter two values: ";
+		int val1 = 0, val2 = 0;
+		cin >> val1 >> val2;
+		cout << "The sum of " << val1 << " and " << val2
+			<< " = " << val1 + val2 << "\n\n"
+			<< "More? Enter yes or no: ";
+		cin >> rsp;
+	} while (!rsp.empty() && rsp[0] != 'n');
 }
 	
 int main() {
