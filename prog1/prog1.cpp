@@ -4,25 +4,25 @@
 #include <iostream>
 #include<vector>
 #include<string>
+#include"prog1.h"
 //#include<iterator>
 using namespace std;
 //using std::cout; using std::cin;using std::endl;
 
+
+
 void test() {	
-	//(a)
-	do{
-		int v1, v2;
-		cout << "Please enter two numbers to sum:";
-			if (cin >> v1 >> v2)
-				cout << "Sum is: " << v1 + v2 << endl;
-	} while (cin);
-	//(b) do {
-	//	// . . .
-	//} while (int ival = get_response());
-	//Click here to view code image
-	//(c) do {
-	//	int ival = get_response();
-	//} while (ival);
+	string r;
+	string s1, s2;
+	bool rt=0;
+	while(cin>>s1>>s2)	
+		if (s1 == s2) {
+			rt=1; break;
+		}
+	if (rt==0)
+	{
+		cout << "there is no word was repeated." << endl;
+	}
 }
 	
 int main() {
