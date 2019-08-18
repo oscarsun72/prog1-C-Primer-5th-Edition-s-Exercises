@@ -9,20 +9,20 @@ using namespace std;
 //using std::cout; using std::cin;using std::endl;
 
 void test() {	
-	(a) do
+	//(a)
+	do{
 		int v1, v2;
-	cout << "Please enter two numbers to sum:";
-	if (cin >> v1 >> v2)
-		cout << "Sum is: " << v1 + v2 << endl;
-	while (cin);
-	Click here to view code image
-	(b) do {
-		// . . .
-	} while (int ival = get_response());
-	Click here to view code image
-	(c) do {
-		int ival = get_response();
-	} while (ival);
+		cout << "Please enter two numbers to sum:";
+			if (cin >> v1 >> v2)
+				cout << "Sum is: " << v1 + v2 << endl;
+	} while (cin);
+	//(b) do {
+	//	// . . .
+	//} while (int ival = get_response());
+	//Click here to view code image
+	//(c) do {
+	//	int ival = get_response();
+	//} while (ival);
 }
 	
 int main() {
