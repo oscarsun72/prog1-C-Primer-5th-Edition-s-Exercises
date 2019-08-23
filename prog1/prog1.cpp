@@ -5,32 +5,24 @@
 #include<vector>
 #include<string>
 #include"prog1.h"
+#include "Chapter6.h"
 //#include<iterator>
 using namespace std;
 //using std::cout; using std::cin;using std::endl;
 
-
-
-void test() {	
-	string r;
-	string s1, s2;
-	bool rt=0;
-	while (cin >> s1) {
-		if (s1 == s2) {
-			rt=1; break;
-		}
-		s2 = s1;
-	}
-	if (rt==0)
-		cout << "there is no word was repeated." << endl;
-	else  cout << "Print the word if it occurs twice in succession:" << s2 << endl;
+void print(const int ia[10])//陣列參數（參數是陣列型別）
+{
+	for (size_t i = 0; i != 10; ++i)
+		cout << ia[i] << endl;
 }
-	
-int main() {
 
-	test();
+int main()
+{
+	int  j[10]= {0,1, 1,0,3,3,4,6,8,9 };
+	print(j);
 	return 0;
 }
+
 
 			//printf("%i\n", i);
 			//std::cout << "Hello World!\n";
