@@ -1,27 +1,32 @@
 ﻿// prog1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
 //
 
+
+//#include"prog1.h"
+//#include "Chapter6.h"
+//using std::cout; using std::cin;using std::endl;
+
 #include <iostream>
 #include<vector>
 #include<string>
-#include"prog1.h"
-#include "Chapter6.h"
-//#include<iterator>
+#include<cassert>
 using namespace std;
-//using std::cout; using std::cin;using std::endl;
 
-void print(const int ia[10])//陣列參數（參數是陣列型別）
-{
-	for (size_t i = 0; i != 10; ++i)
-		cout << ia[i] << endl;
+void f() {};
+void f(int) {};
+void f(int, int) {};
+void f(double, double = 3.14) {};
+
+int main() {
+
 }
 
-int main()
-{
-	int  j[10]= {0,1, 1,0,3,3,4,6,8,9 };
-	print(j);
-	return 0;
-}
+
+//int main(int argc, const char** argv)
+//{
+//	print_sum_of_the_elements_in_the_list({ 11,2,3 });
+//	return 0;
+//}
 
 
 			//printf("%i\n", i);

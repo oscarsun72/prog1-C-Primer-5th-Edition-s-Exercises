@@ -21,6 +21,7 @@ void print_Passing_a_Multidimensional_Array_pointer_size_t(const int (*arr)[2], 
 //果然用size_t也可以，且應該比較對，否則如果是負值，這迭代（iterate）的迴圈怎麼寫才好？
 void print_Passing_a_Multidimensional_Array_multiArr(const int arr[][2],int rowSize);//練習6.23
 
+//void print_sum_of_the_elements_in_the_list(initializer_list<int> lst);//練習6.27
 
 
 
