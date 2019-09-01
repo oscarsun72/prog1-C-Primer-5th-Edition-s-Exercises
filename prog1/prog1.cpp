@@ -12,13 +12,17 @@
 #include<cassert>
 using namespace std;
 
-void f() {};
-void f(int) {};
-void f(int, int) {};
-void f(double, double = 3.14) {};
+struct  Sales_data {
+	std::string bookNo{ "882-33-" };
+	double revenue{ 24.44 };
+	unsigned soldQ{ 1 };
+	double bookSize{ 24.2 };
+}sd;
+
+
+
 
 int main() {
-
 }
 
 
