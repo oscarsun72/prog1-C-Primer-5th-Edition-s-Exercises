@@ -12,9 +12,8 @@
 #include <iostream>//標準程式庫才用角括弧
 #include<vector>
 #include "Sales_data.h"
+#include "Person.h"
 using namespace std;
-
-
 
 ostream& print(ostream& os, Sales_data sales_data) {
 	os << sales_data.isbn() << '\t' <<sales_data.soldQ << '\t' 
