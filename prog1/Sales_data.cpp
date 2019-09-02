@@ -1,4 +1,4 @@
-#include "Sales_data.h"
+ï»¿#include "Sales_data.h"
 #include<string>
 #include<iostream>
 using namespace std;
@@ -12,7 +12,7 @@ Sales_data& Sales_data::combine(const Sales_data& sales_data1,  const Sales_data
 }
 Sales_data& Sales_data::combine(const Sales_data& sales_data)
 {
-	if (bookNo == "") bookNo = sales_data.bookNo;//¦]¬°³o¬OSales_dataÃş§Oªº¦¨­û¨ç¦¡¡A©Ò¥H¥i¥Hª½±µ½Õ¥Î¸ÓÃş§O¤ºªº©Ò¦³¦¨­û¦WºÙ¡A¤£¥²¥ş¦WºÙ
+	if (bookNo == "") bookNo = sales_data.bookNo;//å› ç‚ºé€™æ˜¯Sales_dataé¡åˆ¥çš„æˆå“¡å‡½å¼ï¼Œæ‰€ä»¥å¯ä»¥ç›´æ¥èª¿ç”¨è©²é¡åˆ¥å…§çš„æ‰€æœ‰æˆå“¡åç¨±ï¼Œä¸å¿…å…¨åç¨±
 	bookSize = sales_data.bookSize;
 	soldQ += sales_data.soldQ;
 	revenue += sales_data.revenue;
@@ -31,13 +31,13 @@ double Sales_data::avg_price()const
 	}
 	return 0.0;
 }
-ostream& print(ostream& os, Sales_data sales_data) {
+ostream& print(ostream& os, const Sales_data& sales_data) {
 	os << sales_data.isbn() << '\t' << sales_data.soldQ << '\t'
 		<< sales_data.revenue << '\t' << sales_data.avg_price();
 	return os;
 }
 
-istream& read(istream& is, Sales_data& sales_data) {//­n§ïÅÜ¤Ş¼Æ­È¡A°Ñ¼Æ¤@©w­n¬O°Ñ¦Ò¡A±N¤Ş¼Æ¥Î¶Ç§}¡]°Ñ¦Ò¡^¤è¦¡¶Ç»¼
+istream& read(istream& is, Sales_data& sales_data) {//è¦æ”¹è®Šå¼•æ•¸å€¼ï¼Œåƒæ•¸ä¸€å®šè¦æ˜¯åƒè€ƒï¼Œå°‡å¼•æ•¸ç”¨å‚³å€ï¼ˆåƒè€ƒï¼‰æ–¹å¼å‚³é
 //decltype(cin)& read(istream is ,Sales_data sales_data) {
 	is >> sales_data.bookNo >> sales_data.soldQ >> sales_data.revenue;
 	return is;

@@ -32,10 +32,10 @@
     <ClInclude Include="resource.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Sales_data.h">
+    <ClInclude Include="Person.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h">
+    <ClInclude Include="Sales_data.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

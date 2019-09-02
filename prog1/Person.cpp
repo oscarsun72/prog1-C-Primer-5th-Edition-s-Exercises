@@ -2,11 +2,18 @@
 
 string Person::addressMethod() const
 {
-	return this->address;
+	return address;
 }
 
 string Person::nameMethod() const
 {
-	return this->name;
-	
+	return name;
+}
+istream& read(istream& is,Person& p){
+	is>>p.name>>p.address;
+	return is;
+}
+ostream& print(ostream& os,const Person& p){
+	os<<p.nameMethod()<<'\t'<<p.addressMethod();
+	return os;
 }

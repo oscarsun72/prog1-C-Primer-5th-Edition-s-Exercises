@@ -9,38 +9,23 @@
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
 //#include<string>
 //#include<vector>
-//#include "Person.h"
-
-#include <iostream>//標準程式庫才用角括弧
-#include "Sales_data.h"
+//#include "Sales_data.h"
+#include "Person.h"
+#include <iostream>
 using namespace std;
-
-
-
-
 int main() {
 
-		Sales_data total;
-		if (read(cin, total))
+		Person p;
+		if (read(cin, p))
 		{
-			Sales_data trans;
-			while (read(cin, trans))
-		{
-				if (total.bookNo == trans.bookNo)
-				{
-					total.combine(trans);
-				}
-				else {
-					print(cout, total) << endl;
-					total = trans;
-				}
+			print(cout,p)<<endl;
+			while (read(cin, p))
+				print(cout, p) << endl;				
 		}
-		print(cout, total) << endl;
-	}
-	else
-	{
-	cerr << "No data?!" << endl;
-	}
+		else
+		{
+		cerr << "No data?!" << endl;
+		}
 }
 
 
