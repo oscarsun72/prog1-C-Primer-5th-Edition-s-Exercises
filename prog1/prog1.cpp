@@ -11,15 +11,10 @@
 #include<vector>
 #include<string>
 #include "Sales_item.h"//自訂的標頭檔則用雙引號
-
+#include "Sales_data.h"
 using namespace std;
 
-struct  Sales_data {
-	std::string bookNo;
-	double revenue{0.00};
-	unsigned soldQ{0};
-	double bookSize;
-};
+
 
 int main() {
 	Sales_data book;
