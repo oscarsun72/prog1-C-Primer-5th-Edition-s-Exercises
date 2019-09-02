@@ -3,26 +3,81 @@
 
 
 //#include"prog1.h"
-//#include "Chapter6.h"
+//#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
+//#include<cassert>
 
-#include <iostream>
+#include <iostream>//標準程式庫才用角括弧
 #include<vector>
 #include<string>
-#include<cassert>
+#include "Sales_item.h"//自訂的標頭檔則用雙引號
+
 using namespace std;
 
 struct  Sales_data {
-	std::string bookNo{ "882-33-" };
-	double revenue{ 24.44 };
-	unsigned soldQ{ 1 };
-	double bookSize{ 24.2 };
-}sd;
-
-
-
+	std::string bookNo;
+	double revenue{0.00};
+	unsigned soldQ{0};
+	double bookSize;
+};
 
 int main() {
+	Sales_data book;
+	vector<Sales_data> vecSd;
+	int i = 1;
+	if (cin>>book.bookNo)
+	{
+		while (cin)//這可以處理到讀完輸入止，不限交易記錄筆數
+		{
+			i++;
+			switch (i % 3)
+			{
+			case 1:
+				cin >> book.bookNo;
+				break;
+			case 2:
+				cin>> book.soldQ;
+				break;
+			case 0:
+				cin>>book.revenue;
+				vecSd.push_back(book);
+				break;
+			default:
+				break;			
+			}
+		}
+	}
+	else
+	{
+		cerr << "沒有資料？！" << endl;
+		return -1;
+	}
+	i = 0; unsigned ctr = 1;
+	Sales_data dataPrevious;
+	for (Sales_data Sd : vecSd)
+	{
+		if (i > 0)
+			if (Sd.bookNo == dataPrevious.bookNo)
+			{
+				++ctr;
+			}
+			else
+			{
+				if (!ctr)
+				{					
+					cout << dataPrevious.bookNo << '\t' << "有 " << ctr << " 筆" << endl;					
+				}
+				else
+				{
+					cout << dataPrevious.bookNo << '\t' << "有 " << ctr  << " 筆" << endl;
+					ctr = 1;
+				}
+			}
+		++i;
+		dataPrevious = Sd;
+	}
+	cout << dataPrevious.bookNo << '\t' << "有 " << ctr << " 筆" << endl;
+	return 0;
 }
 
 
