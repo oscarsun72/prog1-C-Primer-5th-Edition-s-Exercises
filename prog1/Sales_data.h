@@ -1,15 +1,15 @@
-#pragma once
+ï»¿#pragma once
 #ifndef SALES_DATA_H
 #define SALES_DATA_H
 #include<string>
-using namespace std;//¤d¸U¤£­n§Ñ¤F³o­Ó
+using namespace std;//åƒè¬ä¸è¦å¿˜äº†é€™å€‹
 struct  Sales_data {
 	string bookNo;
-	double revenue{ 0.00 };//Á`Àç¦¬-Àç·~ÃB
+	double revenue{ 0.00 };//ç¸½ç‡Ÿæ”¶-ç‡Ÿæ¥­é¡
 	unsigned soldQ{ 0 };
 	double bookSize{0.00};
-	Sales_data& combine(const Sales_data&, const Sales_data&);//¦¨­û¨ç¦¡«Å§i¤@©w­n¦bÃş§O¤º¡A©w¸q¥i¦b¦¹¥~
-	Sales_data& combine(const Sales_data&);//­n§ïÅÜthis¤Î¨äÄİ©Ê­È´N¤£¯à¦A¦b°Ñ¼Æ¦C«á¥[¤Wconst¡F¦]¬°¥[¤Wconst«áthis¦¨¤F«ü¦V±`­Èªº±`­È«ü¼Ğ¡A³Q«ü¦VªºªF¦è¬O¤£¯à³Q§ïÅÜªº¤F
+	Sales_data& combine(const Sales_data&, const Sales_data&);//æˆå“¡å‡½å¼å®£å‘Šä¸€å®šè¦åœ¨é¡åˆ¥å…§ï¼Œå®šç¾©å¯åœ¨æ­¤å¤–
+	Sales_data& combine(const Sales_data&);//è¦æ”¹è®ŠthisåŠå…¶å±¬æ€§å€¼å°±ä¸èƒ½å†åœ¨åƒæ•¸åˆ—å¾ŒåŠ ä¸Šconstï¼›å› ç‚ºåŠ ä¸Šconstå¾Œthisæˆäº†æŒ‡å‘å¸¸å€¼çš„å¸¸å€¼æŒ‡æ¨™ï¼Œè¢«æŒ‡å‘çš„æ±è¥¿æ˜¯ä¸èƒ½è¢«æ”¹è®Šçš„äº†
 	string isbn()const;	
 	double avg_price()const;
 };
