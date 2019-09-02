@@ -29,15 +29,6 @@
     <ClInclude Include="resource.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Chapter6.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="Sales_item.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="Version_test.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="Sales_data.h">
       <Filter>標頭檔</Filter>
     </ClInclude>

@@ -14,54 +14,43 @@
 #include "Sales_data.h"
 using namespace std;
 
+
+
+ostream& print(ostream& os, Sales_data sales_data) {
+	os << sales_data.isbn() << '\t' <<sales_data.soldQ << '\t' 
+		<<sales_data.revenue<< '\t' << sales_data.avg_price();
+	return os;
+}
+
+istream& read(istream& is, Sales_data& sales_data) {//要改變引數值，參數一定要是參考，將引數用傳址（參考）方式傳遞
+//decltype(cin)& read(istream is ,Sales_data sales_data) {
+	is >> sales_data.bookNo>>sales_data.soldQ>>sales_data.revenue;
+	return is;
+}
+
 int main() {
-	Sales_data book;
-	vector<Sales_data> vecSd;
-	int i = 1;
-	if (cin>>book.bookNo)//可見每一次>>就移位（shift）了一次，移到沒位，就回傳false
+	Sales_data total;
+	if (read(cin, total))
 	{
-		while (cin>>book.soldQ>>book.revenue)//這可以處理到讀完輸入止，不限交易記錄筆數
+		Sales_data trans;
+		while (read(cin, trans))
 		{
-				vecSd.push_back(book);
-			if (!(cin >> book.bookNo))
+			if (total.bookNo == trans.bookNo)
 			{
-				break;
+				total.combine(trans);
+			}
+			else {
+				print(cout, total) << endl;
+				total = trans;
 			}
 		}
+		print(cout, total) << endl;
 	}
 	else
 	{
-		cerr << "沒有資料？！" << endl;
-		return -1;
+		cerr << "No data?!" << endl;
 	}
-	i = 0; unsigned ctr = 1;
-	Sales_data dataPrevious;
-	for (Sales_data Sd : vecSd)
-	{
-		if (i > 0)
-			if (Sd.bookNo == dataPrevious.bookNo)
-			{
-				++ctr;
-			}
-			else
-			{
-				if (!ctr)
-				{					
-					cout << dataPrevious.bookNo << '\t' << "有 " << ctr << " 筆" << endl;					
-				}
-				else
-				{
-					cout << dataPrevious.bookNo << '\t' << "有 " << ctr  << " 筆" << endl;
-					ctr = 1;
-				}
-			}
-		++i;
-		dataPrevious = Sd;
-	}
-	cout << dataPrevious.bookNo << '\t' << "有 " << ctr << " 筆" << endl;
-	return 0;
 }
-
 
 //int main(int argc, const char** argv)
 //{

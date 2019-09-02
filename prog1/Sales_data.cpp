@@ -22,11 +22,11 @@ string Sales_data::isbn()const
 	return bookNo;
 }
 
-double Sales_data::avg_price(const Sales_data& sales_data)const
+double Sales_data::avg_price()const
 {
-	if (sales_data.soldQ>0)
+	if (soldQ>0)
 	{
-		return sales_data.revenue / sales_data.soldQ;
+		return revenue / soldQ;
 	}
 	return 0.0;
 }
