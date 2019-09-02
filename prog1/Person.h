@@ -3,7 +3,9 @@
 #include<string>
 using namespace std;  
 struct Person{
-	string address;
+	string address ;
 	string name;
+	string addressMethod()const;
+	string nameMethod()const;
 };
 #endif

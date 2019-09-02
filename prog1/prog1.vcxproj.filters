@@ -21,6 +21,9 @@
     <ClCompile Include="Sales_data.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="prog1.h">

@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="prog1.cpp" />
     <ClCompile Include="Sales_data.cpp" />
   </ItemGroup>

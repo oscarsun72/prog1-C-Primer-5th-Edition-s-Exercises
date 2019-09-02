@@ -7,48 +7,16 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
+//#include "Sales_data.h"
 //#include<string>
+//#include<vector>
 
 #include <iostream>//標準程式庫才用角括弧
-#include<vector>
-#include "Sales_data.h"
 #include "Person.h"
 using namespace std;
-
-ostream& print(ostream& os, Sales_data sales_data) {
-	os << sales_data.isbn() << '\t' <<sales_data.soldQ << '\t' 
-		<<sales_data.revenue<< '\t' << sales_data.avg_price();
-	return os;
-}
-
-istream& read(istream& is, Sales_data& sales_data) {//要改變引數值，參數一定要是參考，將引數用傳址（參考）方式傳遞
-//decltype(cin)& read(istream is ,Sales_data sales_data) {
-	is >> sales_data.bookNo>>sales_data.soldQ>>sales_data.revenue;
-	return is;
-}
-
 int main() {
-	Sales_data total;
-	if (read(cin, total))
-	{
-		Sales_data trans;
-		while (read(cin, trans))
-		{
-			if (total.bookNo == trans.bookNo)
-			{
-				total.combine(trans);
-			}
-			else {
-				print(cout, total) << endl;
-				total = trans;
-			}
-		}
-		print(cout, total) << endl;
-	}
-	else
-	{
-		cerr << "No data?!" << endl;
-	}
+	Person p{"士林區","孫守真"};	
+	cout << p.nameMethod() << "在" << p.addressMethod() << endl;
 }
 
 //int main(int argc, const char** argv)
