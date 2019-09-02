@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="prog1.cpp" />
+    <ClCompile Include="Sales_data.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chapter6.h" />

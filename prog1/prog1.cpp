@@ -5,40 +5,27 @@
 //#include"prog1.h"
 //#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
-//#include<cassert>
+//#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
+//#include "Sales_item.h"//自訂的標頭檔則用雙引號
+//#include<string>
 
 #include <iostream>//標準程式庫才用角括弧
 #include<vector>
-#include<string>
-#include "Sales_item.h"//自訂的標頭檔則用雙引號
 #include "Sales_data.h"
 using namespace std;
-
-
 
 int main() {
 	Sales_data book;
 	vector<Sales_data> vecSd;
 	int i = 1;
-	if (cin>>book.bookNo)
+	if (cin>>book.bookNo)//可見每一次>>就移位（shift）了一次，移到沒位，就回傳false
 	{
-		while (cin)//這可以處理到讀完輸入止，不限交易記錄筆數
+		while (cin>>book.soldQ>>book.revenue)//這可以處理到讀完輸入止，不限交易記錄筆數
 		{
-			i++;
-			switch (i % 3)
-			{
-			case 1:
-				cin >> book.bookNo;
-				break;
-			case 2:
-				cin>> book.soldQ;
-				break;
-			case 0:
-				cin>>book.revenue;
 				vecSd.push_back(book);
+			if (!(cin >> book.bookNo))
+			{
 				break;
-			default:
-				break;			
 			}
 		}
 	}
