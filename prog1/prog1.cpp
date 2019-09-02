@@ -7,17 +7,42 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
-//#include "Sales_data.h"
 //#include<string>
 //#include<vector>
+//#include "Person.h"
 
 #include <iostream>//標準程式庫才用角括弧
-#include "Person.h"
+#include "Sales_data.h"
 using namespace std;
+
+
+
+
 int main() {
-	Person p{"士林區","孫守真"};	
-	cout << p.nameMethod() << "在" << p.addressMethod() << endl;
+
+		Sales_data total;
+		if (read(cin, total))
+		{
+			Sales_data trans;
+			while (read(cin, trans))
+		{
+				if (total.bookNo == trans.bookNo)
+				{
+					total.combine(trans);
+				}
+				else {
+					print(cout, total) << endl;
+					total = trans;
+				}
+		}
+		print(cout, total) << endl;
+	}
+	else
+	{
+	cerr << "No data?!" << endl;
+	}
 }
+
 
 //int main(int argc, const char** argv)
 //{

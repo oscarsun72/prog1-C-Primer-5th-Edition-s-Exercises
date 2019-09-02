@@ -8,4 +8,5 @@ struct Person{
 	string addressMethod()const;
 	string nameMethod()const;
 };
+
 #endif
