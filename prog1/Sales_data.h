@@ -9,7 +9,8 @@ struct  Sales_data {
 	Sales_data(const string &bNo) :bookNo{bNo } {}
 	Sales_data(const string &bNo,  const double bSize, const double rvn) :bookNo{ bNo }, bookSize{ bSize }, revenue{rvn} {}
 	Sales_data(const string &, const double bSize, const double, const unsigned);//在類別外定義的建構器
-	Sales_data(istream &);//在類別外定義的建構器
+	//Sales_data(istream &);//在類別外定義的建構器
+	Sales_data(istream& is){read(is, *this);}
 	//Sales_data() {}//與Sales_data() = default;應是一樣的，然不能寫在最前面，會遮蔽後面的建構器 50:00
 	string bookNo;
 	double revenue{ 0.00 };//總營收-營業額

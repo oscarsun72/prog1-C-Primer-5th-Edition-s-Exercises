@@ -6,10 +6,7 @@ using namespace std;
 Sales_data::Sales_data(const string& bNo,const double bSize,const double price, const unsigned sdQ) {
 	bookNo = bNo; soldQ = sdQ; revenue = price * sdQ; bookSize = bSize;
 }
-Sales_data::Sales_data(istream& is)
-{
-	read(is, *this);
-}
+
 Sales_data& Sales_data::combine(const Sales_data& sales_data1,  const Sales_data& sales_data2)
 {
 	this->bookNo = sales_data1.bookNo;
