@@ -8,9 +8,9 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
 //#include<string>
+//include "Person.h"
 #include<vector>
 #include "Sales_data.h"
-//include "Person.h"
 #include <iostream>
 using namespace std;
 int main() {	
