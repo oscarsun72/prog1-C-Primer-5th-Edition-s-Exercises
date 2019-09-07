@@ -8,24 +8,27 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
 //#include<string>
-//#include<vector>
-//#include "Sales_data.h"
-#include "Person.h"
+#include<vector>
+#include "Sales_data.h"
+//include "Person.h"
 #include <iostream>
 using namespace std;
-int main() {
+int main() {	
+	Sales_data sd ;//和下式一樣，只是在Visual Studio預選清單中，它是從第2個建構器來讓我們選的
+	Sales_data sd1 = Sales_data();//可見Sales_data sd的Sales_data() 就是預設的第一個建構器
+	Sales_data& rSd=sd; Sales_data& rrSd=rSd;
+	Sales_data sd2= Sales_data(rSd);//這2個建構器是編譯器自己訂的
+	Sales_data sd21= Sales_data(rrSd);//這2個建構器是編譯器自己訂的
+	Sales_data sd3= Sales_data(cin);//這個在建構時須輸入才能執行
+	Sales_data sd4= Sales_data("978-986-502-172-6(平裝）");
+	Sales_data sd5= Sales_data("978-986-502-172-6(平裝）",24.01,310.11);
+	Sales_data sd6= Sales_data("978-986-502-172-6(平裝）",24.01, 110.1,3);
 
-		Person p;
-		if (read(cin, p))
-		{
-			print(cout,p)<<endl;
-			while (read(cin, p))
-				print(cout, p) << endl;				
-		}
-		else
-		{
-		cerr << "No data?!" << endl;
-		}
+	const vector<Sales_data> vecSd{sd,rSd,rrSd,sd1,sd2,sd21,sd3,sd4,sd5,sd6};
+	for (Sales_data i:vecSd)
+	{
+			print(cout,i)<<"\n"<<endl;		
+	}
 }
 
 
