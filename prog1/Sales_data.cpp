@@ -3,6 +3,10 @@
 #include<iostream>
 using namespace std;
 
+Sales_data::Sales_data(istream& is) {
+	if (read(is, *this)) readSeccess = true;
+}	
+
 Sales_data::Sales_data(const string& bNo,const double bSize,const double price, const unsigned sdQ) {
 	bookNo = bNo; soldQ = sdQ; revenue = price * sdQ; bookSize = bSize;
 }
