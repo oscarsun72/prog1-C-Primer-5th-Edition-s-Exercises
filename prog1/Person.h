@@ -13,7 +13,7 @@ struct Person{
 	Person(istream&);
 	string addressMethod()const;
 	string nameMethod()const;
-	istream& read(istream&,Person&);
+	istream& read(istream&,Person&);//read become member function
 private:
 	string name;
 	string address ;
