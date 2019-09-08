@@ -1,5 +1,10 @@
 ﻿#include "Person.h"
 
+Person::Person(istream& is)
+{
+	read(cin, *this);
+}
+
 string Person::addressMethod() const
 {
 	return address;
