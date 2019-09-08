@@ -14,7 +14,7 @@ string Person::nameMethod() const
 {
 	return name;
 }
-istream& read(istream& is,Person& p){
+istream& Person::read(istream& is,Person& p){
 	is>>p.name>>p.address;
 	return is;
 }

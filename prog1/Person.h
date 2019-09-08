@@ -13,10 +13,10 @@ struct Person{
 	Person(istream&);
 	string addressMethod()const;
 	string nameMethod()const;
+	istream& read(istream&,Person&);
 private:
 	string name;
 	string address ;
 };
-istream& read(istream&,Person&);
 ostream& print(ostream&,const Person&);
 #endif

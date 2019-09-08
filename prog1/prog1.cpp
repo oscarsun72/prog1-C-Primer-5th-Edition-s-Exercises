@@ -16,10 +16,10 @@ using namespace std;
 int main() {
 
 		Person p;
-		if (read(cin, p))
+		if (p.read(cin, p))
 		{
 			print(cout,p)<<endl;
-			while (read(cin, p))
+			while (p.read(cin, p))
 				print(cout, p) << endl;				
 		}
 		else
