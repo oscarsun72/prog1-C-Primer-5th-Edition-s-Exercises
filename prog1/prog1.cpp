@@ -10,22 +10,17 @@
 //#include<string>
 //#include<vector>
 //#include "Sales_data.h"
-#include "Person.h"
+//#include "Person.h"
+#include "Screen.h"
 #include <iostream>
 using namespace std;
 int main() {
-
-		Person p;
-		if (read(cin, p))
-		{
-			print(cout,p)<<endl;
-			while (read(cin, p))
-				print(cout, p) << endl;				
-		}
-		else
-		{
-		cerr << "No data?!" << endl;
-		}
+	Screen sn=Screen(10,5,'a');
+	Screen sn1=Screen(10,5,"好好念佛，成佛是大事，其他啥都是假的啊");
+	cout<<sn.get()<<endl;
+	cout<<sn1.get()<<endl;
+	cout << sn.get(2,40) << endl;
+	cout << sn1.get(2,22) << endl;
 }
 
 
