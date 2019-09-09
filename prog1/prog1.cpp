@@ -8,18 +8,14 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
 //#include<string>
-//#include "Sales_data.h"
-#include<vector>
-#include "Person.h"
+//#include "Person.h"
+//#include<vector>
 #include <iostream>
+#include "Sales_data.h"
 using namespace std;
 int main() {		
-	Person p;
-	Person p1 = Person("孫守真", "士林區");
-	Person p2 = Person(cin);
-	vector<Person>vecPerson{ p,p1,p2 };
-	for(Person p:vecPerson)
-		print(cout,p)<<endl;
+	Sales_data sd = Sales_data(cin);
+	print(cout, sd);
 }
 
 

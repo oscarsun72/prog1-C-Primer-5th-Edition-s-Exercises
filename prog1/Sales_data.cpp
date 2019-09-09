@@ -32,13 +32,14 @@ string Sales_data::isbn()const
 	return bookNo;
 }
 
-double Sales_data::avg_price()const
+inline double Sales_data::avg_price()const
 {
-	if (soldQ>0)
-	{
-		return revenue / soldQ;
-	}
-	return 0.0;
+	return  soldQ? revenue / soldQ: 0.0;
+	//if (soldQ>0)
+	//{
+	//	return revenue / soldQ;
+	//}
+	//return 0.0;
 }
 ostream& print(ostream& os, const Sales_data& sales_data) {
 	os << sales_data.isbn() << '\t' << sales_data.soldQ << '\t'

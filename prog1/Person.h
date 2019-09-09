@@ -16,6 +16,8 @@ struct Person{
 private:
 	string name;
 	string address ;
+friend istream& read(istream&,Person&);
+friend ostream& print(ostream&,const Person&);
 };
 istream& read(istream&,Person&);
 ostream& print(ostream&,const Person&);
