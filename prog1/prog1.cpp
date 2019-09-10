@@ -15,12 +15,13 @@
 #include <iostream>
 using namespace std;
 int main() {
-	Screen sn=Screen(10,5,'a');
-	Screen sn1=Screen(10,5,"好好念佛，成佛是大事，其他啥都是假的啊");
-	cout<<sn.get()<<endl;
-	cout<<sn1.get()<<endl;
-	cout << sn.get(2,40) << endl;
-	cout << sn1.get(2,22) << endl;
+	Screen myScreen(5, 5, 'X'); const Screen myConstScreen(10, 10, 'c');
+	myScreen.move(4, 0).set('#').display(cout);
+	cout << "\n";
+	myScreen.display(cout);
+	cout << "\n";
+	myConstScreen.display(cout);
+	cout << "\n";
 }
 
 
