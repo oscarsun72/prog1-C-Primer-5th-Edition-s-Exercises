@@ -151,15 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Person.cpp" />
     <ClCompile Include="prog1.cpp" />
-    <ClCompile Include="Sales_data.cpp" />
+    <ClCompile Include="XY.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Person.h" />
-    <ClInclude Include="prog1.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Sales_data.h" />
+    <ClInclude Include="XY.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="prog1.rc" />
