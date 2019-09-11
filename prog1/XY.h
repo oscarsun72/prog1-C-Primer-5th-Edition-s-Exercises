@@ -11,8 +11,4 @@ struct  Y {
 	Y(int v): val(v) {}
 	X x;
 };
-
-
-
-
 #endif // !XY_H
