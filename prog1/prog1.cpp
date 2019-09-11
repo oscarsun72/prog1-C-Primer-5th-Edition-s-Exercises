@@ -15,7 +15,7 @@
 #include <iostream>
 using namespace std;
 int main() {
-	Screen myScreen(5, 5, 'X'); const Screen myConstScreen(10, 10, 'c');
+	Screen myScreen=Screen(5, 5, 'X'); const Screen myConstScreen(10, 10, 'c');
 	myScreen.move(4, 0).set('#').display(cout);
 	cout << "\n";
 	myScreen.display(cout);
