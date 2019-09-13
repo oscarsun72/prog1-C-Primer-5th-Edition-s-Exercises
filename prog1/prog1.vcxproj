@@ -152,13 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="prog1.cpp" />
-    <ClCompile Include="XY.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="XY.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="prog1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="X.h" />
+    <ClInclude Include="Y.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

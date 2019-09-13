@@ -11,12 +11,16 @@
 //include "Person.h"
 //#include<vector>
 //#include "Sales_data.h"
-#include "XY.h"
+#include "X.h"
+#include "Y.h"
 #include <iostream>
 using namespace std;
 int main() {	
 	X x;
-	cout<<*(x.yPtr).val<<endl;
+	cout << x.rtnval() << endl;//should be -10
+	cout<<(x.yPtr)->val<<endl;//should be 10
+	cout<<((x.yPtr)->x.rtnval()==x.rtnval())<<endl;//should be 1
+
 }
 
 
