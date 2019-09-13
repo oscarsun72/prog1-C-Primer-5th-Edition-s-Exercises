@@ -16,7 +16,7 @@
 #include <iostream>
 using namespace std;
 int main() {	
-	X x;
+	X x=X(33);
 	cout << x.rtnval() << endl;//should be -10
 	cout<<(x.yPtr)->val<<endl;//should be 10
 	cout<<((x.yPtr)->x.rtnval()==x.rtnval())<<endl;//should be 1
