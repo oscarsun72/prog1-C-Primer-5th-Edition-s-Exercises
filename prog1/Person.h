@@ -4,10 +4,11 @@
 #include<iostream>
 using namespace std;  
 struct Person{
-	string address ;
-	string name;
 	string addressMethod()const;
 	string nameMethod()const;
+	private:
+	string address ;
+	string name;
 };
 istream& read(istream&,Person&);
 ostream& print(ostream&,const Person&);
