@@ -2,6 +2,7 @@
 #include "Y.h"
 #ifndef X_H
 #define X_H
+
 class X {
 	int val = -10;
 	Y y=Y(55);

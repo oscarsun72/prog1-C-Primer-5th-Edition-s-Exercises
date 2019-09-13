@@ -2,6 +2,7 @@
 #include "X.h"
 #ifndef Y_H
 #define Y_H
+
 struct  Y {
 	int val = 10;
 	Y() = default;
