@@ -5,10 +5,10 @@
 
 class X {
 	int val = -10;
-	Y y=Y(55);
+	Y y=Y(55,*yPtr);
 public:
 	X() = default;
-	X(int v) :val(v) {}
+	X(int v,Y &y) :val(v),y(y),yPtr(&y) {}
 	Y * yPtr=&y;
 	inline int rtnval() { return val; }
 };

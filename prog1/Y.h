@@ -5,8 +5,9 @@
 
 struct  Y {
 	int val = 10;
+	Y& y;
 	Y() = default;
-	Y(int v) : val(v) {}
-	X x=X(-10);
+	Y(int v,Y& y) : val(v) ,y(y){}
+	X x=X(-10,y);
 };
 #endif // !Y_H
