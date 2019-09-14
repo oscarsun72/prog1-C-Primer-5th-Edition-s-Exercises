@@ -1,27 +1,59 @@
 ﻿// prog1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
 //
 
-
 //#include"prog1.h"
 //#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
-//#include<string>
 //#include<vector>
 //#include "Sales_data.h"
 //#include "Person.h"
-#include "Screen.h"
+//#include "Screen.h"
+#include<string>
 #include <iostream>
 using namespace std;
-int main() {
-	Screen sn=Screen(10,5,'a');
-	Screen sn1=Screen(10,5,"好好念佛，成佛是大事，其他啥都是假的啊");
-	cout<<sn.get()<<endl;
-	cout<<sn1.get()<<endl;
-	cout << sn.get(2,40) << endl;
-	cout << sn1.get(2,22) << endl;
+class Sales_data {
+	string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;	
+public:
+	// defines the default constructor as well as one that takes a string argument
+	Sales_data(std::string s ) : bookNo(s) { }
+	// remaining constructors unchanged
+	Sales_data(std::string s, unsigned cnt, double rev) :
+		bookNo(s), units_sold(cnt), revenue(rev* cnt) { }
+	Sales_data(std::istream& is = cin) { read(is, *this); }
+	// remaining members as before
+	friend istream& read(istream&, Sales_data&);
+	friend ostream& print(ostream& os, const Sales_data& sales_data);
+};
+
+istream& read(istream&, Sales_data&);
+
+istream& read(istream& is, Sales_data& sales_data) {//要改變引數值，參數一定要是參考，將引數用傳址（參考）方式傳遞
+//decltype(cin)& read(istream is ,Sales_data sales_data) {
+	is >> sales_data.bookNo >> sales_data.units_sold >> sales_data.revenue;
+	return is;
 }
+
+ostream& print(ostream& os, const Sales_data& sales_data) {
+	os << sales_data.bookNo << '\t' << sales_data.units_sold << '\t'
+		<< sales_data.revenue  ;
+	return os;
+}
+
+Sales_data first_item(cin);//Sales_data(std::istream& is = cin) { read(is, *this); }
+
+int main() {
+	Sales_data next;//Sales_data(std::istream& is = cin) { read(is, *this); }
+	Sales_data last("9-999-99999-9");//Sales_data(std::string s ) : bookNo(s) { }
+
+	print(cout,first_item); cout << endl;
+	print(cout,next); cout << endl;
+	print(cout, last); cout << endl;
+}
+
 
 
 //int main(int argc, const char** argv)
