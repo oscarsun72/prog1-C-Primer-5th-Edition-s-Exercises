@@ -10,8 +10,9 @@
 #include <iostream>
 using namespace std;
 int main() {
-	Sales_data def();//此式不會進去執行我們自訂的預設建構器，要改成下式
-	Sales_data def=Sales_data();
+	Sales_data def();//這樣寫變成了宣告一個會傳回Sales_data型別值的函式了
+	Sales_data def;//這樣才是宣告一個Sales_data型別的物件，與下式同！
+	//Sales_data def=Sales_data();
 	Sales_data oneStr("222-111");
 	Sales_data delegated_to("333-222",24.0,10.22);
 	Sales_data fourArg("444-333",32.0,333.3,10);
