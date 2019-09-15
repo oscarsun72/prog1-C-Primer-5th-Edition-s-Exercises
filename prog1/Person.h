@@ -6,12 +6,12 @@ using namespace std;
 struct Person{
 //public:
 	//Person()=default;
-	Person(){
-		name = "someone";
-		address = "somewhere";
+	Person():name( "someone"),address("somewhere"){
+		//name = "someone";//這樣變成「指定」而不是初始化了
+		//address = "somewhere";
 	}
 	Person(const string name, const string& address) :name(name),address(address){}
-	Person(istream&);
+	explicit Person(istream&);
 	string addressMethod()const;
 	string nameMethod()const;
 private:

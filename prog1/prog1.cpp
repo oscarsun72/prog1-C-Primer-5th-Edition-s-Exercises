@@ -13,8 +13,9 @@
 #include "Person.h"
 #include <iostream>
 using namespace std;
-int main() {
-
+int main() {	
+	//Person p;
+	//cout << p.addressMethod() << p.nameMethod() << endl;
 		Person p;
 		if (read(cin, p))
 		{
