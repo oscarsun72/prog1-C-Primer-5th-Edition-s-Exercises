@@ -3,11 +3,13 @@
 #include<iostream>
 using namespace std;
 
-Sales_data::Sales_data(const string& bNo,const double bSize,const double price, const unsigned sdQ) {
+Sales_data::Sales_data(const string& bNo,const double bSize,const double price, const unsigned sdQ) :Sales_data("",0.0,0.0){
+	cout << "I'm the four arguments one!" << endl;
 	bookNo = bNo; soldQ = sdQ; revenue = price * sdQ; bookSize = bSize;
 }
-Sales_data::Sales_data(istream& is)
+Sales_data::Sales_data(istream& is):Sales_data("",0.0,0.0)
 {
+	cout<<"I'm the istream one!"<<endl;
 	read(is, *this);
 }
 Sales_data& Sales_data::combine(const Sales_data& sales_data1,  const Sales_data& sales_data2)

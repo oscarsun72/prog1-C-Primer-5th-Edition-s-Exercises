@@ -2,25 +2,20 @@
 //
 
 
-//#include"prog1.h"
-//#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_item.h"//自訂的標頭檔則用雙引號
 //#include<string>
 //#include<vector>
-//#include "Sales_data.h"
-//#include "Person.h"
-#include "Screen.h"
+#include "Sales_data.h"
 #include <iostream>
 using namespace std;
 int main() {
-	Screen sn=Screen(10,5,'a');
-	Screen sn1=Screen(10,5,"好好念佛，成佛是大事，其他啥都是假的啊");
-	cout<<sn.get()<<endl;
-	cout<<sn1.get()<<endl;
-	cout << sn.get(2,40) << endl;
-	cout << sn1.get(2,22) << endl;
+	Sales_data def();//此式不會進去執行我們自訂的預設建構器，要改成下式
+	Sales_data def=Sales_data();
+	Sales_data oneStr("222-111");
+	Sales_data delegated_to("333-222",24.0,10.22);
+	Sales_data fourArg("444-333",32.0,333.3,10);
+	Sales_data istreamOne(cin);
 }
 
 

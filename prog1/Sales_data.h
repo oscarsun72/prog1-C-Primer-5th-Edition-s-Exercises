@@ -2,12 +2,14 @@
 #ifndef SALES_DATA_H
 #define SALES_DATA_H
 #include<string>
+#include<iostream>
 using namespace std;//千萬不要忘了這個
 struct  Sales_data {
-	Sales_data() = default;//預設建構器（constructor）用這式會較Sales_data() {}多二個建構器，蓋=default由編譯器創建2個額外的合成的預設建構器（synthesized default constructors） 56:00
-	//Sales_data() :bookNo{"000-000-000" } {}
-	Sales_data(const string &bNo) :bookNo{bNo } {}
-	Sales_data(const string &bNo,  const double bSize, const double rvn) :bookNo{ bNo }, bookSize{ bSize }, revenue{rvn} {}
+	//Sales_data() = default;
+	Sales_data() :Sales_data("", 0.0, 0.0) { cout<<"I'm 預設建構器"<<endl; }
+	//Sales_data(const string &bNo) :bookNo{bNo } {}
+	Sales_data(const string& bNo) :Sales_data("", 0.0, 0.0) { cout << "I'm the take a single string argument one" << endl; }
+	Sales_data(const string& bNo, const double bSize, const double rvn) :bookNo{ bNo }, bookSize{ bSize }, revenue{ rvn } {cout <<"I'm 被委派的" <<endl; }//被委派的
 	Sales_data(const string &, const double bSize, const double, const unsigned);//在類別外定義的建構器
 	Sales_data(istream &);//在類別外定義的建構器
 	//Sales_data() {}//與Sales_data() = default;應是一樣的，然不能寫在最前面，會遮蔽後面的建構器 50:00
