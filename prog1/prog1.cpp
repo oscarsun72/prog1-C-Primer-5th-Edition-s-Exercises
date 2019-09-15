@@ -6,52 +6,43 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include "Sales_item.h"//自訂的標頭檔則用雙引號
-//#include<vector>
 //#include "Sales_data.h"
 //#include "Person.h"
 //#include "Screen.h"
-#include<string>
+//#include<string>
+#include<vector>
 #include <iostream>
 using namespace std;
-class Sales_data {
-	string bookNo;
-	unsigned units_sold=0;
-	double revenue=0.0;	
+class NoDefault {
+	int iMem;
+	NoDefault() :iMem(0) { cout << "預設建構器（default　constructor）" << endl; }
 public:
-	// defines the default constructor as well as one that takes a string argument
-	Sales_data(std::string s ) : bookNo(s) { }
-	// remaining constructors unchanged
-	Sales_data(std::string s, unsigned cnt, double rev) :
-		bookNo(s), units_sold(cnt), revenue(rev* cnt) { }
-	Sales_data(std::istream& is = cin) { read(is, *this); }
-	// remaining members as before
-	friend istream& read(istream&, Sales_data&);
-	friend ostream& print(ostream& os, const Sales_data& sales_data);
+	NoDefault(int  i) :NoDefault() { cout << "int" << endl; }	//用委派達到類似預設建構器（default constructor）的功能
+	inline int iMemR() { return iMem; }
 };
 
-istream& read(istream&, Sales_data&);
+class c
+{
+public:
+	c()=default;
+	~c();//解構器
+	inline int ndVal() { return nd.iMemR(); }
+private:
+	NoDefault nd;
+};
 
-istream& read(istream& is, Sales_data& sales_data) {//要改變引數值，參數一定要是參考，將引數用傳址（參考）方式傳遞
-//decltype(cin)& read(istream is ,Sales_data sales_data) {
-	is >> sales_data.bookNo >> sales_data.units_sold >> sales_data.revenue;
-	return is;
+c::~c()
+{
+	nd = NULL;
 }
 
-ostream& print(ostream& os, const Sales_data& sales_data) {
-	os << sales_data.bookNo << '\t' << sales_data.units_sold << '\t'
-		<< sales_data.revenue  ;
-	return os;
-}
-
-Sales_data first_item(cin);//Sales_data(std::istream& is = cin) { read(is, *this); }
 
 int main() {
-	Sales_data next;//Sales_data(std::istream& is = cin) { read(is, *this); }
-	Sales_data last("9-999-99999-9");//Sales_data(std::string s ) : bookNo(s) { }
-
-	print(cout,first_item); cout << endl;
-	print(cout,next); cout << endl;
-	print(cout, last); cout << endl;
+	vector<c> vec(10);
+	//c cTest;
+	//cout<< cTest.ndVal() <<endl;//should be 0
+	for(c i:vec)
+		cout << i.ndVal() << endl;//should be 0
 }
 
 
