@@ -6,21 +6,24 @@
 //#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_item.h"//自訂的標頭檔則用雙引號
 //#include<string>
 //#include<vector>
-//#include "Sales_data.h"
-//#include "Person.h"
-#include "Screen.h"
+
 #include <iostream>
 using namespace std;
+class Account {
+public:
+	void calculate() { amount += amount * interestRate; }
+	static double rate() { return interestRate; }
+	static void rate(double);
+private:
+	std::string owner;
+	double amount;
+	static double interestRate;
+	static double initRate();
+}; 
 int main() {
-	Screen sn=Screen(10,5,'a');
-	Screen sn1=Screen(10,5,"好好念佛，成佛是大事，其他啥都是假的啊");
-	cout<<sn.get()<<endl;
-	cout<<sn1.get()<<endl;
-	cout << sn.get(2,40) << endl;
-	cout << sn1.get(2,22) << endl;
+	
 }
 
 
