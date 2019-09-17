@@ -17,9 +17,9 @@ public:
 		hw(h), io(i), other(o) {
 	}
 	constexpr bool any() { return hw || io || other; }
-	void set_io(bool b) { io = b; }
-	void set_hw(bool b) { hw = b; }
-	void set_other(bool b) { hw = b; }
+	constexpr void set_io(bool b) { io = b; }
+	constexpr void set_hw(bool b) { hw = b; }
+	constexpr void set_other(bool b) { other= b; }//原作「hw = b;」
 private:
 	bool hw; // hardware errors other than IO errors
 	bool io; // IO errors
@@ -29,13 +29,15 @@ private:
 
 int main() {
  Debug io_sub(false, true, false); // debugging IO
-//有「constexpr」還會出錯：「E1086	the object has type qualifiers that are not compatible with the member function "Debug::any"	」下同。
+//有「constexpr」還會出錯：「E1086	the object has type qualifiers that are not compatible with the member function "Debug::any"	」下同。 
+ io_sub.set_hw(true); 
+ io_sub.set_io(true);
+ io_sub.set_other(true);
 if (io_sub.any()) // equivalent to if(true)
 cerr << "print appropriate error messages" << endl;
 Debug prod(false); // no debugging during production
 if (prod.any()) // equivalent to if(false)
 cerr << "print an error message" << endl;
-	
 }
 
 
