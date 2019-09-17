@@ -6,21 +6,36 @@
 //#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_item.h"//自訂的標頭檔則用雙引號
-//#include<string>
-//#include<vector>
-//#include "Sales_data.h"
-//#include "Person.h"
-#include "Screen.h"
+
 #include <iostream>
 using namespace std;
+class Debug {
+public:
+	constexpr Debug(bool b = true) : hw(b), io(b), other(b) {
+	}
+	constexpr Debug(bool h, bool i, bool o) :
+		hw(h), io(i), other(o) {
+	}
+	constexpr bool any() { return hw || io || other; }
+	void set_io(bool b) { io = b; }
+	void set_hw(bool b) { hw = b; }
+	void set_other(bool b) { hw = b; }
+private:
+	bool hw; // hardware errors other than IO errors
+	bool io; // IO errors
+	bool other; // other errors
+};
+
+
 int main() {
-	Screen sn=Screen(10,5,'a');
-	Screen sn1=Screen(10,5,"好好念佛，成佛是大事，其他啥都是假的啊");
-	cout<<sn.get()<<endl;
-	cout<<sn1.get()<<endl;
-	cout << sn.get(2,40) << endl;
-	cout << sn1.get(2,22) << endl;
+ Debug io_sub(false, true, false); // debugging IO
+//有「constexpr」還會出錯：「E1086	the object has type qualifiers that are not compatible with the member function "Debug::any"	」下同。
+if (io_sub.any()) // equivalent to if(true)
+cerr << "print appropriate error messages" << endl;
+Debug prod(false); // no debugging during production
+if (prod.any()) // equivalent to if(false)
+cerr << "print an error message" << endl;
+	
 }
 
 
