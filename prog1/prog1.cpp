@@ -5,44 +5,12 @@
 //#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_item.h"//自訂的標頭檔則用雙引號
-//#include "Sales_data.h"
-//#include "Person.h"
-//#include "Screen.h"
-//#include<string>
-#include<vector>
+#include "example.h"
 #include <iostream>
 using namespace std;
-class NoDefault {
-	int iMem;
-	NoDefault() :iMem(0) { cout << "預設建構器（default　constructor）" << endl; }
-public:
-	NoDefault(int  i) :NoDefault() { cout << "int" << endl; }	//用委派達到類似預設建構器（default constructor）的功能
-	inline int iMemR() { return iMem; }
-};
-
-class c
-{
-public:
-	c()=default;
-	~c();//解構器
-	inline int ndVal() { return nd.iMemR(); }
-private:
-	NoDefault nd;
-};
-
-c::~c()
-{
-	nd = NULL;
-}
-
 
 int main() {
-	vector<c> vec(10);
-	//c cTest;
-	//cout<< cTest.ndVal() <<endl;//should be 0
-	for(c i:vec)
-		cout << i.ndVal() << endl;//should be 0
+	Example e;
 }
 
 
