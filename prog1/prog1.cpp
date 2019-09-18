@@ -22,6 +22,9 @@ private:
 	static double interestRate;
 	static double initRate();
 }; 
+
+double Account::interestRate = initRate();
+
 int main() {
 	
 }
