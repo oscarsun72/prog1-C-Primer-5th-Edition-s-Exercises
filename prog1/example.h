@@ -1,7 +1,7 @@
 #ifndef EXAMPLE_H
 #define EXAMPLE_H
 #include<vector>
-using namespace std;//§O§Ñ¤Fvector¬O std::vector!!!
+using namespace std;//åˆ¥å¿˜äº†vectoræ˜¯ std::vector!!!
 // example.h
 class Example {
 public:
