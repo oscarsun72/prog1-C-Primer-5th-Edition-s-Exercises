@@ -11,6 +11,12 @@ using namespace std;
 
 int main() {
 	Example e;
+	cout << e.rate << endl;
+	cout << e.vecSize << endl;
+	cout << e.vec.size() << endl;
+	cout << Example::rate << endl;
+	cout << Example::vecSize << endl;
+	cout << Example::vec.size() << endl;
 }
 
 
