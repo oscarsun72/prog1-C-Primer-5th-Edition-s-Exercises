@@ -8,25 +8,14 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 //#include<string>
 //#include<vector>
-
+#include"Account.h"
 #include <iostream>
 using namespace std;
-class Account {
-public:
-	void calculate() { amount += amount * interestRate; }
-	static double rate() { return interestRate; }
-	static void rate(double);
-private:
-	std::string owner;
-	double amount;
-	static double interestRate;
-	static double initRate();
-}; 
-
-double Account::interestRate = initRate();
 
 int main() {
-	
+	Account a("孫守真", "0936188888", "臺北市士林區", "M");
+	cout << a.rate() << endl;;
+
 }
 
 

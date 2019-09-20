@@ -151,10 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Account.cpp" />
     <ClCompile Include="prog1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="prog1.rc" />
+    <ClInclude Include="Account.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

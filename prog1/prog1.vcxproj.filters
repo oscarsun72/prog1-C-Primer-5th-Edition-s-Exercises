@@ -18,10 +18,13 @@
     <ClCompile Include="prog1.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Account.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="prog1.rc">
-      <Filter>資源檔</Filter>
-    </ResourceCompile>
+    <ClInclude Include="Account.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
