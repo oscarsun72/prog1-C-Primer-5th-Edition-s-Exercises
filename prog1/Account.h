@@ -22,8 +22,8 @@ private:
 	double amount=0.00;
 	vector<str>transactions;
 	static double interestRate;
-	//static double initRate();//©w¸q¤WÁÙ¨S¸Ñ¨M
-	double initRate();//©w¸q¤WÁÙ¨S¸Ñ¨M
+	//static double initRate();//å®šç¾©ä¸Šé‚„æ²’è§£æ±º
+	double initRate();//å®šç¾©ä¸Šé‚„æ²’è§£æ±º
 };
 
 double Account::interestRate = 0.00;
