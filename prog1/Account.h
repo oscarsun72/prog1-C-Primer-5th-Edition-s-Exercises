@@ -1,4 +1,4 @@
-#ifndef ACCOUNT_H
+﻿#ifndef ACCOUNT_H
 #define ACCOUNT_H
 #include<string>
 #include<vector>
@@ -9,7 +9,7 @@ class Account
 public:
 	typedef string str;
 	Account(str Name,str telephoneNum,str Address,str Gender);
-	//~Account();
+	~Account();
 	void calculate() {amount+=amount*interestRate;	}
 	static double rate() { return interestRate; }
 	//static void rate(double);
@@ -22,8 +22,7 @@ private:
 	double amount=0.00;
 	vector<str>transactions;
 	static double interestRate;
-	//static double initRate();//定義上還沒解決
-	double initRate();//定義上還沒解決
+	static double initRate();//Account.cpp檔定義上還沒解決
 };
 
 double Account::interestRate = 0.00;
@@ -39,9 +38,9 @@ inline double Account::initRate()
 	return interestRate= 0.0;
 }
 
-//
-//Account::~Account()
-//{
-//}
+
+Account::~Account()
+{
+}
 
 #endif 
