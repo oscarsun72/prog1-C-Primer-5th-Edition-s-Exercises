@@ -22,7 +22,8 @@ private:
 	double amount=0.00;
 	vector<str>transactions;
 	static double interestRate;
-	//static double initRate();
+	//static double initRate();//定義上還沒解決
+	double initRate();//定義上還沒解決
 };
 
 double Account::interestRate = 0.00;
@@ -30,8 +31,14 @@ double Account::interestRate = 0.00;
 Account::Account(str Name,str telephoneNum,str Address,str Gender)
 	:name(Name),tel(telephoneNum),address(Address),gender(Gender)
 {
-	//initRate();	
+	initRate();	
 }
+
+inline double Account::initRate()
+{
+	return interestRate= 0.0;
+}
+
 //
 //Account::~Account()
 //{

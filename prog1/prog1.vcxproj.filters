@@ -18,9 +18,6 @@
     <ClCompile Include="prog1.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="Account.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
