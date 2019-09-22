@@ -151,14 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="example.cpp" />
     <ClCompile Include="prog1.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="prog1.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="example.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

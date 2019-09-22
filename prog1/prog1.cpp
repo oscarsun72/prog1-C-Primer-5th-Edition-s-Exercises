@@ -5,18 +5,29 @@
 //#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include "example.h"
 #include <iostream>
+#include<vector>
 using namespace std;
 
+istream& func(istream& is) {
+	int i; vector<int>veci;
+	while (!is.fail()&&!is.eof()&&!is.bad())
+	{
+		is >> i;
+		if (!is.fail() &&!is.eof() && !is.bad())
+			veci.push_back(i);
+	}
+	for (int a : veci)
+	{
+		cout << a;
+		cout << endl;
+	}	cin.clear();
+	//cin.setstate();
+	return cin;
+}
 int main() {
-	Example e;
-	cout << e.rate << endl;
-	cout << e.vecSize << endl;
-	cout << e.vec.size() << endl;
-	cout << Example::rate << endl;
-	cout << Example::vecSize << endl;
-	cout << Example::vec.size() << endl;
+	istream& i = func(cin);
+	cout << i.rdstate() << endl;
 }
 
 
