@@ -29,11 +29,11 @@ private:
 	double revenue{ 0.00 };//總營收-營業額
 	unsigned soldQ{ 0 };
 	double bookSize{0.00};
-friend ostream& print(ostream& , const Sales_data&);
+friend ofstream& print(ofstream& , const Sales_data&);
 friend ifstream& read(ifstream& , Sales_data& );
 friend Sales_data add(const Sales_data&, const Sales_data&);
 };
-ostream& print(ostream& , const Sales_data&);
+ofstream& print(ofstream& , const Sales_data&);
 ifstream& read(ifstream& , Sales_data& );
 Sales_data add(const Sales_data&, const Sales_data&);
 #endif // !SALES_DATA_H

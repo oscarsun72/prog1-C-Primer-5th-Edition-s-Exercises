@@ -42,7 +42,7 @@ inline double Sales_data::avg_price()const
 	//}
 	//return 0.0;
 }
-ostream& print(ostream& os, const Sales_data& sales_data) {
+ofstream& print(ofstream& os, const Sales_data& sales_data) {
 	os << sales_data.isbn() << '\t' << sales_data.soldQ << '\t'
 		<< sales_data.revenue << '\t' << sales_data.avg_price();
 	return os;

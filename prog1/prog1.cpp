@@ -15,8 +15,14 @@
 #include "Sales_data.h"
 using namespace std;
 void main1(int argc, const char* argv[]) {		
-	ifstream ifs(argv[argc-1]);
-	if (ifs) {
+	ifstream ifs(argv[argc-2]);
+	ofstream ofs(argv[argc - 1]);//本來就是要清空 file mode = out and trunc
+	//如果檔案不存在 ofstream會以提供的檔名直接寫入硬碟
+	//如果路徑不正確，則會在工作目錄以下建此新檔
+	//因此，下述的 ofs.good()和 if(ofs) 就會永遠是 true=1了,不可能出錯了
+	//if (ofs.good())
+	//	cout<< ofs.good()<<endl;
+	if (ifs&&ofs) {
 		Sales_data sd;
 		if (read(ifs, sd)) {
 			Sales_data sdnext;
@@ -28,11 +34,11 @@ void main1(int argc, const char* argv[]) {
 				}
 				else
 				{
-					print(cout, sd) << endl;;
+					print(ofs, sd) << endl;;
 					sd = sdnext;
 				}
 			}
-			print(cout, sd)<<endl;
+			print(ofs, sd)<<endl;
 		}
 		else {
 			cout << "交易記錄讀取失敗" << endl;
@@ -43,8 +49,9 @@ void main1(int argc, const char* argv[]) {
 	}
 }
 int main(int argc,  char* argv[]) {
-	const char* a[1] = { "V:\\Programming\\C++\\Sales_data_transactions.txt" };
-	main1(1,a);	
+	const char* a[2] = { "V:\\Programming\\C++\\Sales_data_transactions.txt" 
+						,"V:\\Programming\\C++\\Sales_data_transactions_output.txt"};
+	main1(2,a);	
 }
 
 //int main(int argc, const char** argv)
