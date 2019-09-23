@@ -21,7 +21,9 @@ istream& func(istream& is) {
 	{
 		cout << a;
 		cout << endl;
-	}	cin.clear();
+	}	
+	cout<< cin.rdstate()<<endl;
+	cin.clear();
 	//cin.setstate();
 	return cin;
 }
