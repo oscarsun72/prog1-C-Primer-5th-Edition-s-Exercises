@@ -15,7 +15,7 @@
 #include "Sales_data.h"
 using namespace std;
 void main1(int argc, const char* argv[]) {		
-	ifstream ifs(argv[sizeof( argv)/sizeof(*argv)-1]);
+	ifstream ifs(argv[argc-1]);
 	if (ifs) {
 		Sales_data sd;
 		if (read(ifs, sd)) {
@@ -44,7 +44,7 @@ void main1(int argc, const char* argv[]) {
 }
 int main(int argc,  char* argv[]) {
 	const char* a[1] = { "V:\\Programming\\C++\\Sales_data_transactions.txt" };
-	main1(0,a);	
+	main1(1,a);	
 }
 
 //int main(int argc, const char** argv)
