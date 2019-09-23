@@ -1,27 +1,32 @@
 ﻿// prog1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
 //
 
-
-//#include"prog1.h"
-//#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_item.h"//自訂的標頭檔則用雙引號
-//#include<string>
-//#include<vector>
 //#include "Sales_data.h"
-//#include "Person.h"
-#include "Screen.h"
-#include <iostream>
+
+	//const char* a[4] = { "", "V:\\Programming\\C++\\1.txt"
+	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
+//#include <iostream>
+#include<string>
+#include<vector>
+#include <fstream>
 using namespace std;
-int main() {
-	Screen sn=Screen(10,5,'a');
-	Screen sn1=Screen(10,5,"好好念佛，成佛是大事，其他啥都是假的啊");
-	cout<<sn.get()<<endl;
-	cout<<sn1.get()<<endl;
-	cout << sn.get(2,40) << endl;
-	cout << sn1.get(2,22) << endl;
+void inputAndRead() {	
+	ifstream ifstrm("V:\\Programming\\C++\\1.txt");
+	vector<string>vecStr;
+	if (ifstrm)
+	{
+		string str;
+		while(ifstrm>>str){			
+			vecStr.push_back(str);
+		}
+	}
 }
+
+int main() {
+	inputAndRead();
+	}
 
 
 //int main(int argc, const char** argv)
