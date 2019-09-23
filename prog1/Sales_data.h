@@ -2,6 +2,9 @@
 #ifndef SALES_DATA_H
 #define SALES_DATA_H
 #include<string>
+#include<iostream>
+#include<fstream>
+
 using namespace std;//千萬不要忘了這個
 struct  Sales_data {
 	Sales_data() {
@@ -14,7 +17,7 @@ struct  Sales_data {
 	Sales_data(const string &bNo) :bookNo{bNo } {}
 	Sales_data(const string &bNo,  const double bSize, const double rvn) :bookNo{ bNo }, bookSize{ bSize }, revenue{rvn} {}
 	Sales_data(const string &, const double bSize, const double, const unsigned);//在類別外定義的建構器
-	Sales_data(istream &);//在類別外定義的建構器
+	Sales_data(ifstream &);//在類別外定義的建構器
 	//Sales_data(istream& is){read(is, *this);}
 	string isbn()const;	
 	inline double avg_price()const;
@@ -27,10 +30,10 @@ private:
 	unsigned soldQ{ 0 };
 	double bookSize{0.00};
 friend ostream& print(ostream& , const Sales_data&);
-friend istream& read(istream& , Sales_data& );
+friend ifstream& read(ifstream& , Sales_data& );
 friend Sales_data add(const Sales_data&, const Sales_data&);
 };
 ostream& print(ostream& , const Sales_data&);
-istream& read(istream& , Sales_data& );
+ifstream& read(ifstream& , Sales_data& );
 Sales_data add(const Sales_data&, const Sales_data&);
 #endif // !SALES_DATA_H

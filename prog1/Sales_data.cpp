@@ -1,9 +1,10 @@
 ﻿#include "Sales_data.h"
 #include<string>
 #include<iostream>
+#include<fstream>
 using namespace std;
 
-Sales_data::Sales_data(istream& is) {
+Sales_data::Sales_data(ifstream& is) {
 	if (read(is, *this)) readSeccess = true;
 }	
 
@@ -47,7 +48,7 @@ ostream& print(ostream& os, const Sales_data& sales_data) {
 	return os;
 }
 
-istream& read(istream& is, Sales_data& sales_data) {//要改變引數值，參數一定要是參考，將引數用傳址（參考）方式傳遞
+ifstream& read(ifstream& is, Sales_data& sales_data) {//要改變引數值，參數一定要是參考，將引數用傳址（參考）方式傳遞
 //decltype(cin)& read(istream is ,Sales_data sales_data) {
 	is >> sales_data.bookNo >> sales_data.soldQ >> sales_data.revenue;
 	return is;

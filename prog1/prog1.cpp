@@ -11,13 +11,41 @@
 //#include "Person.h"
 //#include<vector>
 #include <iostream>
+#include <fstream>
 #include "Sales_data.h"
 using namespace std;
-int main() {		
-	Sales_data sd = Sales_data(cin);
-	print(cout, sd);
+void main1(int argc, const char* argv[]) {		
+	ifstream ifs(argv[sizeof( argv)/sizeof(*argv)-1]);
+	if (ifs) {
+		Sales_data sd;
+		if (read(ifs, sd)) {
+			Sales_data sdnext;
+			while (read(ifs,sdnext))
+			{
+				if (sd.isbn()==sdnext.isbn())
+				{
+					sd.combine(sdnext);
+				}
+				else
+				{
+					print(cout, sd) << endl;;
+					sd = sdnext;
+				}
+			}
+			print(cout, sd)<<endl;
+		}
+		else {
+			cout << "交易記錄讀取失敗" << endl;
+		}
+	}
+	else {
+		cout << "檔案讀取失敗" << endl;
+	}
 }
-
+int main(int argc,  char* argv[]) {
+	const char* a[1] = { "V:\\Programming\\C++\\Sales_data_transactions.txt" };
+	main1(0,a);	
+}
 
 //int main(int argc, const char** argv)
 //{
