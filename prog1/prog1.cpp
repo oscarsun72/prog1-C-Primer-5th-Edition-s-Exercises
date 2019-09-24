@@ -1,23 +1,27 @@
 ﻿// prog1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
 //
 
-//#include"prog1.h"
-//#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
+#include<string>
 #include <iostream>
+#include <sstream>
 #include<vector>
 using namespace std;
 
 istream& func(istream& is) {
-	int i; vector<int>veci;
+	string i; vector<string>veci;
 	while (!is.fail()&&!is.eof()&&!is.bad())
 	{
-		is >> i;
-		if (!is.fail() &&!is.eof() && !is.bad())
-			veci.push_back(i);
+		is >> i;		
+		if (!is.fail() &&!is.eof() && !is.bad()){
+			istringstream isstrm(i);
+			string j;
+			isstrm >> j;
+			veci.push_back(j);
+		}
 	}
-	for (int a : veci)
+	for (string a : veci)
 	{
 		cout << a;
 		cout << endl;
