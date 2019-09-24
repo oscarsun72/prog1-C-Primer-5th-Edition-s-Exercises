@@ -16,7 +16,7 @@
 using namespace std;
 void main1(int argc, const char* argv[]) {		
 	ifstream ifs(argv[argc-2]);
-	ofstream ofs(argv[argc - 1]);//本來就是要清空 file mode = out and trunc
+	ofstream ofs(argv[argc - 1],ofstream::app);//本來就是要清空 file mode = out and trunc
 	//如果檔案不存在 ofstream會以提供的檔名直接寫入硬碟
 	//如果路徑不正確，則會在工作目錄以下建此新檔
 	//因此，下述的 ofs.good()和 if(ofs) 就會永遠是 true=1了,不可能出錯了
@@ -38,7 +38,7 @@ void main1(int argc, const char* argv[]) {
 					sd = sdnext;
 				}
 			}
-			print(ofs, sd)<<endl;
+			print(ofs, sd)<<"-------"<<endl;
 		}
 		else {
 			cout << "交易記錄讀取失敗" << endl;
