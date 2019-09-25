@@ -3,36 +3,38 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<string>
 #include <iostream>
+#include <fstream>
 #include <sstream>
+#include<string>
 #include<vector>
 using namespace std;
 
-istream& func(istream& is) {
-	string i; vector<string>veci;
+istream& func(istream& is) {	
+	string i; vector<string>veci;	
 	while (!is.fail()&&!is.eof()&&!is.bad())
+	//while (getline(is, i))
 	{
-		is >> i;		
-		if (!is.fail() &&!is.eof() && !is.bad()){
-			istringstream isstrm(i);
-			string j;
-			isstrm >> j;
-			veci.push_back(j);
-		}
+		getline(is, i);			
+			veci.push_back(i);	
 	}
 	for (string a : veci)
 	{
-		cout << a;
-		cout << endl;
+		istringstream isstrm(a);		
+		while (isstrm>>i)
+		{
+			cout << i;
+			cout << endl;
+		}
 	}	
-	cout<< cin.rdstate()<<endl;
-	cin.clear();
-	//cin.setstate();
-	return cin;
+	cout<< is.rdstate()<<endl;
+	is.clear();
+	//is.setstate();
+	return is;
 }
 int main() {
-	istream& i = func(cin);
+	ifstream ifstrm("V:\\Programming\\C++\\new 2.h");
+	istream& i = func(ifstrm);
 	cout << i.rdstate() << endl;
 }
 
