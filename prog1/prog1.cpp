@@ -1,22 +1,33 @@
 ﻿// prog1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
 //
 
-//#include"prog1.h"
-//#include "Chapter6.h"//標準程式庫才用角括弧
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include "example.h"
 #include <iostream>
+#include<sstream>
+#include<string>
+#include<vector>
 using namespace std;
 
+struct PersonInfo {
+	string name;
+	vector<string>phones;
+};
 int main() {
-	Example e;
-	cout << e.rate << endl;
-	cout << e.vecSize << endl;
-	cout << e.vec.size() << endl;
-	cout << Example::rate << endl;
-	cout << Example::vecSize << endl;
-	cout << Example::vec.size() << endl;
+	string line, word; // will hold a line and word from input, respectively
+	vector<PersonInfo> people; // will hold all the records from the input
+	// read the input a line at a time until cin hits end-of-file (or another error)
+	istringstream record; // bind record to the line we just read
+	while (getline(cin, line)) {
+		PersonInfo info; // create an object to hold this record's data
+		record.str(line);
+		if (record.eof())//關鍵在這！因為record移位（shift）後在處理下一筆記錄（下一行）前未歸位
+			record.clear();
+		record >> info.name; // read the name
+		while (record >> word) // read the phone numbers
+			info.phones.push_back(word); // and store them
+		people.push_back(info); // append this record to people
+	}
 }
 
 
