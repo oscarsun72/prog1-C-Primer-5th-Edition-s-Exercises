@@ -6,7 +6,6 @@
 #include<deque>
 #include<list>
 using namespace std;
-
 int main() {	
 	list<deque<int>> lstdqi;
 	//用別名來定義
