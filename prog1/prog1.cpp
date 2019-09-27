@@ -7,10 +7,10 @@
 #include<list>
 using namespace std;
 int main() {	
-	list<deque<int>> lstdqi;
+	list<deque<int>> lstdqi(10);
 	//用別名來定義
 	typedef deque<int> dqi;
-	list<dqi> lstdqi_alias;	
+	list<dqi> lstdqi_alias(5);	
 }
 
 
