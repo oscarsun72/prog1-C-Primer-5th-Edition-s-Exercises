@@ -3,31 +3,20 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<vector>
+#include<list>
 #include<iostream>
 
 using namespace std;
-vector<int>::const_iterator main1() {
-	static vector<int> veci{ -3,-2,-1,0,1,2,3,4,5 };
-	int i = 2;
-	static vector<int>::const_iterator beg = begin(veci) + 1;
-	static vector<int>::const_iterator ed = end(veci)-4;
-	//左包含區間或左包含範圍是不包括end指標所指之元素的，所以即使end指向2，在此例也一樣屬於未找到也
-	while (beg != ed)
-	{
-		if ((*beg) == 12)
-		{
-			cout << "找到了！" << endl;
-			return beg;
-		}
-		++beg;
-	}
-	cout << "找不到！" << endl;
-	return beg;
-}
 
 int main(){	
-	cout<< *main1()<<endl;
+	list<int> lst1{2,3,4,11,333,3331};
+	list<int>::iterator iter1 = lst1.begin(),
+								iter2 = lst1.end();
+	while (iter1 != iter2) /* ... */
+	{
+		cout << *iter1 << endl;
+		++iter1;
+	}
 }
 
 
