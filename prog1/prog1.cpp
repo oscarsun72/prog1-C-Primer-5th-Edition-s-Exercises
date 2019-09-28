@@ -7,24 +7,27 @@
 #include<iostream>
 
 using namespace std;
-bool main() {
-	vector<int> veci{ -3,-2,-1,0,1,2,3,4,5 };
+vector<int>::const_iterator main1() {
+	static vector<int> veci{ -3,-2,-1,0,1,2,3,4,5 };
 	int i = 2;
-	vector<int>::const_iterator beg = begin(veci) + 1;
-	vector<int>::const_iterator ed = end(veci) - 3;
+	static vector<int>::const_iterator beg = begin(veci) + 1;
+	static vector<int>::const_iterator ed = end(veci)-4;
 	while (beg != ed)
 	{
-		if (*beg == 2)
+		if ((*beg) == 12)
 		{
-			cout << true << endl;
-			return true;
+			cout << "找到了！" << endl;
+			return beg;
 		}
 		++beg;
 	}
-	cout << false << endl;
-	return false;
+	cout << "找不到！" << endl;
+	return beg;
 }
 
+int main(){	
+	cout<< *main1()<<endl;
+}
 
 
 //int main(int argc, const char** argv)
