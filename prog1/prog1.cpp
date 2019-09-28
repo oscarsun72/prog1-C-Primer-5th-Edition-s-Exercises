@@ -12,6 +12,7 @@ vector<int>::const_iterator main1() {
 	int i = 2;
 	static vector<int>::const_iterator beg = begin(veci) + 1;
 	static vector<int>::const_iterator ed = end(veci)-4;
+	//左包含區間或左包含範圍是不包括end指標所指之元素的，所以即使end指向2，在此例也一樣屬於未找到也
 	while (beg != ed)
 	{
 		if ((*beg) == 12)
