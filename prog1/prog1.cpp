@@ -3,14 +3,26 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<deque>
-#include<list>
+#include<vector>
+#include<iostream>
+
 using namespace std;
-int main() {	
-	list<deque<int>> lstdqi(10);
-	//用別名來定義
-	typedef deque<int> dqi;
-	list<dqi> lstdqi_alias(5);	
+bool main() {
+	vector<int> veci{ -3,-2,-1,0,1,2,3,4,5 };
+	int i = 2;
+	vector<int>::const_iterator beg = begin(veci) + 1;
+	vector<int>::const_iterator ed = end(veci) - 3;
+	while (beg != ed)
+	{
+		if (*beg == 2)
+		{
+			cout << true << endl;
+			return true;
+		}
+		++beg;
+	}
+	cout << false << endl;
+	return false;
 }
 
 
