@@ -10,8 +10,8 @@ using namespace std;
 
 int main() {
 	vector<string	> vecs{"孫守真","文天祥","顧炎武"};
-	char  ca[] = "abcde";
-	list<char*> lstcp(10,ca);
+	const char  ca[] = "abcde";
+	list<const char*> lstcp(10,ca);
 	vecs.assign(lstcp.cbegin(),lstcp.cend());//相當於下式
 	//vecs.clear();	vecs.insert(vecs.cbegin(), lstcp.size(), *(lstcp.begin()));
 }
