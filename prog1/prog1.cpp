@@ -3,15 +3,16 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<vector>
-#include<list>
+#include<iostream>
 using namespace std;
 
 int main() {
-	vector<int> veci{-1,-2,-3,0};
-	list<int> lsti{0,1,2,3};
-	vector<double> vecdi(veci.cbegin(),veci.cend());
-	vector<double> vecdl(lsti.cbegin(), lsti.cend());	
+	const char ca[] = { 'h', 'e', 'l', 'l', 'o' ,NULL};//沒有NULL就陷入無窮迴圈
+	const char* cp = ca;
+	while (*cp) {
+		cout << *cp << endl;
+		++cp;
+	}
 }
 
 
