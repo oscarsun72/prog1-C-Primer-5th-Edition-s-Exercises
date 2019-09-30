@@ -16,7 +16,8 @@ int main() {
 	vector<int>veci2(3);
 	/*There are two ways to create a new container as a copy of another one: 
 	We can directly copy the container:*/
-	vector<int>veci3= veci1;
+	vector<int>veci3= veci1;//容器拷貝時，容器型別與元素型別必須一致
+	vector<int>veci31(veci1);//the constructor that takes a container to copy
 	// or (excepting array) we can copy a range of elements denoted by a pair of iterators.:
 	vector<int>veci4(veci2.begin(), veci2.end());
 	vector<int>veci5 = {1,1,1};
