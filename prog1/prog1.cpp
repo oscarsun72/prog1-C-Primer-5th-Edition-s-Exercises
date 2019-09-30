@@ -4,12 +4,13 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<vector>
+#include<string>
 #include<list>
 using namespace std;
 
 int main() {
-	vector<int> veci{-1,-2,-3,0};
-	list<int> lsti{0,1,2,3};
+	vector<string	> vecs{"孫守真","文天祥","顧炎武"};
+	list<char*> lstcp{''};
 	vector<double> vecdi(veci.cbegin(),veci.cend());
 	vector<double> vecdl(lsti.cbegin(), lsti.cend());	
 }
