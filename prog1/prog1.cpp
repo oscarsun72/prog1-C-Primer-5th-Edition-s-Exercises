@@ -3,31 +3,26 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include <iostream>
-#include<sstream>
-#include<string>
 #include<vector>
 using namespace std;
 
-struct PersonInfo {
-	string name;
-	vector<string>phones;
-};
 int main() {
-	string line, word; // will hold a line and word from input, respectively
-	vector<PersonInfo> people; // will hold all the records from the input
-	// read the input a line at a time until cin hits end-of-file (or another error)
-	istringstream record; // bind record to the line we just read
-	while (getline(cin, line)) {
-		PersonInfo info; // create an object to hold this record's data
-		record.str(line);
-		if (record.eof())//關鍵在這！因為record移位（shift）後在處理下一筆記錄（下一行）前未歸位
-			record.clear();
-		record >> info.name; // read the name
-		while (record >> word) // read the phone numbers
-			info.phones.push_back(word); // and store them
-		people.push_back(info); // append this record to people
-	}
+	vector<int> veci;
+	//Every container type defines a default constructor (§ 7.1.4, p. 263). 
+	//With the 	exception of array, the default constructor creates an empty container of the	specified type.
+	/*Again excepting array, the other constructors take arguments that
+		specify the size of the container and initial values for the elements.*/
+	vector<int>veci1(3,2);
+	vector<int>veci2(3);
+	/*There are two ways to create a new container as a copy of another one: 
+	We can directly copy the container:*/
+	vector<int>veci3= veci1;
+	// or (excepting array) we can copy a range of elements denoted by a pair of iterators.:
+	vector<int>veci4(veci2.begin(), veci2.end());
+	vector<int>veci5 = {1,1,1};
+	vector<int>veci6(4,4);
+	veci6 = { 1,1,1 };//size會改變成串列的，而不是不足的用值初始化！veci6.size=3,veci6.capacity()=4;
+	//好像只有array因為是固定大小，串列初始化（list initialization）不夠的剩下才會用值初始化
 }
 
 
