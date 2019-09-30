@@ -10,9 +10,10 @@ using namespace std;
 
 int main() {
 	vector<string	> vecs{"孫守真","文天祥","顧炎武"};
-	list<char*> lstcp{''};
-	vector<double> vecdi(veci.cbegin(),veci.cend());
-	vector<double> vecdl(lsti.cbegin(), lsti.cend());	
+	char  ca[] = "abcde";
+	list<char*> lstcp(10,ca);
+	vecs.assign(lstcp.cbegin(),lstcp.cend());//相當於下式
+	//vecs.clear();	vecs.insert(vecs.cbegin(), lstcp.size(), *(lstcp.begin()));
 }
 
 
