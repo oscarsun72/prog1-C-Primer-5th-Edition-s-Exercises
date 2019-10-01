@@ -12,7 +12,7 @@ int main() {
 	vector<string	> vecs{"孫守真","文天祥","顧炎武"};
 	const char  ca[] = "abcde";
 	list<const char*> lstcp(10,ca);
-	vecs.assign(lstcp.cbegin(),lstcp.cend());//相當於下式：
+	vecs.assign(lstcp.cbegin(),lstcp.cend());//相當於下式
 	//vecs.clear();	vecs.insert(vecs.cbegin(), lstcp.size(), *(lstcp.begin()));
 }
 
