@@ -4,16 +4,25 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<vector>
-#include<string>
-#include<list>
+#include<iostream>
 using namespace std;
-
+bool equal2containers(vector<int>veci1, vector<int> veci2) {
+	if (veci1.size() == veci2.size())
+	{
+		vector<int>::size_type sz{0};
+		for(int var : veci1){
+			if (var != veci2[sz])
+				return false;
+			++sz;
+		}
+		return true;
+	}
+	return false;
+}
 int main() {
-	vector<string	> vecs{"孫守真","文天祥","顧炎武"};
-	const char  ca[] = "abcde";
-	list<const char*> lstcp(10,ca);
-	vecs.assign(lstcp.cbegin(),lstcp.cend());//相當於下式
-	//vecs.clear();	vecs.insert(vecs.cbegin(), lstcp.size(), *(lstcp.begin()));
+	vector<int>veci1{2,3,4,4,5};
+	vector<int>veci2{2,3,4,4,5};
+	cout<<equal2containers(veci1, veci2)<<endl;
 }
 
 
