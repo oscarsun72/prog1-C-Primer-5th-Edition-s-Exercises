@@ -3,26 +3,43 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
+#include<string>
 #include<vector>
+#include<list>
 #include<iostream>
 using namespace std;
-bool equal2containers(vector<int>veci1, vector<int> veci2) {
-	if (veci1.size() == veci2.size())
-	{
-		vector<int>::size_type sz{0};
-		for(int var : veci1){
-			if (var != veci2[sz])
-				return false;
-			++sz;
+string compareElements(list<int>lsti, vector<int> veci) {
+	if (lsti.empty() || veci.empty()) return "請傳入有效容器！";
+	vector<int>::size_type sz{0};
+	for (int var : lsti) {
+		if (var > veci[sz])
+			return "list 大於 vector";
+		else if (var < veci[sz])
+		{
+			return "list 小於 vector";
 		}
-		return true;
+		else
+		{
+			++sz;
+			if (sz > (veci.size() - 1))
+				if(lsti.size() !=veci.size())
+					return "list 元素多於 vector,且vector是list的初始子序列（initial subsequence）";
+				else
+					return "list 等於 vector";
+		}
 	}
-	return false;
+	if (lsti.size()<veci.size())
+	{
+		return "list 是 vector的初始子序列（initial subsequence）";
+	}
+	else
+		return "list 等於 vector";	
 }
+
 int main() {
-	vector<int>veci1{2,3,4,4,5};
+	list<int>lsti{2,3,4,4,5};
 	vector<int>veci2{2,3,4,4,5};
-	cout<<equal2containers(veci1, veci2)<<endl;
+	cout<<compareElements(lsti, veci2)<<endl;
 }
 
 
