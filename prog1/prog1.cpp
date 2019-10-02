@@ -4,17 +4,17 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
-#include<deque>
+#include<list>
 #include<iostream>
 using namespace std;
 void read() {
 	string word;
-	deque<string> deqstr;
+	list<string> deqstr;
 	while (cin>>word)
 	{
 		deqstr.push_back(word);
 	}
-	for(deque<string>::const_iterator iter=deqstr.cbegin();iter != deqstr.cend();++iter)
+	for(list<string>::const_iterator iter=deqstr.cbegin();iter != deqstr.cend();++iter)
 		cout << *iter << endl;
 }
 
