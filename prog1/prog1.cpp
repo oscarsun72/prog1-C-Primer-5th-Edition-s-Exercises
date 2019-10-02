@@ -3,27 +3,23 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<deque>
-#include<list>
+#include<string>
+#include<vector>
+#include<iostream>
 using namespace std;
-void copyElements() {
-	list<int>lsti{1,3,2,4,7,8,9,10,111};
-	deque<int>deqiEven;
-	deque<int>deqiOdd;	
-	for (list<int>::const_iterator iter = lsti.cbegin(); iter != lsti.cend(); ++iter)
-	{
-		int i = *iter;
-		if (i % 2 == 0)
-		{
-			deqiEven.push_back(i);
-		}
-		else
-			deqiOdd.push_back(i);
-	}
-}
-
 int main() {
-	copyElements();
+	string word;
+	vector < string> lst;
+	auto iter = lst.begin();
+	while (cin >> word)
+		iter = lst.insert(iter, word); // same as calling push_front
+
+	/*string word;
+	list < string> lst;
+	auto iter = lst.begin();
+	while (cin >> word)
+		iter = lst.insert(iter, word); // same as calling push_front
+		*/
 }
 
 
