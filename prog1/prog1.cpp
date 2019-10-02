@@ -4,42 +4,22 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
-#include<vector>
-#include<list>
+#include<deque>
 #include<iostream>
 using namespace std;
-string compareElements(list<int>lsti, vector<int> veci) {
-	if (lsti.empty() || veci.empty()) return "請傳入有效容器！";
-	vector<int>::size_type sz{0};
-	for (int var : lsti) {
-		if (var > veci[sz])
-			return "list 大於 vector";
-		else if (var < veci[sz])
-		{
-			return "list 小於 vector";
-		}
-		else
-		{
-			++sz;
-			if (sz > (veci.size() - 1))
-				if(lsti.size() !=veci.size())
-					return "list 元素多於 vector,且vector是list的初始子序列（initial subsequence）";
-				else
-					return "list 等於 vector";
-		}
-	}
-	if (lsti.size()<veci.size())
+void read() {
+	string word;
+	deque<string> deqstr;
+	while (cin>>word)
 	{
-		return "list 是 vector的初始子序列（initial subsequence）";
+		deqstr.push_back(word);
 	}
-	else
-		return "list 等於 vector";	
+	for(deque<string>::const_iterator iter=deqstr.cbegin();iter != deqstr.cend();++iter)
+		cout << *iter << endl;
 }
 
 int main() {
-	list<int>lsti{2,3,4,4,5};
-	vector<int>veci2{2,3,4,4,5};
-	cout<<compareElements(lsti, veci2)<<endl;
+	read();
 }
 
 
