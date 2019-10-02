@@ -3,23 +3,28 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<string>
+#include<deque>
 #include<list>
 #include<iostream>
 using namespace std;
-void read() {
-	string word;
-	list<string> deqstr;
-	while (cin>>word)
+void copyElements() {
+	list<int>lsti{1,3,2,4,7,8,9,10,111};
+	deque<int>deqiEven;
+	deque<int>deqiOdd;	
+	for (list<int>::const_iterator iter = lsti.cbegin(); iter != lsti.cend(); ++iter)
 	{
-		deqstr.push_back(word);
+		int i = *iter;
+		if (i % 2 == 0)
+		{
+			deqiEven.push_back(i);
+		}
+		else
+			deqiOdd.push_back(i);
 	}
-	for(list<string>::const_iterator iter=deqstr.cbegin();iter != deqstr.cend();++iter)
-		cout << *iter << endl;
 }
 
 int main() {
-	read();
+	copyElements();
 }
 
 
