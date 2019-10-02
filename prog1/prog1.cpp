@@ -5,7 +5,6 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<deque>
 #include<list>
-#include<iostream>
 using namespace std;
 void copyElements() {
 	list<int>lsti{1,3,2,4,7,8,9,10,111};
