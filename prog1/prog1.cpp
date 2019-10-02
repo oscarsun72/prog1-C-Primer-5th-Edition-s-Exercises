@@ -8,18 +8,20 @@
 #include<iostream>
 using namespace std;
 int main() {
-	string word;
-	vector < string> lst;
-	auto iter = lst.begin();
-	while (cin >> word)
-		iter = lst.insert(iter, word); // same as calling push_front
-
-	/*string word;
-	list < string> lst;
-	auto iter = lst.begin();
-	while (cin >> word)
-		iter = lst.insert(iter, word); // same as calling push_front
-		*/
+	int some_val=10;
+	vector<int>iv{2,4,6,8,10,12,14,25,33,1};
+	vector<int>::iterator iter = iv.begin(),
+		mid = iv.begin() + iv.size() / 2;
+	while (iter != mid)
+	{
+		if (*iter == some_val)
+		{
+			iter = iv.insert(iter, 2 * some_val);//在vector插入元素後，它元素的迭代器會失效,所以「mid」 也會失效
+			//break;//此下二行均可無誤地離開迴圈
+			mid = iv.begin() + iv.size() / 2;
+		}
+		++iter;
+	}
 }
 
 
