@@ -4,16 +4,29 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<list>
-#include<string>
+#include<vector>
 using namespace std;
 int main() {	
-	list<string>slist{ "孫守真","士林區","范仲淹","江蘇省","連橫","臺灣","包拯","安徽省"	};
-	
-	list<string>::const_iterator elem1 = slist.cbegin() , elem2 = slist.cend() ;
-	++elem1; elem1 = elem2;
-	elem1 = slist.erase(elem1,elem2);// no element be delete,when elem1==elem2
-	//if elem2 is off-the-end ,the elements after elem1 and elem1 all be deleted
-	// when elem1==elem2==off-the-end ,there is no element would be deleted
+	int ia[] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 55, 89 };
+	list<int>lst;
+	vector<int>vec;
+	for (int i : ia)
+	{
+		lst.push_back(i); vec.push_back(i);
+	}
+	list<int>::const_iterator p=lst.cbegin();
+	while (p != lst.cend()) {
+		if ((*p) % 2)
+			p = lst.erase(p);
+		else
+			++p;
+	}
+	vector<int>::const_iterator v=vec.cbegin();
+	while (v != vec.cend()){
+		if ((*v) % 2 == 0)
+			v = vec.erase(v);
+		else ++v;
+	}
 }
 
 
