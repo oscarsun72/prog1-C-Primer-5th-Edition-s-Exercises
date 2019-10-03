@@ -3,22 +3,18 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<vector>
+#include<list>
+#include<string>
 #include<iostream>
 using namespace std;
 int main() {	
-	vector<int>iv;// {2, 4, 6, 8, 10, 12, 14, 25, 33, 1};
-	try
-	{
-		auto v1=iv.at(0);
-	}
-	catch (const std::exception&)
-	{
-		cout << "error!"<< endl;
-	}
-	//auto v2=*(iv.begin());
-	//auto v3 = iv[0];
-	//auto v4 = iv.front();
+	list<string>slist{ "孫守真","士林區","范仲淹","江蘇省","連橫","臺灣","包拯","安徽省"	};
+	
+	list<string>::const_iterator elem1 = slist.cbegin() , elem2 = slist.cend() ;
+	++elem1; elem1 = elem2;
+	elem1 = slist.erase(elem1,elem2);// no element be delete,when elem1==elem2
+	//if elem2 is off-the-end ,the elements after elem1 and elem1 all be deleted
+	// when elem1==elem2==off-the-end ,there is no element would be deleted
 }
 
 
