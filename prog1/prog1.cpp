@@ -4,13 +4,21 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<vector>
+#include<iostream>
 using namespace std;
 int main() {	
 	vector<int>iv;// {2, 4, 6, 8, 10, 12, 14, 25, 33, 1};
-	auto v1=iv.at(0);
-	auto v2=*(iv.begin());
-	auto v3 = iv[0];
-	auto v4 = iv.front();
+	try
+	{
+		auto v1=iv.at(0);
+	}
+	catch (const std::exception&)
+	{
+		cout << "error!"<< endl;
+	}
+	//auto v2=*(iv.begin());
+	//auto v3 = iv[0];
+	//auto v4 = iv.front();
 }
 
 
