@@ -5,7 +5,6 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<list>
 #include<string>
-#include<iostream>
 using namespace std;
 int main() {	
 	list<string>slist{ "孫守真","士林區","范仲淹","江蘇省","連橫","臺灣","包拯","安徽省"	};
