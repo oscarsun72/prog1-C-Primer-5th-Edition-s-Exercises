@@ -3,29 +3,23 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<list>
-#include<vector>
+#include<forward_list>
 using namespace std;
 int main() {	
-	int ia[] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 55, 89 };
-	list<int>lst;
-	vector<int>vec;
-	for (int i : ia)
+	forward_list<int>flst = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 55, 89 };
+	forward_list<int>::const_iterator i = flst.cbegin();
+	forward_list<int>::const_iterator prev = flst.before_begin();
+	while( i != flst.cend())
 	{
-		lst.push_back(i); vec.push_back(i);
-	}
-	list<int>::const_iterator p=lst.cbegin();
-	while (p != lst.cend()) {
-		if ((*p) % 2)
-			p = lst.erase(p);
+		if (*i % 2)
+		{
+			i=flst.erase_after(prev);			
+		}
 		else
-			++p;
-	}
-	vector<int>::const_iterator v=vec.cbegin();
-	while (v != vec.cend()){
-		if ((*v) % 2 == 0)
-			v = vec.erase(v);
-		else ++v;
+		{
+			prev = i;
+			++i;
+		}
 	}
 }
 
