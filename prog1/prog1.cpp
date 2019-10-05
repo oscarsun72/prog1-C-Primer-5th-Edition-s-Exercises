@@ -9,7 +9,7 @@ using namespace std;
 void flist(forward_list<string>flstStr,string s1,string s2) {	
 	forward_list<string>::const_iterator i = flstStr.cbegin();
 	forward_list<string>::const_iterator prev = flstStr.before_begin();
-	bool flg=false;
+	bool flg = false;
 	while (i != flstStr.cend())
 	{
 		if (*i ==s1)
