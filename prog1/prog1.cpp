@@ -4,23 +4,29 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<forward_list>
+#include<string>
 using namespace std;
-int main() {	
-	forward_list<int>flst = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 55, 89 };
-	forward_list<int>::const_iterator i = flst.cbegin();
-	forward_list<int>::const_iterator prev = flst.before_begin();
-	while( i != flst.cend())
+void flist(forward_list<string>flstStr,string s1,string s2) {	
+	forward_list<string>::const_iterator i = flstStr.cbegin();
+	forward_list<string>::const_iterator prev = flstStr.before_begin();
+	bool flg=false;
+	while (i != flstStr.cend())
 	{
-		if (*i % 2)
+		if (*i ==s1)
 		{
-			i=flst.erase_after(prev);			
+			i = flstStr.insert_after(i,s2);
+			flg = true;
 		}
-		else
-		{
-			prev = i;
-			++i;
-		}
+		++i;
+		++prev;
 	}
+	if (!flg) {				
+		flstStr.insert_after(prev, s2);
+	}
+}
+int main() {	
+	forward_list<string>flst = { "孫守真","士林區","范仲淹","江蘇省","連橫","臺灣","包拯","安徽省"	};
+	flist(flst, "孫守真1", "任真");
 }
 
 
