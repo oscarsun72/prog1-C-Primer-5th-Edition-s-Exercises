@@ -10,22 +10,20 @@
 //#include <iostream>
 #include<string>
 #include<vector>
-#include <fstream>
+#include <iostream>
 using namespace std;
-void inputAndRead() {	
-	ifstream ifstrm("V:\\Programming\\C++\\1.txt");
-	vector<string>vecStr;
-	if (ifstrm)
-	{
-		string str;
-		while(ifstrm>>str){			
-			vecStr.push_back(str);
-		}
-	}
-}
 
 int main() {
-	inputAndRead();
+	vector<int> ivec;
+	// size should be zero; capacity is implementation defined
+	cout << "ivec: size: " << ivec.size()
+		<< " capacity: " << ivec.capacity() << endl;
+	// give ivec 24 elements
+	for (vector<int>::size_type ix = 0; ix != 24; ++ix)
+		ivec.push_back(ix);
+	// size should be 24; capacity will be >= 24 and is implementation defined
+	cout << "ivec: size: " << ivec.size()
+		<< " capacity: " << ivec.capacity() << endl;
 	}
 
 
