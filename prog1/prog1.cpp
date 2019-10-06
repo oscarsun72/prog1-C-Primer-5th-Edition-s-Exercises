@@ -4,16 +4,17 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<vector>
+#include<string>
 #include<iostream>
 using namespace std;
 int main() {
-	vector<string> svec;
-	svec.reserve(1024);//capacity()=1024
-	string word;
-	while (cin >> word)
-		svec.push_back(word);//word數量不大於capacity(1024),就不會重新配置記憶體
-	svec.resize(svec.size() + svec.size() / 2);//預先配置值初始化的元素（類似程式庫的實作），需要用到時，改變指定位置上的元素值就好了
-	//可以用記憶體空間來換取執行的效能。因為reserve capacity可能在閒置過久後被系統剔掉
+	vector<char> cvec{'g','o','o','d'};
+	string s,sp;
+		for (char a : cvec){
+			s += a;
+			sp.push_back(a);//這兩種方式都可以
+		}
+		cout << s <<'\t'<<sp<< endl;
 }
 
 
