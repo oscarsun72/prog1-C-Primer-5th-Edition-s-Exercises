@@ -6,19 +6,16 @@
 #include<vector>
 using namespace std;
 int main() {
-	vector<int>v = { 1,2,3,4,5 };
-	// disaster: the behavior of this loop is undefined
-	auto begin = v.begin(),
-		end = v.end(); // bad idea, saving the value of the end iterator
-	// safer: recalculate end on each trip whenever the loop adds/erases elements
-	while (begin != v.end()) {
-		// do some processing
-		++begin; // advance begin because we want to insert after this element
-		//begin = v.insert(begin, 42); // insert the new value
-		v.insert(begin, 42); // insert the new value
-		++begin; // advance begin past the element we just added
-		//插入元素(尤其vector string deque）begin()回傳的迭代器可能會失效
-		//在此例中，begin失效了
+	vector<int>vi = { 1,2,3,4,5 };
+	auto iter = vi.begin();
+	while (iter != vi.end())
+	{
+		if (*iter % 2)
+		{
+			iter = vi.insert(iter, *iter);
+			++iter;
+		}
+		++iter; 
 	}
 }
 
