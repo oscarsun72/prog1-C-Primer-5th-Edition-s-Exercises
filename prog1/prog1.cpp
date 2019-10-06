@@ -7,21 +7,13 @@
 #include<iostream>
 using namespace std;
 int main() {
-	vector<int>vi ;
-	cout << vi.size() << '\t' << vi.capacity()<<endl;//0	0
-	vi = { 1,2,3,4,5 };
-	cout << vi.size() << '\t' << vi.capacity()<<endl;//5	5
-	for (vector<int>::size_type i =0;i != 20;++i)
-	{
-		vi.push_back(i);
-	}
-	cout << vi.size() << '\t' << vi.capacity()<<endl;//25	33
-	vi.reserve(50);
-	cout << vi.size() << '\t' << vi.capacity()<<endl;//25	50
-	vi.resize(11);
-	cout << vi.size() << '\t' << vi.capacity()<<endl;//11	50
-	vi.shrink_to_fit();
-	cout << vi.size() << '\t' << vi.capacity()<<endl;//11	11
+	vector<string> svec;
+	svec.reserve(1024);//capacity()=1024
+	string word;
+	while (cin >> word)
+		svec.push_back(word);//word數量不大於capacity(1024),就不會重新配置記憶體
+	svec.resize(svec.size() + svec.size() / 2);//預先配置值初始化的元素（類似程式庫的實作），需要用到時，改變指定位置上的元素值就好了
+	//可以用記憶體空間來換取執行的效能。因為reserve capacity可能在閒置過久後被系統剔掉
 }
 
 
