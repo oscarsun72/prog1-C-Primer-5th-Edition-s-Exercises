@@ -3,33 +3,21 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<forward_list>
-#include<list>
 #include<vector>
 using namespace std;
 int main() {
 	// silly loop to remove even-valued elements and insert a duplicate of odd-valued 	elements
 	vector<int> vi = { 0,1,2,3,4,5,6,7,8,9 };
-	list<int> lsti = { 0,1,2,3,4,5,6,7,8,9 };
-	forward_list<int> flsti = { 0,1,2,3,4,5,6,7,8,9 };
 	auto iter = vi.begin(); // call begin, not cbegin because we're changing
-	auto iterl = lsti.begin();
-	auto iterf = flsti.begin();
-	auto iterfprev = flsti.before_begin();
 	while (iter != vi.end()) {
 		if (*iter % 2) {
-			iter = vi.insert(iter, *iter); // duplicate the current
-			iterl = lsti.insert(iterl, *iterl); // duplicate the current
-			iterf = flsti.insert_after(iterf, *iterf); // duplicate the current element
-			iter += 2; // advance past this element and the one inserted before it
-			++iterl; ++iterl;//list不能隨機存取元素，只能迭代巡覽，所以其迭代器沒有整數加減運算
-			iterfprev=iterf; ++iterf;//forward_list是沒有--(遞減)運算，不能點頭的，只能advance（向前forward）
+			//iter = vi.insert(iter, *iter); // duplicate the current
+			iter = vi.insert(iter, *iter++); // duplicate the current
+			++iter ; // advance past this element and the one inserted before it
 		}
 		else
 		{
 			iter = vi.erase(iter); // remove even elements
-			iterl = lsti.erase(iterl); // remove even elements			
-			iterf = flsti.erase_after(iterfprev); // remove even elements
 			// don't advance the iterator; iter denotes the element after the one we erased 
 		}
 	}
