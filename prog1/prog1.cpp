@@ -11,13 +11,13 @@ int main() {
 	char a;
 	ifstream ifstrm("G:\\我的雲端硬碟\\！temp\\new.txt");
 	string s,sp;
-	//s.reserve(960010);//有沒有reserve效能似乎差不多
-	sp.reserve(960010);
+	s.reserve(960010);//有沒有reserve效能似乎差不多
+	//sp.reserve(960010);
 		while (ifstrm>>a){
-			//s += a;
-			sp.push_back(a);//這兩種方式都可以,效能好像也差不多。
+			s += a;
+			//sp.push_back(a);//這兩種方式都可以,效能好像也差不多。
 		}
-		cout << s <<'\t'<<sp<< endl;
+		//cout << s <<'\t'<<sp<< endl;
 }
 
 
