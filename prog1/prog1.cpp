@@ -4,19 +4,24 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<vector>
+#include<iostream>
 using namespace std;
 int main() {
-	vector<int>vi = { 1,2,3,4,5 };
-	auto iter = vi.begin();
-	while (iter != vi.end())
+	vector<int>vi ;
+	cout << vi.size() << '\t' << vi.capacity()<<endl;//0	0
+	vi = { 1,2,3,4,5 };
+	cout << vi.size() << '\t' << vi.capacity()<<endl;//5	5
+	for (vector<int>::size_type i =0;i != 20;++i)
 	{
-		if (*iter % 2)
-		{
-			iter = vi.insert(iter, *iter);
-			++iter;
-		}
-		++iter; 
+		vi.push_back(i);
 	}
+	cout << vi.size() << '\t' << vi.capacity()<<endl;//25	33
+	vi.reserve(50);
+	cout << vi.size() << '\t' << vi.capacity()<<endl;//25	50
+	vi.resize(11);
+	cout << vi.size() << '\t' << vi.capacity()<<endl;//11	50
+	vi.shrink_to_fit();
+	cout << vi.size() << '\t' << vi.capacity()<<endl;//11	11
 }
 
 
