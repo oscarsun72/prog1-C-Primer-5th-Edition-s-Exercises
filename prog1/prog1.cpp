@@ -3,16 +3,19 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<vector>
 #include<string>
+#include<fstream>
 #include<iostream>
 using namespace std;
 int main() {
-	vector<char> cvec{'g','o','o','d'};
+	char a;
+	ifstream ifstrm("G:\\我的雲端硬碟\\！temp\\new.txt");
 	string s,sp;
-		for (char a : cvec){
-			s += a;
-			sp.push_back(a);//這兩種方式都可以
+	//s.reserve(960010);//有沒有reserve效能似乎差不多
+	sp.reserve(960010);
+		while (ifstrm>>a){
+			//s += a;
+			sp.push_back(a);//這兩種方式都可以,效能好像也差不多。
 		}
 		cout << s <<'\t'<<sp<< endl;
 }
