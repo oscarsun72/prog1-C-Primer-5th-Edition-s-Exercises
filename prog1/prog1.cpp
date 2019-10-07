@@ -5,9 +5,10 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
 #include<iostream>
+#include<fstream>
 using namespace std;
 int main() {
-	string numbers("0123456789"), name("r2d2");
+	string descender("0123456789"), ascender("r2d2");
 	// returns 1, i.e., the index of the first digit in name
 	auto pos = name.find_first_of(numbers);
 	string::size_type p = numbers.find(name);
