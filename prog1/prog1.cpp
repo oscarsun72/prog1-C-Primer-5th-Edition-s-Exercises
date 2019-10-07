@@ -7,17 +7,41 @@
 #include<fstream>
 #include<iostream>
 using namespace std;
-int main() {
-	char a;
-	ifstream ifstrm("G:\\我的雲端硬碟\\！temp\\new.txt");
-	string s,sp;
-	s.reserve(960010);//有沒有reserve效能似乎差不多
-	//sp.reserve(960010);
-		while (ifstrm>>a){
-			s += a;
-			//sp.push_back(a);//這兩種方式都可以,效能好像也差不多。
+string replaceExercise9_43(string s, string oldVal, string newVal) {
+	string::const_iterator iter = s.cbegin();
+	string::const_iterator iterOld = oldVal.cbegin();
+	string::const_iterator sB;
+	while (iter != s.cend())
+	{
+		if (*iter == *iterOld) {
+			sB = iter;
+			++iter;
+			++iterOld;
+			while (iterOld != oldVal.cend() && iter != s.cend())
+			{
+				if (*iter != *iterOld) break;
+				++iter;
+				++iterOld;
+			}
+			if (iterOld == oldVal.cend())//表示找到
+			{//迭代器（iterator）在編輯元素後就可能失效：
+				iter=s.erase(sB, iter);
+				iter=s.insert(sB, newVal.cbegin(), newVal.cend());
+			}
+			iterOld = oldVal.cbegin();
 		}
-		//cout << s <<'\t'<<sp<< endl;
+		++iter;
+	}
+	return s;
+}
+
+int main() {
+	//const string s = "I decided the thru only way to make it thru the tournament and all the highs and lows was to make him a warrior.";
+	//string sNew = replaceExercise9_43(s, "thru", "through");
+	const string s = "His performance was remarkable, tho , given that tho he was playing through the pain barrier.";
+	string sNew = replaceExercise9_43(s, "tho", "though");
+	if (s != sNew)
+		cout << sNew << endl;
 }
 
 
