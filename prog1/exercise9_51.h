@@ -2,7 +2,6 @@
 #define EXERCISE9_51_H
 #include<string>
 #include<vector>
-//#include<iostream>
 using namespace std;
 class EXERCISE9_51 {
 	unsigned y = 0;
