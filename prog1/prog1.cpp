@@ -4,7 +4,6 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
-#include<fstream>
 #include<iostream>
 using namespace std;
 string Exercise9_45(string name, string prefix, string suffix) {
