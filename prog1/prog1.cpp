@@ -7,40 +7,17 @@
 #include<fstream>
 #include<iostream>
 using namespace std;
-string replaceExercise9_44(string s, string oldVal, string newVal) {
-	string::size_type iter (0);
-	string::size_type iterOld (0);
-	string::size_type sB;// (0);
-	while (iter != s.size())
-	{
-		if (s[iter] == oldVal[iterOld]) {
-			sB = iter;
-			++iter;
-			++iterOld;
-			while (iterOld != oldVal.size() && iter != s.size())
-			{
-				if (s[iter] != oldVal[iterOld]) break;
-				++iter;
-				++iterOld;
-			}
-			if (iterOld == oldVal.size())//表示找到
-			{//index沒有迭代器（iterator）在編輯元素後失效的問題：
-				s.replace(sB, oldVal.size(), newVal);
-			}
-			iterOld = 0;
-		}
-		++iter;
-	}
-	return s;
+string Exercise9_45(string name, string prefix, string suffix) {
+	string::const_iterator iter = name.cbegin();
+	name.insert(name.insert(iter, prefix.cbegin(), prefix.cend())+prefix.size(), ' ');
+	name.append(" ");
+	name.append(suffix.cbegin(), suffix.cend());
+	return name;
 }
 
 int main() {
-	//const string s = "I decided the thru only way to make it thru the tournament and all the highs and lows was to make him a warrior.";
-	//string sNew = replaceExercise9_44(s, "thru", "through");
-	const string s = "His performance was remarkable, tho , given that tho he was playing through the pain barrier.";
-	string sNew = replaceExercise9_44(s, "tho", "though");
-	if (s != sNew)
-		cout << sNew << endl;
+	const string s = "Sun";
+	cout << Exercise9_45(s, "Mr.", "III") << endl;
 }
 
 
