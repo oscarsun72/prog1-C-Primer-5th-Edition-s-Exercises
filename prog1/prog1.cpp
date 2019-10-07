@@ -6,18 +6,13 @@
 #include<string>
 #include<vector>
 #include<iostream>
+#include"exercise9_51.h"
 using namespace std;
 int main() {
-	/*vector<string> vecS{"2","-21","11","5","3"};
-	int i=0;
-	for (string s : vecS)
-		i+=stoi(s);
-	cout << i << endl;*/
-	vector<string> vecS{ "2","-21","11","5","3" };
-	float f = 0;
-	for (string s : vecS)
-		f += stof(s);
-	cout << f << endl;
+	EXERCISE9_51 e;
+	EXERCISE9_51 e1("January 1, 1920");
+	EXERCISE9_51 e2("Feb 11, 1900");
+	EXERCISE9_51 e3("11/1/1995");
 }
 
 
