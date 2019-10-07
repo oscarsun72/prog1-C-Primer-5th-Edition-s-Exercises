@@ -6,42 +6,15 @@
 #include<string>
 #include<iostream>
 using namespace std;
-void find數字和字母Exercise9_47(string str) {
-	string number{ "0123456789" };
-	string alpha("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	string::size_type pos{ 0 };
-	while ((pos = str.find_first_of(number, pos)) != string::npos)
-	{		
-		cout << "number index is " << pos << endl;
-		++pos;
-	}
-	pos = 0;
-	while ((pos = str.find_first_of(alpha, pos)) != string::npos)
-	{
-		cout << "alphabetic index is " << pos << endl;
-		++pos;
-	}
-}
-void findnot數字和字母Exercise9_47(string str) {
-	string number{ "0123456789" };
-	string alpha("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	string::size_type pos{ 0 };
-	while ((pos = str.find_first_not_of(number, pos)) != string::npos)
-	{
-		cout << "alphabetic index is " << pos << endl;
-		++pos;
-	}
-	pos = 0;
-	while ((pos = str.find_first_not_of(alpha, pos)) != string::npos)
-	{
-		cout << "number index is " << pos << endl;
-		++pos;
-	}
-}
-
 int main() {
-	find數字和字母Exercise9_47("ab2c3d7R4E6");
-	findnot數字和字母Exercise9_47("ab2c3d7R4E6");
+	string numbers("0123456789"), name("r2d2");
+	// returns 1, i.e., the index of the first digit in name
+	auto pos = name.find_first_of(numbers);
+	string::size_type p = numbers.find(name);
+	if (p==string::npos)
+	{
+		cout << "no position!" << endl;
+	}
 }
 
 
