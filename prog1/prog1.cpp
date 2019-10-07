@@ -7,28 +7,27 @@
 #include<fstream>
 #include<iostream>
 using namespace std;
-string replaceExercise9_43(string s, string oldVal, string newVal) {
-	string::const_iterator iter = s.cbegin();
-	string::const_iterator iterOld = oldVal.cbegin();
-	string::const_iterator sB;
-	while (iter != s.cend())
+string replaceExercise9_44(string s, string oldVal, string newVal) {
+	string::size_type iter (0);
+	string::size_type iterOld (0);
+	string::size_type sB;// (0);
+	while (iter != s.size())
 	{
-		if (*iter == *iterOld) {
+		if (s[iter] == oldVal[iterOld]) {
 			sB = iter;
 			++iter;
 			++iterOld;
-			while (iterOld != oldVal.cend() && iter != s.cend())
+			while (iterOld != oldVal.size() && iter != s.size())
 			{
-				if (*iter != *iterOld) break;
+				if (s[iter] != oldVal[iterOld]) break;
 				++iter;
 				++iterOld;
 			}
-			if (iterOld == oldVal.cend())//表示找到
-			{//迭代器（iterator）在編輯元素後就可能失效：
-				iter=s.erase(sB, iter);
-				iter=s.insert(sB, newVal.cbegin(), newVal.cend());
+			if (iterOld == oldVal.size())//表示找到
+			{//index沒有迭代器（iterator）在編輯元素後失效的問題：
+				s.replace(sB, oldVal.size(), newVal);
 			}
-			iterOld = oldVal.cbegin();
+			iterOld = 0;
 		}
 		++iter;
 	}
@@ -37,9 +36,9 @@ string replaceExercise9_43(string s, string oldVal, string newVal) {
 
 int main() {
 	//const string s = "I decided the thru only way to make it thru the tournament and all the highs and lows was to make him a warrior.";
-	//string sNew = replaceExercise9_43(s, "thru", "through");
+	//string sNew = replaceExercise9_44(s, "thru", "through");
 	const string s = "His performance was remarkable, tho , given that tho he was playing through the pain barrier.";
-	string sNew = replaceExercise9_43(s, "tho", "though");
+	string sNew = replaceExercise9_44(s, "tho", "though");
 	if (s != sNew)
 		cout << sNew << endl;
 }
