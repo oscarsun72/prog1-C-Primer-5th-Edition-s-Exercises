@@ -6,16 +6,42 @@
 #include<string>
 #include<iostream>
 using namespace std;
-string Exercise9_44(string name, string prefix, string suffix) {
-	string::size_type iter{ 0 };
-	name.insert(iter, prefix);
-	name.insert((name.insert((name.insert(prefix.size(), " ")).size(), " ")).size(), suffix);
-	return name;
+void find數字和字母Exercise9_47(string str) {
+	string number{ "0123456789" };
+	string alpha("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	string::size_type pos{ 0 };
+	while ((pos = str.find_first_of(number, pos)) != string::npos)
+	{		
+		cout << "number index is " << pos << endl;
+		++pos;
+	}
+	pos = 0;
+	while ((pos = str.find_first_of(alpha, pos)) != string::npos)
+	{
+		cout << "alphabetic index is " << pos << endl;
+		++pos;
+	}
+}
+void findnot數字和字母Exercise9_47(string str) {
+	string number{ "0123456789" };
+	string alpha("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	string::size_type pos{ 0 };
+	while ((pos = str.find_first_not_of(number, pos)) != string::npos)
+	{
+		cout << "alphabetic index is " << pos << endl;
+		++pos;
+	}
+	pos = 0;
+	while ((pos = str.find_first_not_of(alpha, pos)) != string::npos)
+	{
+		cout << "number index is " << pos << endl;
+		++pos;
+	}
 }
 
 int main() {
-	const string s = "Sun";
-	cout << Exercise9_44(s, "Mr.", "III") << endl;
+	find數字和字母Exercise9_47("ab2c3d7R4E6");
+	findnot數字和字母Exercise9_47("ab2c3d7R4E6");
 }
 
 
