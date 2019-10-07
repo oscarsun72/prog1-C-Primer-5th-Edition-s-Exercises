@@ -6,40 +6,18 @@
 #include<string>
 #include<vector>
 #include<iostream>
-#include<fstream>
 using namespace std;
 int main() {
-	string descender("gjpqy"), ascender("bdfhklt"),word;
-	ifstream ifstm("V:\\Programming\\C++\\1.txt");
-	vector<string> vecStr,vec;	
-	while (ifstm>>word)
-	{
-		vecStr.push_back(word);
-	}
-	for (string s : vecStr) {
-		auto pos = s.find_first_of(descender);
-		string::size_type p = s.find_first_of(ascender);
-		if (pos==string::npos && p==string::npos )
-		{
-			vec.push_back(s);
-		}		
-	}
-	string str,ss;
-	for (string s:vec)//已經吻合條件的字詞
-	{
-		if (str.size() > s.size()) {
-			if (str.size() > ss.size())
-				ss = str;
-		}
-		else if (s.size() > str.size()) {
-			if (s.size() > ss.size())
-				ss = s;
-		}
-		else
-			if (ss == "") ss = str;
-		str = s;
-	}
-	cout << ss << endl;
+	/*vector<string> vecS{"2","-21","11","5","3"};
+	int i=0;
+	for (string s : vecS)
+		i+=stoi(s);
+	cout << i << endl;*/
+	vector<string> vecS{ "2","-21","11","5","3" };
+	float f = 0;
+	for (string s : vecS)
+		f += stof(s);
+	cout << f << endl;
 }
 
 
