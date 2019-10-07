@@ -6,17 +6,16 @@
 #include<string>
 #include<iostream>
 using namespace std;
-string Exercise9_45(string name, string prefix, string suffix) {
-	string::const_iterator iter = name.cbegin();
-	name.insert(name.insert(iter, prefix.cbegin(), prefix.cend())+prefix.size(), ' ');
-	name.append(" ");
-	name.append(suffix.cbegin(), suffix.cend());
+string Exercise9_44(string name, string prefix, string suffix) {
+	string::size_type iter{ 0 };
+	name.insert(iter, prefix);
+	name.insert((name.insert((name.insert(prefix.size(), " ")).size(), " ")).size(), suffix);
 	return name;
 }
 
 int main() {
 	const string s = "Sun";
-	cout << Exercise9_45(s, "Mr.", "III") << endl;
+	cout << Exercise9_44(s, "Mr.", "III") << endl;
 }
 
 
