@@ -4,18 +4,42 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
+#include<vector>
 #include<iostream>
 #include<fstream>
 using namespace std;
 int main() {
-	string descender("0123456789"), ascender("r2d2");
-	// returns 1, i.e., the index of the first digit in name
-	auto pos = name.find_first_of(numbers);
-	string::size_type p = numbers.find(name);
-	if (p==string::npos)
+	string descender("gjpqy"), ascender("bdfhklt"),word;
+	ifstream ifstm("V:\\Programming\\C++\\1.txt");
+	vector<string> vecStr,vec;	
+	while (ifstm>>word)
 	{
-		cout << "no position!" << endl;
+		vecStr.push_back(word);
 	}
+	for (string s : vecStr) {
+		auto pos = s.find_first_of(descender);
+		string::size_type p = s.find_first_of(ascender);
+		if (pos==string::npos && p==string::npos )
+		{
+			vec.push_back(s);
+		}		
+	}
+	string str,ss;
+	for (string s:vec)//已經吻合條件的字詞
+	{
+		if (str.size() > s.size()) {
+			if (str.size() > ss.size())
+				ss = str;
+		}
+		else if (s.size() > str.size()) {
+			if (s.size() > ss.size())
+				ss = s;
+		}
+		else
+			if (ss == "") ss = str;
+		str = s;
+	}
+	cout << ss << endl;
 }
 
 
