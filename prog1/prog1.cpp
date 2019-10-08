@@ -16,7 +16,8 @@ int main() {
 	{
 		deqs.push_back(s);
 	}
-	stack<string> stks(deqs);
+	stack<string> stks(deqs);//原來轉接器（adaptor）就是這樣用的啊！
+	//就是請stack來執行deqs做不到的事，就把deqs當作引數交給它（複製一份；傳值；copy）讓轉接器做原來容器（container）做不到的事，使得容器表現得好像跟轉接器一樣
 	for (string s : deqs)
 	{
 		if (s == "("||s.find("(")!=string::npos)
