@@ -4,15 +4,34 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
-#include<vector>
 #include<iostream>
-#include"exercise9_51.h"
+#include<deque>
+#include<stack>
 using namespace std;
 int main() {
-	EXERCISE9_51 e;
-	EXERCISE9_51 e1("January 1, 1920");
-	EXERCISE9_51 e2("Feb 11, 1900");
-	EXERCISE9_51 e3("11/1/1995");
+	string s;
+	deque<string> deqs;
+	stack<string>::size_type ix(0), pos(0);
+	while (cin >> s)
+	{
+		deqs.push_back(s);
+	}
+	stack<string> stks(deqs);
+	for (string s : deqs)
+	{
+		if (s == "("||s.find("(")!=string::npos)
+			pos = ix;
+		if (s == ")"||s.find("(") != string::npos)
+		{
+			for (stack<string>::size_type i = 0; i != (deqs.size()- pos); ++i)
+			{
+				stks.pop();
+			}
+			stks.push("●parenthesized expression was replaced.●");
+			break;
+		}
+		++ix;
+	}
 }
 
 
