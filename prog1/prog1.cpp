@@ -14,16 +14,8 @@
 using namespace std;
 
 int main() {
-	vector<int> ivec;
-	// size should be zero; capacity is implementation defined
-	cout << "ivec: size: " << ivec.size()
-		<< " capacity: " << ivec.capacity() << endl;
-	// give ivec 24 elements
-	for (vector<int>::size_type ix = 0; ix != 24; ++ix)
-		ivec.push_back(ix);
-	// size should be 24; capacity will be >= 24 and is implementation defined
-	cout << "ivec: size: " << ivec.size()
-		<< " capacity: " << ivec.capacity() << endl;
+	const char *c = "123";
+	string s = "123";
 	}
 
 
