@@ -14,9 +14,8 @@
 using namespace std;
 
 int main() {
-	vector<int>vec{ 0,12,42,3,5050,3900 };
-	int val = 0;
-	auto result = accumulate(vec.cbegin(), vec.cend(), val);
+	vector<double>v{ 0,12.111,42,3,5050,3900 };
+	auto result = accumulate(v.cbegin(), v.cend(), 0.00);	
 	cout << "The sum is " << result << endl;
 }
 
