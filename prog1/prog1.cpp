@@ -7,15 +7,15 @@
 
 	//const char* a[4] = { "", "V:\\Programming\\C++\\1.txt"
 	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
-#include<vector>
+#include<list>
 #include<string>
 #include <iostream>
 //#include <algorithm>
 using namespace std;
 
 int main() {
-	vector<int>vec{0,12,42,3, 5050 , 3900 , 4050 , 3050 , 4650 , 1200 , 9950 , 1800 , 6465 , 1230 , 2400 , 2600 , 1900 , 1900 , 2600 , 2835 , 6450 , 15266 , 1800 , 1800 , 1800 , 1080 , 4320 , 30 ,42,43,42 ,1850 , 50 };
-	int val = 42; // value we'll look for
+	list<string>vec{ "0","12","42","3","5050","3900","4050","3050","4650","1200","9950","1800","6465","1230","2400","2600","1900","1900","2600","2835","6450","15266","1800","1800","1800","1080","4320","30","42","43","42","1850","50" };
+	string val = "42"; // value we'll look for
 // result will denote the element we want if it's in vec, or vec.cend() if not
 	auto result = count(vec.cbegin(), vec.cend(), val);
 	// report the result
