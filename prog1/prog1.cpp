@@ -10,13 +10,20 @@
 
 #include <iostream>
 #include <vector>
-#include <numeric>
+//#include <numeric>
 using namespace std;
 
 int main() {
-	vector<double>v{ 0,12.111,42,3,5050,3900 };
-	auto result = accumulate(v.cbegin(), v.cend(), 0.00);	
-	cout << "The sum is " << result << endl;
+	//auto roster1="there is ";
+	//vector<const char*>roster2="there is ";
+	const char ca1[] = "A string example";
+	const char ca2[] = "A different string";
+	vector<const char*>roster1{ca1,ca2,ca1};
+	vector<const char*>roster2{ca1,ca2,"1"};
+	//vector<const char*>roster1{"there is ","","a"};
+	//vector<const char*>roster2{"there is ","","b"};
+	auto result = equal(roster1.cbegin(), roster1.cend(), roster2.cbegin());
+	cout <<  result << endl;
 }
 
 
