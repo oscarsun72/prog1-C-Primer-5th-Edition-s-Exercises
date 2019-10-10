@@ -8,22 +8,14 @@
 	//const char* a[4] = { "", "V:\\Programming\\C++\\1.txt"
 	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
 //#include <iostream>
-#include<string>
 #include<vector>
 #include <iostream>
 using namespace std;
 
 int main() {
-	vector<int>vec{0,12,42,3};
-	int val = 42; // value we'll look for
-// result will denote the element we want if it's in vec, or vec.cend() if not
-	
-	auto result = find(vec.cbegin(), vec.cend(), val);
-	// report the result
-	cout << "The value " << val
-		<< (result == vec.cend()
-			? " is not present" : " is present") << endl;
-	}
+	vector<int>vec;
+	fill_n(back_inserter(vec), 11,- 233);
+}
 
 
 //int main(int argc, const char** argv)
