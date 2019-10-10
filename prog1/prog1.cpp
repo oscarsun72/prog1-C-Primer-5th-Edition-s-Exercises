@@ -14,8 +14,15 @@
 using namespace std;
 
 int main() {
-	const char *c = "123";
-	string s = "123";
+	vector<int>vec{0,12,42,3};
+	int val = 42; // value we'll look for
+// result will denote the element we want if it's in vec, or vec.cend() if not
+	
+	auto result = find(vec.cbegin(), vec.cend(), val);
+	// report the result
+	cout << "The value " << val
+		<< (result == vec.cend()
+			? " is not present" : " is present") << endl;
 	}
 
 
