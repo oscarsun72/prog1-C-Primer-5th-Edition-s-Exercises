@@ -9,19 +9,14 @@
 	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
 //#include <iostream>
 #include<vector>
-#include<list>
 #include <iostream>
 using namespace std;
 int main() {
-	vector<int> vec; list<int> lst; int i;
-	while (cin >> i)
-		lst.push_back(i);
-	//copy(lst.cbegin(), lst.cend(), vec.begin());//vec.size()=0
-	//copy(lst.cbegin(), lst.cend(), back_inserter(vec));//1
-	vec.resize(lst.size());
-	copy(lst.cbegin(), lst.cend(), vec.begin());//2
-	/*vec.reserve(lst.size());//reserve只影響 capacity 不能用！
-	copy(lst.cbegin(), lst.cend(), vec.begin());*/
+	vector<int> vec;
+	//vec.reserve(10); // reserve is covered in § 9.4 (p. 356)
+	vec.resize(10);
+	fill_n(vec.begin(), 10, 0);
+	//剛好剛才(a)已演示過了！哈哈
 }
 
 
