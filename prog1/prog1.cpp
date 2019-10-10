@@ -9,12 +9,19 @@
 	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
 //#include <iostream>
 #include<vector>
+#include<list>
 #include <iostream>
 using namespace std;
 int main() {
-	vector<int>vec;
-	fill_n(back_inserter(vec), 11,- 233);	
-	fill_n(vec.begin(),vec.size(),0);
+	vector<int> vec; list<int> lst; int i;
+	while (cin >> i)
+		lst.push_back(i);
+	//copy(lst.cbegin(), lst.cend(), vec.begin());//vec.size()=0
+	//copy(lst.cbegin(), lst.cend(), back_inserter(vec));//1
+	vec.resize(lst.size());
+	copy(lst.cbegin(), lst.cend(), vec.begin());//2
+	/*vec.reserve(lst.size());//reserve只影響 capacity 不能用！
+	copy(lst.cbegin(), lst.cend(), vec.begin());*/
 }
 
 
