@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include <vector>
-//#include <numeric>
 using namespace std;
 
 int main() {
@@ -18,8 +17,17 @@ int main() {
 	//vector<const char*>roster2="there is ";
 	const char ca1[] = "A string example";
 	const char ca2[] = "A different string";
-	vector<const char*>roster1{ca1,ca2,ca1};
-	vector<const char*>roster2{ca1,ca2,"1"};
+	const char ca3[] = "A different string";
+	vector<const char*>roster1;
+	vector<const char*>roster2;
+	roster1.push_back(ca1); roster2.push_back(ca1);
+	roster1.push_back(ca2); roster2.push_back(ca3);
+	//roster2.push_back(ca1);
+	//可見比較的是指標（pointer）記憶體位址值，而不是「字串」文字本身
+	//可見提供2個迭代器的，其大小一定要等於、小於1個的那個。
+	//equal比較的是roster1是否和roster2相等，或為其子集合
+	//vector<const char*>roster1{ca1,ca2,ca1};
+	//vector<const char*>roster2{ca1,ca2,"1"};
 	//vector<const char*>roster1{"there is ","","a"};
 	//vector<const char*>roster2{"there is ","","b"};
 	auto result = equal(roster1.cbegin(), roster1.cend(), roster2.cbegin());
