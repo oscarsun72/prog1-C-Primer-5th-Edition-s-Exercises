@@ -11,10 +11,10 @@
 #include<vector>
 #include <iostream>
 using namespace std;
-
 int main() {
 	vector<int>vec;
-	fill_n(back_inserter(vec), 11,- 233);
+	fill_n(back_inserter(vec), 11,- 233);	
+	fill_n(vec.begin(),vec.size(),0);
 }
 
 
