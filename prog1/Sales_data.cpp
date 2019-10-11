@@ -66,6 +66,8 @@ bool compareIsbn(const Sales_data& sd1, const Sales_data& sd2)
 
 void sortIsbn(const vector<Sales_data>& vecSales_data)
 {
-	sort(vecSales_data.begin(), vecSales_data.end(),compareIsbn);
+	sort(vecSales_data.cbegin(), vecSales_data.cend(),
+		[](const Sales_data& sd1, const Sales_data& sd2)
+		{return sd1.isbn().size() < sd2.isbn().size(); });
 	//stable_sort(vecSales_data.begin(), vecSales_data.end(), compareIsbn);
 }
