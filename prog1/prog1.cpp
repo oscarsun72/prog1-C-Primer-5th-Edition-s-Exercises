@@ -20,7 +20,9 @@ int main() {
 		vecSale_data.push_back(sd);
 	sortIsbn(vecSale_data);
 	for (Sales_data s : vecSale_data)
-		print(cout, s);
+	{
+		print(cout, s); cout << endl;
+	}
 }
 
 
