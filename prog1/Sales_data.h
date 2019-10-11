@@ -2,6 +2,7 @@
 #ifndef SALES_DATA_H
 #define SALES_DATA_H
 #include<string>
+#include<vector>
 using namespace std;//千萬不要忘了這個
 struct  Sales_data {
 	Sales_data() = default;//預設建構器（constructor）用這式會較Sales_data() {}多二個建構器，蓋=default由編譯器創建2個額外的合成的預設建構器（synthesized default constructors） 56:00
@@ -24,4 +25,5 @@ ostream& print(ostream& , const Sales_data&);
 istream& read(istream& , Sales_data& );
 Sales_data add(const Sales_data&, const Sales_data&);
 bool compareIsbn(const Sales_data& ,const Sales_data &);
+void sortIsbn(const vector<Sales_data>&);
 #endif // !SALES_DATA_H

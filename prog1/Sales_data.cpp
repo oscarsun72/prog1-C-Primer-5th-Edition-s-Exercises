@@ -1,16 +1,17 @@
 ﻿#include "Sales_data.h"
 #include<string>
 #include<iostream>
+#include<algorithm>
 using namespace std;
 
-Sales_data::Sales_data(const string& bNo,const double bSize,const double price, const unsigned sdQ) {
+Sales_data::Sales_data(const string& bNo, const double bSize, const double price, const unsigned sdQ) {
 	bookNo = bNo; soldQ = sdQ; revenue = price * sdQ; bookSize = bSize;
 }
 Sales_data::Sales_data(istream& is)
 {
 	read(is, *this);
 }
-Sales_data& Sales_data::combine(const Sales_data& sales_data1,  const Sales_data& sales_data2)
+Sales_data& Sales_data::combine(const Sales_data& sales_data1, const Sales_data& sales_data2)
 {
 	this->bookNo = sales_data1.bookNo;
 	this->bookSize = sales_data1.bookSize;
@@ -33,7 +34,7 @@ string Sales_data::isbn()const
 
 double Sales_data::avg_price()const
 {
-	if (soldQ>0)
+	if (soldQ > 0)
 	{
 		return revenue / soldQ;
 	}
@@ -60,5 +61,11 @@ Sales_data add(const Sales_data& sales_data1, const Sales_data& sales_data2)
 
 bool compareIsbn(const Sales_data& sd1, const Sales_data& sd2)
 {
-	return sd1.bookNo;
+	return sd1.isbn().size() < sd2.isbn().size();
+}
+
+void sortIsbn(const vector<Sales_data>& vecSales_data)
+{
+	sort(vecSales_data.begin(), vecSales_data.end(),compareIsbn);
+	//stable_sort(vecSales_data.begin(), vecSales_data.end(), compareIsbn);
 }

@@ -12,29 +12,15 @@
 #include<string>
 #include"Sales_data.h"
 #include <iostream>
-#include<algorithm>
 using namespace std;
-
-inline bool isShorter(const string & s1,const string & s2) {
-	return s1.size() < s2.size();
-};
-void elimDups(vector<string>& vecStr) {
-	print(vecStr); cout << endl;
-	sort(vecStr.begin(), vecStr.end());//也不能用const iterators
-	print(vecStr); cout << endl;
-	auto rngEnd = unique(vecStr.begin(), vecStr.end());//因為unique會overwrite所以不能用「cbegin()、cend()」
-	print(vecStr); cout << endl;
-	vecStr.erase(rngEnd, vecStr.cend());
-	print(vecStr); cout << endl;
-	stable_sort(vecStr.begin(), vecStr.end(), isShorter);//通常我們呼叫函式是必須要傳引數，而在這裡卻只要調用其名稱即可！
-	print(vecStr); cout << endl;
-}
 int main() {
-	string word; vector<string> vecStr;
-	while (cin >> word) {
-		vecStr.push_back(word);
-	}
-	elimDups(vecStr);
+	Sales_data sd;
+	vector<Sales_data>vecSale_data;
+	while(read(cin, sd))
+		vecSale_data.push_back(sd);
+	sortIsbn(vecSale_data);
+	for (Sales_data s : vecSale_data)
+		print(cout, s);
 }
 
 
