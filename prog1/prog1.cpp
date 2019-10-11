@@ -10,14 +10,11 @@
 //#include <iostream>
 #include<vector>
 #include<string>
+#include"Sales_data.h"
 #include <iostream>
 #include<algorithm>
 using namespace std;
 
-void print(vector<string>& vec) {
-	for (string s : vec)
-		cout << s << ",";
-}
 inline bool isShorter(const string & s1,const string & s2) {
 	return s1.size() < s2.size();
 };
