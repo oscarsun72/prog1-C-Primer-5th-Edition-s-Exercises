@@ -9,14 +9,30 @@
 	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
 //#include <iostream>
 #include<vector>
+#include<string>
 #include <iostream>
+#include<algorithm>
 using namespace std;
+
+void print(vector<string>& vec) {
+	for (string s : vec)
+		cout << s << ",";
+}
+void elimDups(vector<string>& vecStr) {
+	print(vecStr); cout << endl;
+	sort(vecStr.begin(), vecStr.end());//也不能用const iterators
+	print(vecStr); cout << endl;
+	auto rngEnd = unique(vecStr.begin(), vecStr.end());//因為unique會overwrite所以不能用「cbegin()、cend()」
+	print(vecStr); cout << endl;
+	vecStr.erase(rngEnd, vecStr.cend());
+	print(vecStr); cout << endl;
+}
 int main() {
-	vector<int> vec;
-	//vec.reserve(10); // reserve is covered in § 9.4 (p. 356)
-	vec.resize(10);
-	fill_n(vec.begin(), 10, 0);
-	//剛好剛才(a)已演示過了！哈哈
+	string word; vector<string> vecStr;
+	while (cin >> word) {
+		vecStr.push_back(word);
+	}
+	elimDups(vecStr);
 }
 
 
