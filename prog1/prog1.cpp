@@ -18,6 +18,9 @@ void print(vector<string>& vec) {
 	for (string s : vec)
 		cout << s << ",";
 }
+inline bool isShorter(const string & s1,const string & s2) {
+	return s1.size() < s2.size();
+};
 void elimDups(vector<string>& vecStr) {
 	print(vecStr); cout << endl;
 	sort(vecStr.begin(), vecStr.end());//也不能用const iterators
@@ -25,6 +28,8 @@ void elimDups(vector<string>& vecStr) {
 	auto rngEnd = unique(vecStr.begin(), vecStr.end());//因為unique會overwrite所以不能用「cbegin()、cend()」
 	print(vecStr); cout << endl;
 	vecStr.erase(rngEnd, vecStr.cend());
+	print(vecStr); cout << endl;
+	stable_sort(vecStr.begin(), vecStr.end(), isShorter);//通常我們呼叫函式是必須要傳引數，而在這裡卻只要調用其名稱即可！
 	print(vecStr); cout << endl;
 }
 int main() {
