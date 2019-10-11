@@ -3,32 +3,31 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_data.h"
-
-	//const char* a[4] = { "", "V:\\Programming\\C++\\1.txt"
-	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
-//#include <iostream>
 #include<vector>
 #include<string>
 #include<algorithm>
 #include <iostream>
 using namespace std;
+bool morethen5char(string s) {
+	return s.size() >= 5;
+}
 int main() {
-	Sales_data sd;
-	vector<Sales_data>vecSale_data;
-	while(read(cin, sd))
-		vecSale_data.push_back(sd);
-	sortIsbn(vecSale_data);
-	for (Sales_data s : vecSale_data)
+	string w;
+	vector<string>words;
+	while (cin>>w)
 	{
-		print(cout, s); cout << endl;
+		words.push_back(w);
 	}
+	auto pr=partition(words.begin(), words.end(), morethen5char);//不能用常值版本cbegin，可見是要改寫元素故
+	words.erase(pr, words.end());
+	for (string s : words)
+		cout << s << ",";
+	cout << endl;
 }
 
 
 //int main(int argc, const char** argv)
 //{
-//	print_sum_of_the_elements_in_the_list({ 11,2,3 });
 //	return 0;
 //}
 
