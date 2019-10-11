@@ -10,7 +10,7 @@
 //#include <iostream>
 #include<vector>
 #include<string>
-#include"Sales_data.h"
+#include<algorithm>
 #include <iostream>
 using namespace std;
 int main() {
