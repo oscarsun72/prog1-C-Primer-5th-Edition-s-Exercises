@@ -9,13 +9,15 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-void biggies(const vector<string>& vecStr,vector<string>::size_type sz ) {
-	//sort(vecStr.begin(), vecStr.end());
-	//stable_sort(vecStr.begin(), vecStr.end()
-				//, [](const string& s1, const string & s2) {return s1.size()<s2.size();});
-	//auto iterB = find_if_not(vecStr.cbegin()
-	//			, vecStr.cend(), [sz](const string& s) {return s.size()<sz; });
-	//for_each(iterB, vecStr.cend(), [](const string& s) {cout << s << endl; });
+void biggies(vector<string>& vecStr,vector<string>::size_type sz ) {
+	//因為要對vecStr做編輯（sort演算法都會動到容器元素），所以不能是對常值的參考:
+	//const vector<string>& vecStr
+	sort(vecStr.begin(), vecStr.end());
+	stable_sort(vecStr.begin(), vecStr.end()
+				, [](const string& s1, const string & s2) {return s1.size()<s2.size();});
+	auto iterB = find_if_not(vecStr.cbegin()
+				, vecStr.cend(), [sz](const string& s) {return s.size()<sz; });
+	for_each(iterB, vecStr.cend(), [](const string& s) {cout << s << endl; });
 }
 int main() {
 	vector<string> vec;
@@ -24,7 +26,7 @@ int main() {
 	{
 		vec.push_back(word);
 	}
-	biggies(vec,4);
+	biggies(vec,8);
 }
 
 
