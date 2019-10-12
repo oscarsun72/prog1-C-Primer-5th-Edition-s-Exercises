@@ -5,13 +5,26 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
 using namespace std;
+void biggies(const vector<string>& vecStr,vector<string>::size_type sz ) {
+	//sort(vecStr.begin(), vecStr.end());
+	//stable_sort(vecStr.begin(), vecStr.end()
+				//, [](const string& s1, const string & s2) {return s1.size()<s2.size();});
+	//auto iterB = find_if_not(vecStr.cbegin()
+	//			, vecStr.cend(), [sz](const string& s) {return s.size()<sz; });
+	//for_each(iterB, vecStr.cend(), [](const string& s) {cout << s << endl; });
+}
 int main() {
-	int i2=3;
-	auto lmbda = [i2](const int& i1) ->int{return i1 + i2; };//指定asign型別須用auto，不能用int
-	//	'i2' cannot be implicitly captured because no default capture mode has been specified
-	//C++ an enclosing-function local variable cannot be referenced in a lambda body unless it is in the capture list
-	cout <<  lmbda(1) <<endl;//不管有沒有參數，一定不能省掉呼叫運算子（call operator）
+	vector<string> vec;
+	string word;
+	while (cin>>word)
+	{
+		vec.push_back(word);
+	}
+	biggies(vec,4);
 }
 
 
