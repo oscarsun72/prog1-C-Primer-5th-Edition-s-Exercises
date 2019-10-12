@@ -9,15 +9,14 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-void biggies(vector<string>& vecStr,vector<string>::size_type sz ) {
-	//因為要對vecStr做編輯（sort演算法都會動到容器元素），所以不能是對常值的參考:
-	//const vector<string>& vecStr
-	sort(vecStr.begin(), vecStr.end());
-	stable_sort(vecStr.begin(), vecStr.end()
-				, [](const string& s1, const string & s2) {return s1.size()<s2.size();});
-	auto iterB = find_if_not(vecStr.cbegin()
-				, vecStr.cend(), [sz](const string& s) {return s.size()<sz; });
-	for_each(iterB, vecStr.cend(), [](const string& s) {cout << s << endl; });
+void biggies(vector<string>& vecStr,vector<string>::size_type sz ) {		
+	//sort(vecStr.begin(), vecStr.end());	
+	auto iterE=partition(vecStr.begin(), vecStr.end(),
+		[sz](const string& s)->bool {return s.size()>=sz; });	
+	sort(vecStr.begin(), iterE);
+	stable_sort(vecStr.begin(), iterE
+		, [](const string& s1, const string& s2) {return s1.size() < s2.size(); });
+	for_each( vecStr.begin(), iterE, [](const string& s) {cout << s << endl; });
 }
 int main() {
 	vector<string> vec;
