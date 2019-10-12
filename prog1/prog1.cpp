@@ -10,8 +10,7 @@
 #include <algorithm>
 using namespace std;
 void biggies(vector<string>& vecStr,vector<string>::size_type sz ) {		
-	//sort(vecStr.begin(), vecStr.end());	
-	auto iterE=partition(vecStr.begin(), vecStr.end(),
+	auto iterE=partition(vecStr.begin(), vecStr.end(),//先分組再排序。若先排序再分組則會亂序
 		[sz](const string& s)->bool {return s.size()>=sz; });	
 	sort(vecStr.begin(), iterE);
 	stable_sort(vecStr.begin(), iterE
