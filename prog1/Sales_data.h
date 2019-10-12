@@ -25,5 +25,5 @@ ostream& print(ostream& , const Sales_data&);
 istream& read(istream& , Sales_data& );
 Sales_data add(const Sales_data&, const Sales_data&);
 bool compareIsbn(const Sales_data& ,const Sales_data &);
-void sortIsbn(const vector<Sales_data>&);
+void sortIsbn(vector<Sales_data>&);
 #endif // !SALES_DATA_H

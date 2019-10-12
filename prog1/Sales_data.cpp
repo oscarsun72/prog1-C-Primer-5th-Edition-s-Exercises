@@ -69,5 +69,8 @@ void sortIsbn(vector<Sales_data>& vecSales_data)
 	sort(vecSales_data.begin(), vecSales_data.end(),
 		[](const Sales_data& sd1, const Sales_data& sd2)
 		{return sd1.isbn().size() < sd2.isbn().size(); });
-	//stable_sort(vecSales_data.begin(), vecSales_data.end(), compareIsbn);
+	stable_sort(vecSales_data.begin(), vecSales_data.end(),
+		[](const Sales_data& sd1, const Sales_data& sd2)->bool 
+		{return sd1.isbn() < sd2.isbn();});
+	//用<小於運算子就是遞增排序
 }
