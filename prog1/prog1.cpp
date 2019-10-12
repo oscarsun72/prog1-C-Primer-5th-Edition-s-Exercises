@@ -9,14 +9,16 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-
-
+void elimDups(vector<string>& words) {//eliminate duplicates
+	sort(words.begin(), words.end());
+	auto iter=unique(words.begin(), words.end());
+	words.erase(iter, words.end());
+}
 string make_plural(size_t count, string word ,string s) {
 	return count > 1 ? word + s : word;
 }
-void biggies(vector<string>& words,
-	vector<string>::size_type sz) {
-	//elimDups(words); // put words in alphabetical order and remove duplicates
+void biggies(vector<string>& words,vector<string>::size_type sz) {
+	elimDups(words); // put words in alphabetical order and remove duplicates
 	// sort words by size, but maintain alphabetical order for words of the same size
 	stable_sort(words.begin(), words.end(),//sort 預設必是由小到大排序…
 		[](const string& a, const string& b)
@@ -43,7 +45,7 @@ int main() {
 	{
 		vec.push_back(w);
 	}
-	biggies(vec, 4);
+	biggies(vec, 8);
 }
 
 
