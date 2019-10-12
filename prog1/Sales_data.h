@@ -24,6 +24,9 @@ struct  Sales_data {
 ostream& print(ostream& , const Sales_data&);
 istream& read(istream& , Sales_data& );
 Sales_data add(const Sales_data&, const Sales_data&);
-bool compareIsbn(const Sales_data& ,const Sales_data &);
-void sortIsbn(const vector<Sales_data>&);
+//定義Sales_data自己的排序：
+bool compareIsbnLength(const Sales_data& ,const Sales_data &);
+void sortIsbnAscending( vector<Sales_data>&);
+void sortIsbnDescending( vector<Sales_data>&);
+void printVectorSales_data(const std::vector<Sales_data>& vecSale_data);
 #endif // !SALES_DATA_H

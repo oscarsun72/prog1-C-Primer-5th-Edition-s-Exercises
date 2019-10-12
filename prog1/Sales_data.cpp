@@ -59,14 +59,33 @@ Sales_data add(const Sales_data& sales_data1, const Sales_data& sales_data2)
 	return sum;
 }
 
-bool compareIsbn(const Sales_data& sd1, const Sales_data& sd2)
+bool compareIsbnLength(const Sales_data& sd1, const Sales_data& sd2)
 {
-	//return sd1.isbn().size() < sd2.isbn().size();
-	return sd1.bookNo.size() < sd2.bookNo.size();
+	return sd1.isbn().size() < sd2.isbn().size();
+	//return sd1.bookNo.size() < sd2.bookNo.size();//二式皆可，因為目前Sales_data為struct，預設其成員存取權為公開
 }
 
-void sortIsbn(vector<Sales_data>& vecSales_data)
+void sortIsbnAscending(vector<Sales_data>&vecSales_data)
 {
-	sort(vecSales_data.begin(), vecSales_data.end(),compareIsbn);
-	//stable_sort(vecSales_data.begin(), vecSales_data.end(), compareIsbn);
+	sort(vecSales_data.begin(), vecSales_data.end(), compareIsbnLength);
+	stable_sort(vecSales_data.begin(), vecSales_data.end(),
+		[](const Sales_data& sd1, const Sales_data& sd2)->bool {
+			return sd1.isbn() < sd2.isbn(); });//再用string的小於運算子作比較
+	//用<即遞增,小的排前面，用>即遞減，大的排前面
+	////第2階用售出數量來排序：這樣寫變成全部改用售出數量來排序了
+	//stable_sort(vecSales_data.begin(), vecSales_data.end(),
+	//	[](const Sales_data& sd1, const Sales_data& sd2)->bool {
+	//		return sd1.soldQ < sd2.soldQ; });
+}
+
+void sortIsbnDescending( vector<Sales_data> & vecSales_data)
+{
+	sort(vecSales_data.begin(), vecSales_data.end(),compareIsbnLength);
+	stable_sort(vecSales_data.begin(), vecSales_data.end(),
+		[](const Sales_data& sd1, const Sales_data& sd2)->bool {
+			return sd1.isbn() > sd2.isbn(); });//用string型別的比較//使用lambda 
+	////第2階用售出數量來排序：這樣寫變成全部改用售出數量來排序了
+	//stable_sort(vecSales_data.begin(), vecSales_data.end(),
+	//	[](const Sales_data& sd1, const Sales_data& sd2)->bool {
+	//		return sd1.soldQ>sd2.soldQ; });
 }

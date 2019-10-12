@@ -12,7 +12,16 @@
 #include<string>
 #include"Sales_data.h"
 #include <iostream>
+#include <iostream>
+
 using namespace std;
+void printVectorSales_data(const std::vector<Sales_data>& vecSale_data)
+{
+	for (Sales_data s : vecSale_data)
+	{
+		print(cout, s); cout << endl;
+	}
+}
 int main() {
 	Sales_data sd;
 	vector<Sales_data>vecSale_data;
@@ -20,11 +29,11 @@ int main() {
 	{
 		vecSale_data.push_back(sd);
 	}
-	sortIsbn(vecSale_data);
-	for (Sales_data s : vecSale_data)
-	{
-		print(cout, s); cout << endl;
-	}
+	sortIsbnDescending(vecSale_data);
+	printVectorSales_data(vecSale_data);
+	cout << endl;
+	sortIsbnAscending(vecSale_data);	
+	printVectorSales_data(vecSale_data);
 }
 
 
