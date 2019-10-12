@@ -10,11 +10,11 @@
 #include <algorithm>
 using namespace std;
 void biggies(vector<string>& vecStr,vector<string>::size_type sz ) {		
-	auto iterE=partition(vecStr.begin(), vecStr.end(),//先分組再排序。若先排序再分組則會亂序
-		[sz](const string& s)->bool {return s.size()>=sz; });	
-	sort(vecStr.begin(), iterE);
-	stable_sort(vecStr.begin(), iterE
-		, [](const string& s1, const string& s2) {return s1.size() < s2.size(); });
+	sort(vecStr.begin(), vecStr.end());
+	stable_sort(vecStr.begin(), vecStr.end(),
+		 [](const string& s1, const string& s2) {return s1.size() < s2.size(); });
+	auto iterE = stable_partition(vecStr.begin(), vecStr.end(),//分組時不會動到原來的排序
+		[sz](const string& s)->bool {return s.size() >= sz; });
 	for_each( vecStr.begin(), iterE, [](const string& s) {cout << s << endl; });
 }
 int main() {
