@@ -59,13 +59,13 @@ Sales_data add(const Sales_data& sales_data1, const Sales_data& sales_data2)
 	return sum;
 }
 
-bool compareIsbn(const Sales_data& sd1, const Sales_data& sd2)
-{
-	return sd1.isbn().size() < sd2.isbn().size();
-}
+//bool compareIsbn(const Sales_data& sd1, const Sales_data& sd2)
+//{
+//	return sd1.isbn().size() < sd2.isbn().size();
+//}
 
-void sortIsbn(const vector<Sales_data>& vecSales_data)
-{
+void sortIsbn(vector<Sales_data>& vecSales_data)
+{//因為sort會對vecStr做編輯、會動到容器元素，所以不能是對常值的參考:const vector<Sales_data>&
 	sort(vecSales_data.begin(), vecSales_data.end(),
 		[](const Sales_data& sd1, const Sales_data& sd2)
 		{return sd1.isbn().size() < sd2.isbn().size(); });
