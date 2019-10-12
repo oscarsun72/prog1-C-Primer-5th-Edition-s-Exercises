@@ -3,22 +3,20 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_data.h"
 
-	//const char* a[4] = { "", "V:\\Programming\\C++\\1.txt"
-	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
-//#include <iostream>
 #include <iostream>
 using namespace std;
 int main() {
-	auto lmbda = [](const int& i1, const int& i2) ->int{return i1 + i2; };//指定asign型別須用auto，不能用int
-	cout <<  lmbda(1,13) <<endl;//不管有沒有參數，一定不能省掉呼叫運算子（call operator）
+	int i2=3;
+	auto lmbda = [i2](const int& i1) ->int{return i1 + i2; };//指定asign型別須用auto，不能用int
+	//	'i2' cannot be implicitly captured because no default capture mode has been specified
+	//C++ an enclosing-function local variable cannot be referenced in a lambda body unless it is in the capture list
+	cout <<  lmbda(1) <<endl;//不管有沒有參數，一定不能省掉呼叫運算子（call operator）
 }
 
 
 //int main(int argc, const char** argv)
 //{
-//	print_sum_of_the_elements_in_the_list({ 11,2,3 });
 //	return 0;
 //}
 
