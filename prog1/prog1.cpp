@@ -10,19 +10,11 @@
 //#include <iostream>
 #include<vector>
 #include<string>
-#include"Sales_data.h"
 #include <iostream>
 using namespace std;
 int main() {
-	Sales_data sd;
-	vector<Sales_data>vecSale_data;
-	while(read(cin, sd))
-		vecSale_data.push_back(sd);
-	sortIsbn(vecSale_data);
-	for (Sales_data s : vecSale_data)
-	{
-		print(cout, s); cout << endl;
-	}
+	auto lmbda = [](const int& i1, const int& i2) ->int{return i1 + i2; };//指定asign型別須用auto，不能用int
+	cout <<  lmbda(1,13) <<endl;//不管有沒有參數，一定不能省掉呼叫運算子（call operator）
 }
 
 
