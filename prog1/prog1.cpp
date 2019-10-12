@@ -3,17 +3,10 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-//#include "Sales_data.h"
-
-	//const char* a[4] = { "", "V:\\Programming\\C++\\1.txt"
-	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
-//#include <iostream>
 #include<vector>
 #include<string>
 #include"Sales_data.h"
 #include <iostream>
-#include <iostream>
-
 using namespace std;
 void printVectorSales_data(const std::vector<Sales_data>& vecSale_data)
 {
@@ -39,7 +32,6 @@ int main() {
 
 //int main(int argc, const char** argv)
 //{
-//	print_sum_of_the_elements_in_the_list({ 11,2,3 });
 //	return 0;
 //}
 
