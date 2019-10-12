@@ -8,8 +8,6 @@
 	//const char* a[4] = { "", "V:\\Programming\\C++\\1.txt"
 	//	, "V:\\Programming\\C++\\2.txt", "V:\\Programming\\C++\\3.txt" };
 //#include <iostream>
-#include<vector>
-#include<string>
 #include <iostream>
 using namespace std;
 int main() {
