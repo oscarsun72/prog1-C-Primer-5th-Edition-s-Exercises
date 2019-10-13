@@ -4,21 +4,16 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<vector>
-#include<string>
 #include <iostream>
-#include <algorithm>
 using namespace std;
 int main() {
-	vector<string>vecs;
-	string word;
-	while (cin >> word)
-	{
-		vecs.push_back(word);
-	}
-	auto c=count_if(vecs.cbegin(), vecs.cend(), 
-		[](const string& s)->bool {return s.size() > 6; });
-	cout << c << endl;
+	int i=111;
+	auto L = [&]()mutable->bool {
+		if(i!=0)--i; return i == 0; };//二個述句就必須有傳回型別
+	while (!L()) {}//不能少了呼叫運算子（call operator）
+	cout << i << endl;
+	L();
+	cout << i << endl;
 }
 
 
