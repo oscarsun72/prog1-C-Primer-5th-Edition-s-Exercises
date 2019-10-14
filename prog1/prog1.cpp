@@ -5,15 +5,27 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <functional>
 using namespace std;
+using namespace std::placeholders;//若沒此行，則「_1」就undefined
+bool isShorter(const string& s, string::size_type sz) {
+	return s.size() <= sz;
+}
 int main() {
-	int i=111;
-	auto L = [&]()mutable->bool {
-		if(i!=0)--i; return i == 0; };//二個述句就必須有傳回型別
-	while (!L()) {}//不能少了呼叫運算子（call operator）
-	cout << i << endl;
-	L();
-	cout << i << endl;
+	vector<string>v;
+	string w;
+	unsigned sz=6;
+	while (cin >> w)
+		v.push_back(w);
+	auto b = bind(isShorter, _1, sz);
+	cout<<count_if(v.cbegin(), v.cend(), b)<<endl;//此3種均可以，此題不用lambda
+	//可見在呼叫這個b （new callable 可呼叫物件 callable object）不用加呼叫運算子（call operator），也不必傳遞引數
+	//cout<<count_if(v.cbegin(), v.cend(), bind(isShorter, _1, sz))<<endl;
+	//cout<<count_if(v.cbegin(), v.cend(), [](const string& s)->bool {return s.size() <= 6; })<<endl;
+	
 }
 
 
