@@ -4,26 +4,13 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<vector>
-#include<string>
-#include <iostream>
-#include <algorithm>
-#include <iterator>
-#include <list>
+#include<iostream>
+#include<iterator>
+#include<numeric>
 using namespace std;
 int main() {
-	list<string>lst;	
-	vector<string>v;// {"戒", "定", "慧", "戒"};
-	string w;
-	while (cin >> w)		v.push_back(w);
-	//不排序就無法正確汰重
-	sort(v.begin(),v.end());
-	//以下三者均可，唯front_inserter結果元素是倒序
-	unique_copy(v.begin(), v.end(), front_inserter(lst));
-	//unique_copy(v.begin(	), v.end(), back_inserter(lst));
-	//unique_copy(v.begin(), v.end(), inserter(lst,lst.begin()));
-	for (string s : lst) cout << s << " ";
-	cout << endl;
+	istream_iterator<int>in(cin), end;
+	cout<<accumulate(in, end, 0)<<endl;
 }
 
 //int main(int argc, const char** argv)
