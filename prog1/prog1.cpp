@@ -15,10 +15,10 @@ bool check_size(const string& s, string::size_type sz) {
 	return s.size() >= sz;
 }
 int main() {
-	vector<int>v{10,12,14,3,2,4};
-	string w="孫守真任真甫";
-	cout<<*find_if_not(v.cbegin(),v.cend(),
-									bind(check_size, w, _1))<<endl;
+	vector<int>v{ 10,12,14,3,2,4 };
+	string w = "孫守真任真甫";
+	cout << *find_if_not(v.cbegin(), v.cend(),
+		bind(check_size, w, _1)) << endl;
 }
 
 
