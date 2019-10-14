@@ -10,20 +10,42 @@
 #include <algorithm>
 #include <iterator>
 #include <list>
+#include <deque>
+#include <forward_list>
 using namespace std;
 int main() {
-	list<string>lst;	
-	vector<string>v;// {"戒", "定", "慧", "戒"};
-	string w;//按住Ctrl+Alt再加滑鼠左鍵就可以多重選取或多重插入點
-	while (cin >> w)		v.push_back(w);
-	//不排序就無法正確汰重
-	sort(v.begin(),v.end());
-	//以下三者均可，唯front_inserter結果元素是倒序
-	unique_copy(v.begin(), v.end(), front_inserter(lst));
-	//unique_copy(v.begin(	), v.end(), back_inserter(lst));
-	//unique_copy(v.begin(), v.end(), inserter(lst,lst.begin()));
-	for (string s : lst) cout << s << " ";
+	vector<unsigned>v{ 1,2,3,4,5,6,7,8,9 };
+	list<unsigned>lst;
+	deque<unsigned>dq;
+	forward_list<unsigned>fw;
+	copy(v.cbegin(), v.cend(), inserter(lst, lst.begin()));
+	for (unsigned s : lst) cout << s << " ";
+	cout << endl;	lst.clear();
+	copy(v.cbegin(), v.cend(), back_inserter(lst));
+	for (unsigned s : lst) cout << s << " ";
+	cout << endl;	lst.clear();
+	copy(v.cbegin(), v.cend(), front_inserter(lst));
+	for (unsigned s : lst) cout << s << " ";
 	cout << endl;
+	cout << endl;
+	copy(v.cbegin(), v.cend(), inserter(dq, dq.begin()));
+	for (unsigned s :dq) cout << s << " ";
+	cout << endl;	dq.clear();
+	copy(v.cbegin(), v.cend(), back_inserter(dq));
+	for (unsigned s : dq) cout << s << " ";
+	cout << endl;	dq.clear();
+	copy(v.cbegin(), v.cend(), front_inserter(dq));
+	for (unsigned s : dq) cout << s << " ";
+	cout << endl;	
+	cout << endl;
+	//copy(v.cbegin(), v.cend(), inserter(fw, fw.begin()));//forward_list也沒有insert
+	//copy(v.cbegin(), v.cend(), back_inserter(fw));//forward_list沒有push_back
+	copy(v.cbegin(), v.cend(), front_inserter(fw));
+	for (unsigned s : fw) cout << s << " ";
+	cout << endl;
+
+
+
 }
 
 //int main(int argc, const char** argv)
