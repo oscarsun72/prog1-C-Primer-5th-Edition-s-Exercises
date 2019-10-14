@@ -14,7 +14,7 @@ using namespace std;
 int main() {
 	list<string>lst;	
 	vector<string>v;// {"戒", "定", "慧", "戒"};
-	string w;
+	string w;//按住Ctrl+Alt再加滑鼠左鍵就可以多重選取或多重插入點
 	while (cin >> w)		v.push_back(w);
 	//不排序就無法正確汰重
 	sort(v.begin(),v.end());
