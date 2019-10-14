@@ -7,29 +7,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <functional>
+#include <algorithm>
 using namespace std;
-using namespace std::placeholders;//若沒此行，則「_1」就undefined
-bool isShorterthe(const string& s, string::size_type sz) {
-	return s.size() <= sz;
-}
+using namespace std::placeholders;
 bool check_size(const string& s, string::size_type sz) {
 	return s.size() >= sz;
 }
-
 int main() {
-	vector<string>v;
-	string w;
-	unsigned sz=6;
-	while (cin >> w)
-		v.push_back(w);
-	auto b = bind(isShorter, _1, sz);
-	cout<<count_if(v.cbegin(), v.cend(), b)<<endl;//此3種均可以，此題不用lambda
-	//可見在呼叫這個b （new callable 可呼叫物件 callable object）不用加呼叫運算子（call operator），也不必傳遞引數
-	//cout<<count_if(v.cbegin(), v.cend(), bind(isShorter, _1, sz))<<endl;
-	//cout<<count_if(v.cbegin(), v.cend(), [](const string& s)->bool {return s.size() <= 6; })<<endl;
-	
+	vector<int>v{10,12,14,3,2,4};
+	string w="孫守真任真甫";
+	cout<<*find_if_not(v.cbegin(),v.cend(),
+									bind(check_size, w, _1))<<endl;
 }
 
 
