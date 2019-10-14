@@ -8,23 +8,28 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <functional>
+using namespace std::placeholders;
 using namespace std;
-void biggies(vector<string>& vecStr,vector<string>::size_type sz ) {		
-	auto iterE=partition(vecStr.begin(), vecStr.end(),//先分組再排序。若先排序再分組則會亂序
-		[sz](const string& s)->bool {return s.size()>=sz; });	
+bool check_size(const string& s, string::size_type sz) {
+	return s.size() >= sz;
+}
+void biggies(vector<string>& vecStr, vector<string>::size_type sz) {
+	auto iterE = partition(vecStr.begin(), vecStr.end(),//先分組再排序。若先排序再分組則會亂序
+		bind(check_size,_1,sz));
 	sort(vecStr.begin(), iterE);
 	stable_sort(vecStr.begin(), iterE
 		, [](const string& s1, const string& s2) {return s1.size() < s2.size(); });
-	for_each( vecStr.begin(), iterE, [](const string& s) {cout << s << endl; });
+	for_each(vecStr.begin(), iterE, [](const string& s) {cout << s << endl; });
 }
 int main() {
 	vector<string> vec;
 	string word;
-	while (cin>>word)
+	while (cin >> word)
 	{
 		vec.push_back(word);
 	}
-	biggies(vec,8);
+	biggies(vec, 8);
 }
 
 
