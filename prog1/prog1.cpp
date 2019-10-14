@@ -18,7 +18,7 @@ int main() {
 	vector<int>v{ 10,12,14,3,2,4 };
 	string w = "孫守真任真甫";
 	cout << *find_if_not(v.cbegin(), v.cend(),
-		bind(check_size, w, _1)) << endl;
+		bind(check_size, w, _1)) << endl;//print(the answer is): 14
 }
 
 
