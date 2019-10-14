@@ -11,7 +11,7 @@
 #include <functional>
 using namespace std;
 using namespace std::placeholders;//若沒此行，則「_1」就undefined
-bool isShorter(const string& s, string::size_type sz) {
+bool isShorterAndEqualSz(const string& s, string::size_type sz) {
 	return s.size() <= sz;
 }
 int main() {
@@ -20,7 +20,7 @@ int main() {
 	unsigned sz=6;
 	while (cin >> w)
 		v.push_back(w);
-	auto b = bind(isShorter, _1, sz);
+	auto b = bind(isShorterAndEqualSz, _1, sz);
 	cout<<count_if(v.cbegin(), v.cend(), b)<<endl;//此3種均可以，此題不用lambda
 	//可見在呼叫這個b （new callable 可呼叫物件 callable object）不用加呼叫運算子（call operator），也不必傳遞引數
 	//cout<<count_if(v.cbegin(), v.cend(), bind(isShorter, _1, sz))<<endl;
