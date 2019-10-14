@@ -11,9 +11,13 @@
 #include <functional>
 using namespace std;
 using namespace std::placeholders;//若沒此行，則「_1」就undefined
-bool isShorter(const string& s, string::size_type sz) {
+bool isShorterthe(const string& s, string::size_type sz) {
 	return s.size() <= sz;
 }
+bool check_size(const string& s, string::size_type sz) {
+	return s.size() >= sz;
+}
+
 int main() {
 	vector<string>v;
 	string w;
