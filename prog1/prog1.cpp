@@ -15,7 +15,10 @@ bool check_size(const string& s, string::size_type sz) {
 	return s.size() >= sz;
 }
 int main() {
-	vector<int>v{ 10,12,14,3,2,4 };
+	vector<int>v{ 10,12,-3,14,3,2,4 };//int型別和size_type做運算時有風險，應先過濾無負值才能進行
+	sort(v.begin(), v.end());
+	v.erase(stable_partition(v.begin(), v.end(), [](const int& i)->bool {return i >= 0; }));
+	//若無以上2行（erase v中小於0的值），print(the answer is): -3
 	string w = "孫守真任真甫";
 	cout << *find_if_not(v.cbegin(), v.cend(),
 		bind(check_size, w, _1)) << endl;//print(the answer is): 14
