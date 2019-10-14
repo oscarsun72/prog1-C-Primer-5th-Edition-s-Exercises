@@ -8,44 +8,23 @@
 #include<string>
 #include <iostream>
 #include <algorithm>
+#include <iterator>
+#include <list>
 using namespace std;
-
-
-string make_plural(size_t count, string word ,string s) {
-	return count > 1 ? word + s : word;
-}
-void biggies(vector<string>& words,
-	vector<string>::size_type sz) {
-	//elimDups(words); // put words in alphabetical order and remove duplicates
-	// sort words by size, but maintain alphabetical order for words of the same size
-	stable_sort(words.begin(), words.end(),//sort 預設必是由小到大排序…
-		[](const string& a, const string& b)
-		{ return a.size() < b.size(); });//…所以須配合著<小於運算子來用！也就是說sort是藉由「<」小於運算子比較的結果來決定由小到大排序的順序的
-//要明白這些predicate(p.386)是怎麼作用的，才能真正弄懂
-// get an iterator to the first element whose size() is >= sz
-	auto wc = find_if(words.begin(), words.end(),
-		[sz](const string& a)
-		{ return a.size() >= sz; });//可見find_if是用「true」來判斷predicate。且只找第一個符合條件（predicate為true）的
-// compute the number of elements with size >= sz
-	auto count = words.end() - wc;
-	cout << count << " " << make_plural(count, "word", "s")
-		<< " of length " << sz << " or longer" << endl;
-	// print words of the given size or longer, each one followed by a space
-	for_each(wc, words.end(),
-		[](const string& s) {cout << s << " "; });
+int main() {
+	list<string>lst;	
+	vector<string>v;// {"戒", "定", "慧", "戒"};
+	string w;
+	while (cin >> w)		v.push_back(w);
+	//不排序就無法正確汰重
+	sort(v.begin(),v.end());
+	//以下三者均可，唯front_inserter結果元素是倒序
+	unique_copy(v.begin(), v.end(), front_inserter(lst));
+	//unique_copy(v.begin(	), v.end(), back_inserter(lst));
+	//unique_copy(v.begin(), v.end(), inserter(lst,lst.begin()));
+	for (string s : lst) cout << s << " ";
 	cout << endl;
 }
-
-int main() {
-	vector<string>vec;
-	string w;
-	while (cin>>w)
-	{
-		vec.push_back(w);
-	}
-	biggies(vec, 4);
-}
-
 
 //int main(int argc, const char** argv)
 //{
