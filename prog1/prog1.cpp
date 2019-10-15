@@ -20,7 +20,7 @@ int main() {
 	ostream_iterator<int>od(ofstmOdd, " ") ,oe(ofstmEven, "\n");
 	while (in != end)
 	{
-		i = *in++;
+		i = *in++;//移動迭代器（iterator）即可逐一巡覽要處理各個元素
 		if((i % 2)==0)
 			 *oe++=i ;
 		else
