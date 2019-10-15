@@ -49,12 +49,13 @@ int main()
 						//用 Sales_item 帶了一個ISBN參數的建構器來建構accumulate的基點
 		fnext = f;
 	}
-		
+	//---------		----------------------------------
+	//以下是本書原型（頁24）
 	//Sales_item total; //存放下一筆交易記綠資料的變數
 	////讀取第一筆交易記錄，並確保有資料可以處理
 	//if (std::cin >> total) {
 	//	v.push_back
-	//	Sales_item trans; //用來存放運行總和的變數
+	//	Sales_item trans; 用來存放運行總和的變數//孫守真按：原書註解錯置，中文版亦未訂正：此當為total的註解，反之亦然。已在線上勘誤，尚未見刊出。頁255在另做Sales_data時已其訂正，可參證
 	//	//讀取並處理剩餘的交易記錄
 	//	while (std::cin >> trans) {
 	//		//如果我們仍然是在處理同一本書
