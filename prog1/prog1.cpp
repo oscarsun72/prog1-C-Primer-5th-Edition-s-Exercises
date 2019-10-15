@@ -21,6 +21,11 @@ int main()
 	istream_iterator<Sales_item>i(cin), end;
 	ostream_iterator<Sales_item>o(cout,"\n");
 	vector<Sales_item>v(i, end);	
+	//若要檢查沒有輸入或輸入錯誤，可在此加判斷
+	if (v.empty()) {//沒有輸入！警示使用者
+			cerr << "No data?!" << std::endl;
+		return -1; //指示失敗
+	}	
 	vector<Sales_item>vUniqu;
 	sort(v.begin(), v.end(), compareIsbn1);
 	//unique_copy(v.begin(), v.end(), inserter(vUniqu,vUniqu.begin()));
