@@ -5,17 +5,72 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<iterator>//for「istream_iterator」
-#include<deque>
-#include<algorithm>//for sort()、unique_copy()
+#include<iterator>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+#include "Sales_item.h"
+#include <functional>
+using namespace std::placeholders;
 using namespace std;
-int main() {
-	istream_iterator<int>i(cin),end;
-	deque<int>dq(i,end);//i用cin建構初始化，因為cin現在是空的，沒有元素，所以i一定時和end相等的，同時指著第一和最後的「元素」。
-	sort(dq.begin(), dq.end());//汰重前一定要排序,由此亦可知unique演算法是什麼「演算」（推演、計算）的了
-	ostream_iterator<int>o(cout, ",");
-	unique_copy(dq.begin(),dq.end(),o);
+inline bool compareIsbn1(const Sales_item& s1, const Sales_item& s2) {
+	return s1.isbn() < s2.isbn();
 }
+int main()
+{
+	istream_iterator<Sales_item>i(cin), end;
+	ostream_iterator<Sales_item>o(cout,"\n");
+	vector<Sales_item>v(i, end);	
+	vector<Sales_item>vUniqu;
+	sort(v.begin(), v.end(), compareIsbn1);
+	//unique_copy(v.begin(), v.end(), inserter(vUniqu,vUniqu.begin()));
+	//演算法要增減容器大小（元素個數）一定要請「介入者（插入者）迭代器」「代理」！
+	//因為 Sales_item定義要資料成員（data　member）都相同才算重複，所以不能用它內建的==
+	vector<Sales_item>::const_iterator f,fnext=v.cbegin();
+	//for (Sales_item s : vUniqu) {
+	//	f = find(fnext, v.cend(), s);
+	//	while (find(++f, v.cend(), s) != v.cend()) {//找到相同的Sales_item		
+	//	}
+	//	*o++=accumulate(fnext, f, Sales_item());
+	//	fnext = f;
+	//}
+	//
+	//所以只能逐一其比對.isbn()==.isbn()	
+	while (fnext!=v.cend())
+	{
+		f = find_if_not(fnext, v.cend(),bind(compareIsbn,_1, *fnext));//找到ISBN不同的另一本書在容器中的位置
+		//auto a= accumulate(fnext, f, Sales_item());
+		* o++ = accumulate(fnext, f, Sales_item(fnext->isbn()));
+						//用 Sales_item 帶了一個ISBN參數的建構器來建構accumulate的基點
+		fnext = f;
+	}
+		
+	//Sales_item total; //存放下一筆交易記綠資料的變數
+	////讀取第一筆交易記錄，並確保有資料可以處理
+	//if (std::cin >> total) {
+	//	v.push_back
+	//	Sales_item trans; //用來存放運行總和的變數
+	//	//讀取並處理剩餘的交易記錄
+	//	while (std::cin >> trans) {
+	//		//如果我們仍然是在處理同一本書
+	//		if (total.isbn() == trans.isbn())
+	//			total += trans; // 更新累計的 total
+	//		else {
+	//			//印出前一本書的結果
+	//			std::cout << total << std::endl;
+	//			total = trans; // total現在指向下一本書
+	//		}
+	//	}
+	//	std::cout << total << std::endl; // 印出最後一筆交易記錄
+	//}
+	//else {
+	//	//沒有輸入！警示使用者
+	//	std::cerr << "No data?!" << std::endl;
+	//	return -1; //指示失敗
+	//}
+	//return 0;
+}
+
 
 //int main(int argc, const char** argv)
 //{
