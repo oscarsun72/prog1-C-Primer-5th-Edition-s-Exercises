@@ -7,14 +7,14 @@
 #include<iostream>
 #include<iterator>//for「istream_iterator」
 #include<deque>
-#include<algorithm>//for sort()
+#include<algorithm>//for sort()、unique_copy()
 using namespace std;
 int main() {
 	istream_iterator<int>i(cin),end;
 	deque<int>dq(i,end);//i用cin建構初始化，因為cin現在是空的，沒有元素，所以i一定時和end相等的，同時指著第一和最後的「元素」。
-	sort(dq.begin(), dq.end());
+	sort(dq.begin(), dq.end());//汰重前一定要排序,由此亦可知unique演算法是什麼「演算」（推演、計算）的了
 	ostream_iterator<int>o(cout, ",");
-	copy(dq.cbegin(), dq.cend(), o);
+	unique_copy(dq.begin(),dq.end(),o);
 }
 
 //int main(int argc, const char** argv)
