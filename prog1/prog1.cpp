@@ -18,9 +18,14 @@ int main() {
 	//凡是用到迭代器範圍的通常都是要巡覽該範圍內元素一遍的，所以這個迭代（iterate）或巡覽，就是交由vector的建構器（constructor）來執行吧
 	//才可以看似不用寫迴圈，卻能不斷執行、迭代、巡覽若此
 	ostream_iterator<string>outf(cout," ");
-	for (string s : v)
-		*outf++ = s;
-		//outf = s;//解參考運算子和遞增運算子也可省略（詳頁406）
+	//沒有#include<algorithm> 卻能用copy，也是一絕。應與已經「using namespace std;」有關
+	copy(v.cbegin(), v.cend(), outf);//一樣是指出了「迭代器範圍」然後巡覽（迭代（iterate））每個範圍內的元素，到outf上頭
+	//所以巡覽（迭代（iterate））的工作是由用到這個迭代器範圍引數的函式、建構器或演算法等來負責的
+	/*以上寫法比以下精簡多了 詳頁406上方：
+	我們可以不用自己寫這種迴圈，而是呼叫copy輕鬆地印出vec中的元素：*/
+	//for (string s : v)
+	//	*outf++ = s;
+	//	//outf = s;//解參考運算子和遞增運算子也可省略（詳頁406）
 	cout << endl;//此行是讓Visual Studio在 start without debugging的時候，最末它提供的提示文字可以放在下一行再印出
 }
 
