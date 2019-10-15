@@ -5,28 +5,16 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<fstream>
 #include<iterator>//for「istream_iterator」
-#include<string>
-#include<vector>
+#include<deque>
+#include<algorithm>//for sort()
 using namespace std;
 int main() {
-	ifstream ifstm("V:\\Programming\\C++\\3.txt");
-	//在Visual Studio預設情況下，文字檔僅支援ANSI或Big5編碼。UTF-8應該是要用到轉碼功能
-	istream_iterator<string>inf(ifstm), endf;
-	vector<string>v(inf,endf);//是迭代器（iterator）的話就可以直接用首尾二個迭代器來指出要建構元素的範圍及其值
-	//凡是用到迭代器範圍的通常都是要巡覽該範圍內元素一遍的，所以這個迭代（iterate）或巡覽，就是交由vector的建構器（constructor）來執行吧
-	//才可以看似不用寫迴圈，卻能不斷執行、迭代、巡覽若此
-	ostream_iterator<string>outf(cout," ");
-	//沒有#include<algorithm> 卻能用copy，也是一絕。應與已經「using namespace std;」有關
-	copy(v.cbegin(), v.cend(), outf);//一樣是指出了「迭代器範圍」然後巡覽（迭代（iterate））每個範圍內的元素，到outf上頭
-	//所以巡覽（迭代（iterate））的工作是由用到這個迭代器範圍引數的函式、建構器或演算法等來負責的
-	/*以上寫法比以下精簡多了 詳頁406上方：
-	我們可以不用自己寫這種迴圈，而是呼叫copy輕鬆地印出vec中的元素：*/
-	//for (string s : v)
-	//	*outf++ = s;
-	//	//outf = s;//解參考運算子和遞增運算子也可省略（詳頁406）
-	cout << endl;//此行是讓Visual Studio在 start without debugging的時候，最末它提供的提示文字可以放在下一行再印出
+	istream_iterator<int>i(cin),end;
+	deque<int>dq(i,end);//i用cin建構初始化，因為cin現在是空的，沒有元素，所以i一定時和end相等的，同時指著第一和最後的「元素」。
+	sort(dq.begin(), dq.end());
+	ostream_iterator<int>o(cout, ",");
+	copy(dq.cbegin(), dq.cend(), o);
 }
 
 //int main(int argc, const char** argv)
