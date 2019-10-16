@@ -4,28 +4,15 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<fstream>
+#include<iostream>
+#include<vector>
+#include<string>
 #include<iterator>
 using namespace std;
 int main() {
-	ifstream ifstm("V:\\Programming\\C++\\2.txt");
-	/*ofstream ofstmOdd("V:\\Programming\\C++\\2odd.txt",ofstream::app);
-	ofstream ofstmEven("V:\\Programming\\C++\\2even.txt",ofstream::app);;*/
-	ofstream ofstmOdd("V:\\Programming\\C++\\2odd.txt");
-	ofstream ofstmEven("V:\\Programming\\C++\\2even.txt");;
-	/*The only way to preserve the existing data in a file opened by an ofstream is to specify app or in mode explicitly.(p.320
-	8.2.2. File Modes :Opening a File in out Mode Discards Existing Data)*/
-	istream_iterator<int>in(ifstm), end;
-	int i;
-	ostream_iterator<int>od(ofstmOdd, " ") ,oe(ofstmEven, "\n");
-	while (in != end)
-	{
-		i = *in++;
-		if((i % 2)==0)
-			 *oe++=i ;
-		else
-			*od++ =i;
-	}	
+	vector<string>v{"孫守真","任真","good"};	
+	ostream_iterator<string> o(cout, ",");
+	copy(v.crbegin(), v.crend(), o);	
 }
 
 //int main(int argc, const char** argv)
