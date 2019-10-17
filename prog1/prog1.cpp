@@ -4,21 +4,22 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<iostream>//cout
+#include<iostream>
 #include<list>
-#include<iterator>//ostream_iterator<string> 
-#include<algorithm>//find
+#include<vector>
+#include<iterator>
+#include<algorithm>
 using namespace std;
 int main() {
-	list<int>v{1,2,3,0,4,11,3,3,2,0};			
-	list<int>::const_reverse_iterator lit=find(v.crbegin(), v.crend(), 0);
-	list<int>::const_iterator litOrdinary=find(v.cbegin(), v.cend(), 0);
-	ostream_iterator<int>o(cout, ",");
-	o = *lit;
-	lit++;//backward
-	*o++ = *lit;
-	*o++ = *litOrdinary;	
-	*o++ = *(++litOrdinary);	
+	vector<int>v{1,2,3,0,4,11,3,5,2,0};			
+	list<int>lst(7-(3-1));//the elements from positions 3 through 7
+	//copy的目的地容器要有和copy來源的容器至少有一樣的size()
+	copy(v.crbegin() + (v.size() - 7), v.crbegin() + (v.size() - 2), lst.begin());	
+	ostream_iterator<int> oIter(cout, ",");
+	/*copy(v.crbegin() + (v.size() - 7), v.crbegin() + (v.size() - 2),oIter); cout << endl;
+	copy(v.cbegin() + 2, v.cbegin() + 6,oIter); cout << endl;
+	cout << endl; copy(v.cbegin() , v.cend() ,oIter); cout << endl;	*/
+	copy(lst.cbegin(), lst.cend(),oIter);cout << endl;
 }
 
 //int main(int argc, const char** argv)
