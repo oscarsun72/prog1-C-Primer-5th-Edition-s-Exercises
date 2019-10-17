@@ -5,15 +5,21 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>//cout
-#include<vector>
+#include<list>
 #include<string>
 #include<iterator>//ostream_iterator<string> 
-#include<algorithm>//reverse_copy
+#include<algorithm>
 using namespace std;
 int main() {
-	vector<string>v{"孫守真","任真","good"};	
-	ostream_iterator<string> o(cout, ",");
-	reverse_copy(v.cbegin(), v.cend(), o);
+	list<int>v{1,2,3,0,4,11,3,3,2,0};			
+	list<int>::const_reverse_iterator lit=find(v.crbegin(), v.crend(), 0);
+	list<int>::const_iterator litOrdinary=find(v.cbegin(), v.cend(), 0);
+	ostream_iterator<int>o(cout, ",");
+	o = *lit;
+	lit++;//backward
+	*o++ = *lit;
+	*o++ = *litOrdinary;	
+	*o++ = *(++litOrdinary);	
 }
 
 //int main(int argc, const char** argv)
