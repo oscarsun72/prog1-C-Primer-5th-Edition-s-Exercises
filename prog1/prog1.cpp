@@ -4,15 +4,16 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<iostream>
+#include<iostream>//cout
 #include<vector>
 #include<string>
-#include<iterator>
+#include<iterator>//ostream_iterator<string> 
+#include<algorithm>//reverse_copy
 using namespace std;
 int main() {
 	vector<string>v{"孫守真","任真","good"};	
 	ostream_iterator<string> o(cout, ",");
-	copy(v.crbegin(), v.crend(), o);	
+	reverse_copy(v.cbegin(), v.cend(), o);
 }
 
 //int main(int argc, const char** argv)
