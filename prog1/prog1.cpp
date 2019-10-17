@@ -8,7 +8,7 @@
 #include<list>
 #include<vector>
 #include<iterator>
-#include<algorithm>
+//#include<algorithm>//copy不在此標頭檔中
 using namespace std;
 int main() {
 	vector<int>v{1,2,3,0,4,11,3,5,2,0};			
