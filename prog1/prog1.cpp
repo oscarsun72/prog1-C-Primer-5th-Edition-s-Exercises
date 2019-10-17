@@ -6,9 +6,8 @@
 
 #include<iostream>//cout
 #include<list>
-#include<string>
 #include<iterator>//ostream_iterator<string> 
-#include<algorithm>
+#include<algorithm>//find
 using namespace std;
 int main() {
 	list<int>v{1,2,3,0,4,11,3,3,2,0};			
