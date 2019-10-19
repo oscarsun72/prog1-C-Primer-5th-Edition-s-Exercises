@@ -4,28 +4,19 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<fstream>
+#include<iostream>
 #include<iterator>
+#include<vector>
+#include<algorithm>
 using namespace std;
 int main() {
-	ifstream ifstm("V:\\Programming\\C++\\2.txt");
-	/*ofstream ofstmOdd("V:\\Programming\\C++\\2odd.txt",ofstream::app);
-	ofstream ofstmEven("V:\\Programming\\C++\\2even.txt",ofstream::app);;*/
-	ofstream ofstmOdd("V:\\Programming\\C++\\2odd.txt");
-	ofstream ofstmEven("V:\\Programming\\C++\\2even.txt");;
-	/*The only way to preserve the existing data in a file opened by an ofstream is to specify app or in mode explicitly.(p.320
-	8.2.2. File Modes :Opening a File in out Mode Discards Existing Data)*/
-	istream_iterator<int>in(ifstm), end;
-	int i;
-	ostream_iterator<int>od(ofstmOdd, " ") ,oe(ofstmEven, "\n");
-	while (in != end)
-	{
-		i = *in++;
-		if((i % 2)==0)
-			 *oe++=i ;
-		else
-			*od++ =i;
-	}	
+	vector<int>v1{ 1,3,5,6,99,8 }, v2;
+	// copies only the even elements from v1 into v2; v1 is unchanged
+	remove_copy_if(v1.begin(), v1.end(), back_inserter(v2),
+		[](int i) { return i % 2; });
+	ostream_iterator<int>out(cout, ",");
+	copy(v2.cbegin(), v2.cend(), out);
+	cout << endl;
 }
 
 //int main(int argc, const char** argv)
