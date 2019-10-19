@@ -6,16 +6,29 @@
 
 #include<iostream>
 #include<iterator>
-#include<vector>
-#include<algorithm>
+#include<list>
+//#include<algorithm>
 using namespace std;
+void elimDups(list<string>& words)
+{
+	// sort words alphabetically so we can find the duplicates
+	//sort(words.begin(), words.end());
+	words.sort();//用list版本的演算法，在unique前一樣要先排序
+	// unique reorders the input range so that each word appears once in the
+	// front portion of the range and returns an iterator one past the unique range
+	//auto end_unique = unique(words.begin(), words.end());
+	words.unique();//因為list成員函式演算法是直接對list動手的，所以不必再用erase
+	// erase uses a vector operation to remove the nonunique elements
+	//words.erase(end_unique, words.end());
+	//words.erase();
+}
 int main() {
-	vector<int>v1{ 1,3,5,6,99,8 }, v2;
-	// copies only the even elements from v1 into v2; v1 is unchanged
-	remove_copy_if(v1.begin(), v1.end(), back_inserter(v2),
-		[](int i) { return i % 2; });
-	ostream_iterator<int>out(cout, ",");
-	copy(v2.cbegin(), v2.cend(), out);
+	list<string>lst;
+	istream_iterator<string>in(cin), end;	
+	copy(in, end, back_inserter( lst));
+	elimDups(lst);
+	ostream_iterator<string>out(cout," ");
+	copy(lst.cbegin(), lst.cend(), out);
 	cout << endl;
 }
 
