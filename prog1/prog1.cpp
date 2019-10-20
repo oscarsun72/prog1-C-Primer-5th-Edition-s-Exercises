@@ -6,17 +6,22 @@
 
 #include<iostream>
 #include<iterator>
-#include<vector>
-#include<algorithm>
+#include<map>
+//#include<algorithm>
 using namespace std;
 int main() {
-	vector<int>v1{ 1,3,5,6,99,8 }, v2;
-	// copies only the even elements from v1 into v2; v1 is unchanged
-	remove_copy_if(v1.begin(), v1.end(), back_inserter(v2),
-		[](int i) { return i % 2; });
+	istream_iterator<string>in(cin), end;
+	map<string, string::size_type>m;
+	while (in != end)
+	{
+		++m[*in];
+		++in;
+	}	
 	ostream_iterator<int>out(cout, ",");
-	copy(v2.cbegin(), v2.cend(), out);
-	cout << endl;
+	for(auto var : m)
+	{
+		cout<<var.first << " " <<var.second<< endl;
+	}
 }
 
 //int main(int argc, const char** argv)
