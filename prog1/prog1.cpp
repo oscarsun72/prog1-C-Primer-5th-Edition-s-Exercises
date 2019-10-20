@@ -15,12 +15,10 @@ int main() {
 	{
 		++m[*in];
 		++in;
-	}	
-	//ostream_iterator<int>out(cout, ",");//無法用，因map元素為pair型別
-	for(auto var : m)
-	{
-		cout<<var.first << " " <<var.second<< endl;
 	}
+	//ostream_iterator<int>out(cout, ",");//無法用，因map元素為pair型別
+	for (auto var : m)
+		cout << var.first << " " << var.second << endl;
 }
 
 //int main(int argc, const char** argv)
