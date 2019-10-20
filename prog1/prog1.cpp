@@ -21,7 +21,7 @@ int main() {
 	while (getline(cin, line)) {
 		PersonInfo info; // create an object to hold this record's data
 		record.str(line);
-		if (record.eof())//關鍵在這！因為record移位（shift）後在處理下一筆記錄（下一行）前未歸位
+		if (record.eof())//→關鍵在這！因為record移位（shift）後在處理下一筆記錄（下一行）前未歸位
 			record.clear();
 		record >> info.name; // read the name
 		while (record >> word) // read the phone numbers
