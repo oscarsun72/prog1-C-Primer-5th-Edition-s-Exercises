@@ -7,7 +7,6 @@
 #include<iostream>
 #include<iterator>
 #include<map>
-//#include<algorithm>
 using namespace std;
 int main() {
 	istream_iterator<string>in(cin), end;
@@ -17,7 +16,7 @@ int main() {
 		++m[*in];
 		++in;
 	}	
-	ostream_iterator<int>out(cout, ",");
+	//ostream_iterator<int>out(cout, ",");//無法用，因map元素為pair型別
 	for(auto var : m)
 	{
 		cout<<var.first << " " <<var.second<< endl;
