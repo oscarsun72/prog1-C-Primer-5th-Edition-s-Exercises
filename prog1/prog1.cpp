@@ -10,7 +10,7 @@
 #include<set>
 using namespace std;
 int main() {
-	set<string>st{ "the","an","and","or" ,"as","be","are","at","if","to","of"};
+	set<string>st{ "the","an","and","or" ,"be","at","if","to","of"};
 	istream_iterator<string>in(cin), end;
 	map<string, string::size_type>m;
 	while (in != end)
