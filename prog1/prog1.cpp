@@ -4,14 +4,15 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<iostream>
+#include<fstream>
 #include<iterator>
 #include<map>
 #include<set>
 using namespace std;
 int main() {
 	set<string>st{ "the","an","and","or" ,"be","at","if","to","of"};
-	istream_iterator<string>in(cin), end;
+	ifstream fs("V:\\Programming\\C++\\Untitled-1.txt");
+	istream_iterator<string>in(fs), end;
 	map<string, string::size_type>m;
 	while (in != end)
 	{
@@ -21,8 +22,9 @@ int main() {
 		}
 		++in;
 	}
+	ofstream ofs("V:\\Programming\\C++\\out.txt");
 	for (auto var : m)
-		cout << var.first << " " << var.second << endl;
+		ofs << var.first << " " << var.second << endl;
 }
 
 //int main(int argc, const char** argv)
