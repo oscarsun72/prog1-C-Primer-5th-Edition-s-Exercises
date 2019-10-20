@@ -16,19 +16,20 @@ int main() {
 	map<string, string::size_type>m;
 	while (in != end)
 	{
-		if (st.find(*in) == st.cend())
+		string s(*in);
+		for (decltype(s.size()) i = 0; i != s.size(); ++i)
 		{
-			string s(*in);
-			for (decltype(s.size()) i = 0; i != s.size(); ++i)
+			if (ispunct(s[i]))
 			{
-				if (ispunct(s[i]))
-				{
-					s.erase(i, 1);
-					--i;
-				}
-				else
-					s[i] = tolower(s[i]);
+				s.erase(i, 1);
+				--i;
 			}
+			else
+				s[i] = tolower(s[i]);//st都是小寫，所以改成小寫，以供st.find(s)比對
+		}
+		if (st.find(s) == st.cend())
+		{
+
 			++m[s];
 		}
 		++in;
