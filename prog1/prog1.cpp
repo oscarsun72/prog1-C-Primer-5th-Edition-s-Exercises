@@ -8,8 +8,9 @@
 #include<iterator>
 #include<map>
 #include<set>
+#include<algorithm>
 using namespace std;
-int main() {
+int main() {	
 	set<string>st{ "the","an","and","or" ,"be","at","if","to","of"};
 	ifstream fs("V:\\Programming\\C++\\Untitled-1.txt");
 	istream_iterator<string>in(fs), end;
@@ -18,7 +19,18 @@ int main() {
 	{
 		if (st.find(*in) == st.cend())
 		{
-			++m[*in];
+			string s(*in);
+			for (decltype(s.size()) i=0 ;i!=s.size() ;++i)
+			{
+				if (ispunct(s[i]))
+				{
+					s.erase(i,1);
+					--i;
+				}
+				else
+				s[i]=tolower(s[i]);
+			}
+			++m[s];
 		}
 		++in;
 	}
