@@ -8,15 +8,28 @@
 #include<iterator>
 #include<vector>
 #include<algorithm>
+#include<map>
 using namespace std;
 int main() {
-	vector<int>v1{ 1,3,5,6,99,8 }, v2;
-	// copies only the even elements from v1 into v2; v1 is unchanged
-	remove_copy_if(v1.begin(), v1.end(), back_inserter(v2),
-		[](int i) { return i % 2; });
-	ostream_iterator<int>out(cout, ",");
-	copy(v2.cbegin(), v2.cend(), out);
-	cout << endl;
+	map<string, vector<string>> m;
+	//test text:
+	//Wells Oscar Wells joy Sun Oscar Washington Smith Sun June Wells Steve Washington Jack Sun Judy
+	//multimap<string, vector<string>> m;
+	istream_iterator<string>in(cin), end;
+	string lastName;
+	while (in!=end)
+	{
+		lastName = *in;
+		m[lastName].push_back(*++in);
+		++in;
+	}
+	ostream_iterator<string>out(cout,",");
+	for (auto a :m)
+	{
+		cout << a.first << ":";
+		copy(a.second.cbegin(), a.second.cend(), out);
+		cout << endl;
+	}
 }
 
 //int main(int argc, const char** argv)
