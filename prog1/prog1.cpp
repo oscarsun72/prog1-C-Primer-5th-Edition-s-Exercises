@@ -7,16 +7,18 @@
 #include<fstream>
 #include<iterator>
 #include<map>
-#include<set>
+#include<vector>
 using namespace std;
 int main() {
-	set<string>st{ "the","an","and","or" ,"be","at","if","to","of"};
+	//set<string>st{ "the","an","and","or" ,"be","at","if","to","of"};
+	vector<string>st{ "the","an","and","or" ,"be","at","if","to","of"};
 	ifstream fs("V:\\Programming\\C++\\Untitled-1.txt");
 	istream_iterator<string>in(fs), end;
 	map<string, string::size_type>m;
 	while (in != end)
 	{
-		if (st.find(*in) == st.cend())
+		//if (st.find(*in) == st.cend())
+		if (find(st.cbegin(),st.cend(),*in)==st.cend())
 		{
 			++m[*in];
 		}
