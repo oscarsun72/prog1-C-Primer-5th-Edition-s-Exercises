@@ -6,20 +6,26 @@
 
 #include<iostream>
 #include<iterator>
-#include<vector>
-#include<algorithm>
+#include<list>
+#include<map>
 using namespace std;
 int main() {
-	char ch = 'a';
-	typedef char* pstring;
-	using pstring1 = char*;
-	pstring p = &ch;
-	pstring1 p1 = &ch;
-	if (p != p1)
+	map<string, list<string>>m;
+	istream_iterator<string>in(cin), end;
+	ostream_iterator<string>out(cout, ",");
+	string word;
+	while (in!=end)
 	{
-		cout << "hello world!\n"<<endl;
+		word = *in;
+		m[word].push_back(*++in);
+		++in;
 	}
-
+	for (auto a : m)
+	{
+		cout << a.first <<":\t";
+		copy(a.second.cbegin(),a.second.cend(), out);			
+		cout << endl;
+	}
 }
 
 //int main(int argc, const char** argv)
