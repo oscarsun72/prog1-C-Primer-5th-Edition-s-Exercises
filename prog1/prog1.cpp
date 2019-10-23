@@ -10,13 +10,16 @@
 #include<algorithm>
 using namespace std;
 int main() {
-	vector<int>v1{ 1,3,5,6,99,8 }, v2;
-	// copies only the even elements from v1 into v2; v1 is unchanged
-	remove_copy_if(v1.begin(), v1.end(), back_inserter(v2),
-		[](int i) { return i % 2; });
-	ostream_iterator<int>out(cout, ",");
-	copy(v2.cbegin(), v2.cend(), out);
-	cout << endl;
+	char ch = 'a';
+	typedef char* pstring;
+	using pstring1 = char*;
+	pstring p = &ch;
+	pstring1 p1 = &ch;
+	if (p != p1)
+	{
+		cout << "hello world!\n"<<endl;
+	}
+
 }
 
 //int main(int argc, const char** argv)
