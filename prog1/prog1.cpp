@@ -7,25 +7,40 @@
 #include<iostream>
 #include<iterator>
 #include<list>
+#include<vector>
 #include<map>
 using namespace std;
 int main() {
-	map<string, list<string>>m;
-	istream_iterator<string>in(cin), end;
-	ostream_iterator<string>out(cout, ",");
+	map<list<int>::iterator, int>m;
+	map<vector<int>::iterator, int>mv;
+	vector<int>vi; vector<int>::iterator viiter;
+	list<int>li; list<int>::iterator liiter;
+	istream_iterator<int>in(cin), end;
+	ostream_iterator<int>out(cout, ",");
 	string word;
 	while (in!=end)
 	{
-		word = *in;
-		m[word].push_back(*++in);
-		++in;
+		vi.push_back(*in++);
+		//li.push_back(*++in);
 	}
-	for (auto a : m)
+	//liiter = li.begin();
+	viiter = vi.begin();
+	while (viiter!=vi.end())
 	{
-		cout << a.first <<":\t";
-		copy(a.second.cbegin(),a.second.cend(), out);			
+		//m[liiter] = *liiter;
+		//++liiter;
+		mv[viiter] = *viiter;
+		++viiter;
+	}		
+	for (auto a : mv)
+	{
+		cout << *a.first << ":\t";
+		*out++ = a.second;
 		cout << endl;
 	}
+	cout <<"-----------"<< endl;
+	*out++ = mv[viiter-4];
+	cout << endl;
 }
 
 //int main(int argc, const char** argv)
