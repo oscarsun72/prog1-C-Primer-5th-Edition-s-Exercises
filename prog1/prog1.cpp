@@ -5,42 +5,41 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<iterator>
-#include<list>
 #include<vector>
-#include<map>
+#include<set>
+#include"Sales_data.h"
 using namespace std;
 int main() {
-	map<list<int>::iterator, int>m;
-	map<vector<int>::iterator, int>mv;
-	vector<int>vi; vector<int>::iterator viiter;
-	list<int>li; list<int>::iterator liiter;
-	istream_iterator<int>in(cin), end;
-	ostream_iterator<int>out(cout, ",");
-	string word;
-	while (in!=end)
+	Sales_data s; vector<Sales_data>v;
+	while (read(cin, s))
 	{
-		vi.push_back(*in++);
-		//li.push_back(*++in);
+		v.push_back(s);
 	}
-	//liiter = li.begin();
-	viiter = vi.begin();
-	while (viiter!=vi.end())
+	
+	// bookstore 可能會有數筆交易記錄有相同的ISBN
+// bookstore 中的元素會以ISBN排序
+	multiset<Sales_data, decltype(compareIsbn)*>
+		bookstore(v.cbegin(),v.cend(),compareIsbn);
+	
+	typedef decltype(compareIsbn)* compIsbn;//頁249
+	multiset<Sales_data, compIsbn>
+		bookstore_typedef_decltype(v.cbegin(),v.cend(),compareIsbn);
+	
+	using compISbn=bool(*)(const Sales_data& ,const Sales_data&) ;//頁249
+	multiset<Sales_data, compISbn>
+		bookstore_using(v.cbegin(),v.cend(),compareIsbn);
+
+	typedef bool(*compISBn)(const Sales_data&, const Sales_data&) ;
+	multiset<Sales_data, compISBn>
+		bookstore_typedef(v.cbegin(),v.cend(),compareIsbn);
+		
+	multiset<Sales_data, bool(*)(const Sales_data&, const Sales_data&)>//頁249
+		bookstore_PF(v.cbegin(),v.cend(),compareIsbn);
+	
+	for (Sales_data s : bookstore_using)//以上5種（bookstore……bookstore_PF）全對了
 	{
-		//m[liiter] = *liiter;
-		//++liiter;
-		mv[viiter] = *viiter;
-		++viiter;
-	}		
-	for (auto a : mv)
-	{
-		cout << *a.first << ":\t";
-		*out++ = a.second;
-		cout << endl;
+		print(cout, s); cout << endl;
 	}
-	cout <<"-----------"<< endl;
-	*out++ = mv[viiter-4];
-	cout << endl;
 }
 
 //int main(int argc, const char** argv)
