@@ -6,26 +6,22 @@
 
 #include<iostream>
 #include<iterator>
-#include<vector>
-#include<set>
+#include<map>
 using namespace std;
 int main() {
-	multiset<string> c ;
-	istream_iterator<string>in(cin),end;
-	ostream_iterator<string>out(cout, ","); 
-	copy(in, end, inserter(c, c.end()));
-	vector<string>v;
-	copy(in, end, inserter(v, v.end()));
-	copy(c.cbegin(), c.cend(), out); cout << endl;
-	//copy(v.begin(), v.end(), inserter(c, c.end()));//OK
-	//copy(v.begin(), v.end(), back_inserter(c));//Error	C2039	'push_back': is not a member of 'std::multiset<std::string,std::less<_Kty>,std::allocator<_Kty>>'
-	//copy(c.begin(), c.end(), inserter(v, v.end()));//OK
-	copy(c.begin(), c.end(), back_inserter(v));//OK，與前式同。因vector有push_back()也
-	copy(c.cbegin(), c.cend(), out);
-	cout << '\n' << "----------" << endl;
-	copy(v.cbegin(), v.cend(), out); cout << endl;
+	// get an iterator positioned on the first element
+	map<string, unsigned>word_count;
+	istream_iterator<string>in(cin), end;
+	while (in != end) ++word_count[*++in] ;
+	map<string, unsigned>::const_iterator map_it = word_count.cbegin();
+	// compare the current iterator to the off-the-end iterator
+	while (map_it != word_count.cend()) {
+		// dereference the iterator to print the element key--value pairs
+		cout << map_it->first << " occurs "
+			<< map_it->second << " times" << endl;
+		++map_it; // increment the iterator to denote the next element
+	}
 }
-
 //int main(int argc, const char** argv)
 //{
 //	return 0;
