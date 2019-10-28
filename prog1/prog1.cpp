@@ -6,36 +6,17 @@
 
 #include<iostream>
 #include<iterator>
-#include<vector>
 #include<map>
 using namespace std;
 int main() {
-	map<string, vector<pair<string,string>>> m;
-	//test text:
-	//Wells Oscar Wells joy Sun Oscar Washington Smith Sun June Wells Steve Washington Jack Sun Judy
-	//multimap<string, vector<string>> m;
-	istream_iterator<string>in(cin), end;
-	string lastName,firstname;
-	while (in!=end)
-	{
-		lastName = *in;
-		firstname=*++in;
-		m[lastName].push_back(make_pair(firstname, *++in));
-		++in;
-	}
-	ostream_iterator<string>out(cout,",");
-	for (auto a :m)
-	{
-		cout << a.first << ":";
-		for (pair<string,string> s : a.second)
-		{
-			*out++ = s.first;			
-			*out++ = s.second;
-			cout << "、";
-		}		
-		cout << endl;
-		cout <<"----------------"<< endl;
-	}
+	map<string, string> m;m["孫"]= "守真" ;
+	map<string, string>::iterator map_it=m.begin();
+	ostream_iterator<string>out(cout);
+	*out = map_it->first;
+	*out++ = map_it->second; cout << endl; 
+	map_it->second = "任真";
+	*out = map_it->first;
+	*out++ = map_it->second; cout << endl;
 }
 
 //int main(int argc, const char** argv)
