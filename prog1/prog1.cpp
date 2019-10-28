@@ -6,17 +6,24 @@
 
 #include<iostream>
 #include<iterator>
-#include<map>
+#include<vector>
+#include<set>
 using namespace std;
 int main() {
-	map<string, string> m;m["孫"]= "守真" ;
-	map<string, string>::iterator map_it=m.begin();
-	ostream_iterator<string>out(cout);
-	*out = map_it->first;
-	*out++ = map_it->second; cout << endl; 
-	map_it->second = "任真";
-	*out = map_it->first;
-	*out++ = map_it->second; cout << endl;
+	multiset<string> c ;
+	istream_iterator<string>in(cin),end;
+	ostream_iterator<string>out(cout, ","); 
+	copy(in, end, inserter(c, c.end()));
+	vector<string>v;
+	copy(in, end, inserter(v, v.end()));
+	copy(c.cbegin(), c.cend(), out); cout << endl;
+	//copy(v.begin(), v.end(), inserter(c, c.end()));//OK
+	//copy(v.begin(), v.end(), back_inserter(c));//Error	C2039	'push_back': is not a member of 'std::multiset<std::string,std::less<_Kty>,std::allocator<_Kty>>'
+	//copy(c.begin(), c.end(), inserter(v, v.end()));//OK
+	copy(c.begin(), c.end(), back_inserter(v));//OK，與前式同。因vector有push_back()也
+	copy(c.cbegin(), c.cend(), out);
+	cout << '\n' << "----------" << endl;
+	copy(v.cbegin(), v.cend(), out); cout << endl;
 }
 
 //int main(int argc, const char** argv)
