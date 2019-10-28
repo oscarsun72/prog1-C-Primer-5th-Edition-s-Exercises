@@ -7,7 +7,6 @@
 #include<iostream>
 #include<iterator>
 #include<vector>
-#include<algorithm>
 #include<map>
 using namespace std;
 int main() {
