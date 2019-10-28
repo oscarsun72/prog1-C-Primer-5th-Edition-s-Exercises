@@ -6,8 +6,7 @@
 
 #include<iostream>
 #include<vector>
-#include<set>
-#include"Sales_data.h"
+#include<iterator>
 using namespace std;
 int main() {
 	Sales_data s; vector<Sales_data>v;
@@ -21,6 +20,8 @@ int main() {
 	multiset<Sales_data, decltype(compareIsbn)*>
 		bookstore(v.cbegin(),v.cend(),compareIsbn);
 	
+	copy(v.cbegin(), v.cend(), back_inserter(bookstore));
+
 	typedef decltype(compareIsbn)* compIsbn;//頁249
 	multiset<Sales_data, compIsbn>
 		bookstore_typedef_decltype(v.cbegin(),v.cend(),compareIsbn);
