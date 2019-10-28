@@ -38,8 +38,16 @@ int main() {
 	
 	for (Sales_data s : bookstore_using)//以上5種（bookstore……bookstore_PF）全對了
 	{
-		print(cout, s); cout << endl;
+		print(cout, s); cout << endl; 
 	}
+	//練習11.19改用迭代器回傳
+	cout << "------------" << endl;
+	multiset<Sales_data, compISbn>::iterator bookstore_using_it{bookstore_using.begin()};
+	while (bookstore_using_it != bookstore_using.end())
+	{
+		print(cout, *bookstore_using_it++); cout << endl;
+	}
+	cout << endl;
 }
 
 //int main(int argc, const char** argv)
