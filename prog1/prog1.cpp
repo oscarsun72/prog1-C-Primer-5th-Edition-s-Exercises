@@ -11,24 +11,31 @@
 #include<map>
 using namespace std;
 int main() {
-	map<string, vector<string>> m;
+	map<string, vector<pair<string,string>>> m;
 	//test text:
 	//Wells Oscar Wells joy Sun Oscar Washington Smith Sun June Wells Steve Washington Jack Sun Judy
 	//multimap<string, vector<string>> m;
 	istream_iterator<string>in(cin), end;
-	string lastName;
+	string lastName,firstname;
 	while (in!=end)
 	{
 		lastName = *in;
-		m[lastName].push_back(*++in);
+		firstname=*++in;
+		m[lastName].push_back(make_pair(firstname, *++in));
 		++in;
 	}
 	ostream_iterator<string>out(cout,",");
 	for (auto a :m)
 	{
 		cout << a.first << ":";
-		copy(a.second.cbegin(), a.second.cend(), out);
+		for (pair<string,string> s : a.second)
+		{
+			*out++ = s.first;			
+			*out++ = s.second;
+			cout << "、";
+		}		
 		cout << endl;
+		cout <<"----------------"<< endl;
 	}
 }
 
