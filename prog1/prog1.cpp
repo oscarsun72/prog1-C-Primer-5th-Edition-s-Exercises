@@ -6,40 +6,42 @@
 
 #include<iostream>
 #include<vector>
-#include<iterator>
+//#include<utility>//pair雖定義在此標頭中，但卻不必include就能用，如copy演算法等亦然
 using namespace std;
+pair<string, int>return_pair(vector<pair<string, int>>::const_iterator iter) {
+	return {iter->first,iter->second};
+}
 int main() {
-	Sales_data s; vector<Sales_data>v;
-	while (read(cin, s))
-	{
-		v.push_back(s);
-	}
-	
-	// bookstore 可能會有數筆交易記錄有相同的ISBN
-// bookstore 中的元素會以ISBN排序
-	multiset<Sales_data, decltype(compareIsbn)*>
-		bookstore(v.cbegin(),v.cend(),compareIsbn);
-	
-	copy(v.cbegin(), v.cend(), back_inserter(bookstore));
-
-	typedef decltype(compareIsbn)* compIsbn;//頁249
-	multiset<Sales_data, compIsbn>
-		bookstore_typedef_decltype(v.cbegin(),v.cend(),compareIsbn);
-	
-	using compISbn=bool(*)(const Sales_data& ,const Sales_data&) ;//頁249
-	multiset<Sales_data, compISbn>
-		bookstore_using(v.cbegin(),v.cend(),compareIsbn);
-
-	typedef bool(*compISBn)(const Sales_data&, const Sales_data&) ;
-	multiset<Sales_data, compISBn>
-		bookstore_typedef(v.cbegin(),v.cend(),compareIsbn);
-		
-	multiset<Sales_data, bool(*)(const Sales_data&, const Sales_data&)>//頁249
-		bookstore_PF(v.cbegin(),v.cend(),compareIsbn);
-	
-	for (Sales_data s : bookstore_using)//以上5種（bookstore……bookstore_PF）全對了
-	{
-		print(cout, s); cout << endl;
+	vector<pair<string,int>>v;
+	vector<pair<string,int>>v1;
+	vector<pair<string,int>>v2;
+	vector<pair<string,int>>v3;
+	//istream_iterator<string>in(cin), end;
+	//while (in!=end)	{		
+	string w;int i;
+	vector<pair<string, int>>::const_iterator v1iter;
+	size_t vNo = 0;
+	while(cin>>w){
+		if (cin >> i) {
+			pair<string, int>pr(w, i);//v建構器初始化
+			v.push_back(pr);
+			pair<string, int>prLI = {w, i };//v1串列初始化（list　initialization）
+			v1.push_back(prLI);						
+			v1iter = v1.cbegin();//因為插入元素後原迭代器會失效，所以每次都要重取第一元素的迭代器
+			v2.push_back(return_pair(v1iter+vNo)); ++vNo;//v2最複雜,由函式傳回值來初始化
+			v3.push_back(make_pair(w, i));//v3此式最簡單而直觀！
+		}
+	}	
+	vNo=0;
+	vector<pair<string, int>> a[4] = { v,v1,v2,v3 };
+	for(vector<pair<string, int>> v:a){
+		cout << vNo++ << ":" << endl;
+		for (pair<string,int>p:v)
+		{
+			cout<< p.first; cout << ":"
+			<<p.second << endl;
+		}
+		cout << "---------" << endl;
 	}
 }
 
