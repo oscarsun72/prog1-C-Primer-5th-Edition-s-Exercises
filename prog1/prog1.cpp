@@ -12,10 +12,13 @@ int main() {
 	map<string, size_t> word_count; // empty map from string to size_t
 	string word;
 	while (cin >> word)
-	{
-		pair<map<string, size_t>::iterator, bool> inR = word_count.insert({ word, 1 });
-		if (!inR.second) ++inR.first->second;
-	}
+		++word_count.insert({ word, 0 }).first->second;//其實就是下面的濃縮
+	//while (cin >> word)
+	//{
+	//	pair<map<string, size_t>::iterator, bool> inR = word_count.insert({ word, 1 });
+	//	if (!inR.second) ++inR.first->second;
+	//}
+	//原來的下標（subscript）運算
 		//++word_count[word]; // fetch and increment the counter for word
 	for (const auto& w : word_count) // for each element in the map
 	// print the results
