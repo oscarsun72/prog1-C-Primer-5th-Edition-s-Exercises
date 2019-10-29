@@ -12,7 +12,7 @@ int main() {
 	map<string, size_t> word_count; // empty map from string to size_t
 	string word;
 	while (cin >> word)
-		++word_count.insert({ word, 0 }).first->second;//其實就是下面的濃縮
+		++word_count.insert({ word, 0 }).first->second;//其實就是下面（即練習11.20）的濃縮
 	//while (cin >> word)
 	//{
 	//	pair<map<string, size_t>::iterator, bool> inR = word_count.insert({ word, 1 });
