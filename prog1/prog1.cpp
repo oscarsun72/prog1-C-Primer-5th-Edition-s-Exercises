@@ -6,24 +6,29 @@
 
 #include<iostream>
 #include<map>
+#include<vector>
 using namespace std;
-int main() {
-	// count the number of times each word occurs in the input
-	map<string, size_t> word_count; // empty map from string to size_t
+int main() {	
+	map<string, vector<int>> m; 
 	string word;
-	while (cin >> word)
-		++word_count.insert({ word, 0 }).first->second;//其實就是下面（即練習11.20）的濃縮
-	//while (cin >> word)
-	//{
-	//	pair<map<string, size_t>::iterator, bool> inR = word_count.insert({ word, 1 });
-	//	if (!inR.second) ++inR.first->second;
-	//}
-	//原來的下標（subscript）運算
-		//++word_count[word]; // fetch and increment the counter for word
-	for (const auto& w : word_count) // for each element in the map
+	int i;
+	vector<int>v;
+	while (cin >> word)		
+	{
+		cin >> i;
+		v.push_back(i);
+		cin >> i;
+		pair<map<string, vector<int>>::iterator, bool> insResult =
+			m.insert(pair<string, vector<int>>(word, v));
+		if (!insResult.second) insResult.first->second.push_back(i);
+		//以上3行程式碼可濃縮為下一式
+		//(m.insert(pair<string,vector<int>>(word,v)).first->second).push_back(i);
+	}
+	for (const auto& w : m) // for each element in the map
 	// print the results
-		cout << w.first << " occurs " << w.second
-		<< ((w.second > 1) ? " times" : " time") << endl;
+		cout << w.first << " occurs " << w.second.back()
+		<< ((w.second.size() > 1) ? " times" : " time") << w.second.size()<<
+		endl;
 }
 
 //int main(int argc, const char** argv)
