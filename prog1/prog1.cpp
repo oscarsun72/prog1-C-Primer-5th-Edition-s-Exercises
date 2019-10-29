@@ -7,29 +7,30 @@
 #include<iostream>
 #include<map>
 #include<vector>
+#include<iterator>
 using namespace std;
-int main() {	
-	map<string, vector<int>> m; 
-	string word;
-	int i;
-	vector<int>v;
-	while (cin >> word)		
+int main() {
+	multimap<string, vector<string>> m;
+	//test text:
+	//Wells Oscar Wells joy Sun Oscar Washington Smith Sun June Wells Steve Washington Jack Sun Judy
+	//multimap<string, vector<string>> m;
+	istream_iterator<string>in(cin), end;
+	string lastName; vector<string>v;
+	while (in != end)
 	{
-		cin >> i;
-		v.push_back(i);
-		cin >> i;
-		pair<map<string, vector<int>>::iterator, bool> insResult =
-			m.insert(pair<string, vector<int>>(word, v));
-		if (!insResult.second) insResult.first->second.push_back(i);
-		//以上3行程式碼可濃縮為下一式
-		//(m.insert(pair<string,vector<int>>(word,v)).first->second).push_back(i);
+		lastName = *in;
+		m.insert(pair<string, vector<string>>(lastName, v))->second.push_back(*++in);
+		++in;
 	}
-	for (const auto& w : m) // for each element in the map
-	// print the results
-		cout << w.first << " occurs " << w.second.back()
-		<< ((w.second.size() > 1) ? " times" : " time") << w.second.size()<<
-		endl;
+	ostream_iterator<string>out(cout, ",");
+	for (auto a : m)
+	{
+		cout << a.first << ":";
+		copy(a.second.cbegin(), a.second.cend(), out);
+		cout << endl;
+	}
 }
+
 
 //int main(int argc, const char** argv)
 //{
