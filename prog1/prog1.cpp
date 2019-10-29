@@ -12,8 +12,7 @@ using namespace std;
 int main() {
 	multimap<string, vector<string>> m;
 	//test text:
-	//Wells Oscar Wells joy Sun Oscar Washington Smith Sun June Wells Steve Washington Jack Sun Judy
-	//multimap<string, vector<string>> m;
+	//Wells Oscar Wells joy Sun Oscar Washington Smith Sun June Wells Steve Washington Jack Sun Judy	
 	istream_iterator<string>in(cin), end;
 	string lastName; vector<string>v;
 	while (in != end)
