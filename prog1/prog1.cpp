@@ -5,49 +5,22 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<vector>
-#include<set>
-#include"Sales_data.h"
+#include<map>
 using namespace std;
 int main() {
-	Sales_data s; vector<Sales_data>v;
-	while (read(cin, s))
+	// count the number of times each word occurs in the input
+	map<string, size_t> word_count; // empty map from string to size_t
+	string word;
+	while (cin >> word)
 	{
-		v.push_back(s);
+		pair<map<string, size_t>::iterator, bool> inR = word_count.insert({ word, 1 });
+		if (!inR.second) ++inR.first->second;
 	}
-	
-	// bookstore 可能會有數筆交易記錄有相同的ISBN
-// bookstore 中的元素會以ISBN排序
-	multiset<Sales_data, decltype(compareIsbn)*>
-		bookstore(v.cbegin(),v.cend(),compareIsbn);
-	
-	typedef decltype(compareIsbn)* compIsbn;//頁249
-	multiset<Sales_data, compIsbn>
-		bookstore_typedef_decltype(v.cbegin(),v.cend(),compareIsbn);
-	
-	using compISbn=bool(*)(const Sales_data& ,const Sales_data&) ;//頁249
-	multiset<Sales_data, compISbn>
-		bookstore_using(v.cbegin(),v.cend(),compareIsbn);
-
-	typedef bool(*compISBn)(const Sales_data&, const Sales_data&) ;
-	multiset<Sales_data, compISBn>
-		bookstore_typedef(v.cbegin(),v.cend(),compareIsbn);
-		
-	multiset<Sales_data, bool(*)(const Sales_data&, const Sales_data&)>//頁249
-		bookstore_PF(v.cbegin(),v.cend(),compareIsbn);
-	
-	for (Sales_data s : bookstore_using)//以上5種（bookstore……bookstore_PF）全對了
-	{
-		print(cout, s); cout << endl; 
-	}
-	//練習11.19改用迭代器回傳
-	cout << "------------" << endl;
-	multiset<Sales_data, compISbn>::iterator bookstore_using_it{bookstore_using.begin()};
-	while (bookstore_using_it != bookstore_using.end())
-	{
-		print(cout, *bookstore_using_it++); cout << endl;
-	}
-	cout << endl;
+		//++word_count[word]; // fetch and increment the counter for word
+	for (const auto& w : word_count) // for each element in the map
+	// print the results
+		cout << w.first << " occurs " << w.second
+		<< ((w.second > 1) ? " times" : " time") << endl;
 }
 
 //int main(int argc, const char** argv)
