@@ -5,15 +5,40 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<iterator>
 #include<map>
 #include<vector>
 using namespace std;
 int main() {
-	vector<int>v{1,2};
-	map<string, vector<int>>m;//{ "營利事業所得稅",v },
+	vector<int>v{ 1,2 };
+	map<string, vector<int>>m;
 	m["孫守真"] = v;
+	istream_iterator<string>in(cin), end;
+	while (in != end)
+		m.insert(make_pair(*in++, v));
 	string s("守真");
 	map<string, vector<int>>::iterator it = m.find(s);
+	map<string, vector<int>>::iterator itL = m.lower_bound(s);
+	map<string, vector<int>>::iterator itU = m.upper_bound(s);
+	pair<map<string, vector<int>>::iterator, map<string, vector<int>>::iterator>
+		itE = m.equal_range(s);
+	if (itL == itE.first)
+		cout << "lower=first" << endl;
+	if (itU == itE.second)
+		cout << "upper=second" << endl;
+	if (itL == itU)
+		cout << "not found" << endl;
+	if (itE.first == itE.second)
+	{
+		cout << "not found" << endl;
+		cout << (itE.first)->first << endl;//可見可插入位置也如前循序容器的insert都是在前位插入要插入的元素
+		m.insert(itE.first, make_pair(s, v));
+	}
+	decltype(m.cbegin()) itM = m.cbegin();
+	while (itM != m.cend())
+	{
+		cout << itM++->first << endl;
+	}
 }
 
 
