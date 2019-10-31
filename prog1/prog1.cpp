@@ -6,28 +6,13 @@
 
 #include<iostream>
 #include<map>
-#include<vector>
-#include<iterator>
 using namespace std;
 int main() {
-	multimap<string, vector<string>> m;
-	//test text:
-	//Wells Oscar Wells joy Sun Oscar Washington Smith Sun June Wells Steve Washington Jack Sun Judy	
-	istream_iterator<string>in(cin), end;
-	string lastName; vector<string>v;
-	while (in != end)
-	{
-		lastName = *in;
-		m.insert(pair<string, vector<string>>(lastName, v))->second.push_back(*++in);
-		++in;
-	}
-	ostream_iterator<string>out(cout, ",");
-	for (auto a : m)
-	{
-		cout << a.first << ":";
-		copy(a.second.cbegin(), a.second.cend(), out);
-		cout << endl;
-	}
+	map<int,int> m;
+	cout << m.size() << endl;//=0
+	m[0] = 1;
+	cout << m.size() << endl;//=1
+	cout << m.begin()->first << ":" << m.begin()->second << endl;//=「0:1」
 }
 
 
