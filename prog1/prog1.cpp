@@ -5,14 +5,20 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<map>
+#include<vector>
 using namespace std;
 int main() {
-	map<int,int> m;
-	cout << m.size() << endl;//=0
-	m[0] = 1;
-	cout << m.size() << endl;//=1
-	cout << m.begin()->first << ":" << m.begin()->second << endl;//=「0:1」
+	vector<int> v;
+	cout << v.size() << endl;//=0
+	//v[0] = 1;//error :vector subscript out of range
+	try
+	{
+		v.at(0) = 1;
+	}
+	catch (const std::exception&)
+	{
+		cout << v.size() << endl;//=0
+	}
 }
 
 
