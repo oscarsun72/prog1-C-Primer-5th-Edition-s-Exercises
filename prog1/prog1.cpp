@@ -15,9 +15,10 @@ int main() {
 	{
 		v.at(0) = 1;
 	}
-	catch (const std::exception&)
+	catch (const std::exception& ex)
 	{
 		cout << v.size() << endl;//=0
+		cerr << ex.what() << endl;
 	}
 }
 
