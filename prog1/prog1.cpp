@@ -6,18 +6,14 @@
 
 #include<iostream>
 #include<map>
+#include<vector>
 using namespace std;
 int main() {
-	map<int, string>m;//下標（subscript）要用角括弧中逗號前的相容型別，下標回傳的型別則為逗號後的型別
-	cout << m.size() << endl;//=0
-	m[1.1] = "i";
-	cout << m.size() << endl;//=1
-	cout << m.begin()->first << ":" << m.begin()->second << endl;//=1:i
-	/*Warning	C4244	'argument': conversion from 'double' to 'int', possible loss of data*/
-	string s = m[1.3];
-	auto as = m[1.3];//type of as  is string
-	cout << m.size() << endl;//=1
-	cout << m.begin()->first << ":" << m.begin()->second << endl;//=1:i
+	vector<int>v{1,2};
+	map<string, vector<int>>m;//{ "營利事業所得稅",v },
+	m["孫守真"] = v;
+	string s("守真");
+	map<string, vector<int>>::iterator it = m.find(s);
 }
 
 
