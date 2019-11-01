@@ -7,7 +7,6 @@
 #include<iostream>
 #include<iterator>
 #include<map>
-#include<vector>
 using namespace std;
 int main() {
 	multimap<string, string>m;	
