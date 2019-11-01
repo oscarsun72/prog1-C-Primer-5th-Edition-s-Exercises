@@ -10,17 +10,19 @@
 #include<vector>
 using namespace std;
 int main() {
-	vector<int>v{ 1,2 };
-	map<string, vector<int>>m;
-	m["孫守真"] = v;
+	multimap<string, string>m;	
 	istream_iterator<string>in(cin), end;
+	string a;
 	while (in != end)
-		m.insert(make_pair(*in++, v));
-	string s("守真");
-	map<string, vector<int>>::iterator it = m.find(s);
-	map<string, vector<int>>::iterator itL = m.lower_bound(s);
-	map<string, vector<int>>::iterator itU = m.upper_bound(s);
-	pair<map<string, vector<int>>::iterator, map<string, vector<int>>::iterator>
+	{
+		a = *in;
+		m.insert(make_pair(a, *++in)); ++in;
+	}
+	string s("孫守真");
+	multimap<string, string>::iterator it = m.find(s);//此下三式用map也行，不必用multimap
+	multimap<string, string>::iterator itL = m.lower_bound(s);
+	multimap<string, string>::iterator itU = m.upper_bound(s);
+	pair<multimap<string, string>::iterator, multimap<string, string>::iterator>
 		itE = m.equal_range(s);
 	if (itL == itE.first)
 		cout << "lower=first" << endl;
@@ -31,13 +33,14 @@ int main() {
 	if (itE.first == itE.second)
 	{
 		cout << "not found" << endl;
-		cout << (itE.first)->first << endl;//可見可插入位置也如前循序容器的insert都是在前位插入要插入的元素
-		m.insert(itE.first, make_pair(s, v));
+		cout << (itE.first)->first << endl;//可見可插入位置也如前循序容器的insert都是在前位插入要插入的元素		
 	}
+	if (itL != itU&&it!=m.end()&& itE.first!=itE.second)
+		m.erase(s);
 	decltype(m.cbegin()) itM = m.cbegin();
 	while (itM != m.cend())
 	{
-		cout << itM++->first << endl;
+		cout << itM++->first<<":"<< itM->second << endl;
 	}
 }
 
