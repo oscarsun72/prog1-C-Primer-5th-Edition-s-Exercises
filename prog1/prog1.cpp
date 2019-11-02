@@ -6,7 +6,6 @@
 
 #include<iostream>
 #include<iterator>
-#include<map>
 #include<unordered_map>//唯二不同，須引用而已
 using namespace std;
 int main() {
