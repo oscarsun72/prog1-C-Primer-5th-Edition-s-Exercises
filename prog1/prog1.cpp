@@ -5,41 +5,32 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<fstream>
 #include<iterator>
 #include<map>
 using namespace std;
 int main() {
-	multimap<string, string>m;	
-	istream_iterator<string>in(cin), end;
-	string a;
-	while (in != end)
-	{
-		a = *in;
-		m.insert(make_pair(a, *++in)); ++in;
+	map<string, string>mReplace;
+	ifstream ifs("V:\\Programming\\C++\\OCRtxtCorrect1.txt");
+	ifstream ifsInput("V:\\Programming\\C++\\input1.txt");
+	istream_iterator<string>in(ifs), end;
+	string key, value;
+	while (in != end) {
+		key = *in; value = *++in;
+		mReplace.insert(make_pair(key, value)); ++in;
 	}
-	string s("孫守真");
-	multimap<string, string>::iterator it = m.find(s);//此下三式用map也行，不必用multimap
-	multimap<string, string>::iterator itL = m.lower_bound(s);
-	multimap<string, string>::iterator itU = m.upper_bound(s);
-	pair<multimap<string, string>::iterator, multimap<string, string>::iterator>
-		itE = m.equal_range(s);
-	if (itL == itE.first)
-		cout << "lower=first" << endl;
-	if (itU == itE.second)
-		cout << "upper=second" << endl;
-	if (itL == itU)
-		cout << "not found" << endl;
-	if (itE.first == itE.second)
+	istream_iterator<string>input(ifsInput), e;
+	map<string, string>::const_iterator mIt;
+	string ocr;
+	while (input != e)
 	{
-		cout << "not found" << endl;
-		cout << (itE.first)->first << endl;//可見可插入位置也如前循序容器的insert都是在前位插入要插入的元素		
-	}
-	if (itL != itU&&it!=m.end()&& itE.first!=itE.second)
-		m.erase(s);
-	decltype(m.cbegin()) itM = m.cbegin();
-	while (itM != m.cend())
-	{
-		cout << itM++->first<<":"<< itM->second << endl;
+		ocr = *input;
+		mIt = mReplace.find(ocr);
+		if (mIt != mReplace.cend())
+			cout << mIt->second << endl;
+		else
+			cout << ocr << endl;
+		++input;
 	}
 }
 
