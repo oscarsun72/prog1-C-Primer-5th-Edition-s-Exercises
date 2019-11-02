@@ -5,17 +5,34 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<fstream>
 #include<iterator>
-#include<unordered_map>//唯二不同，須引用而已
+#include<unordered_map>//唯3不同，須引用而已
 using namespace std;
 int main() {
-	unordered_map<string, size_t> word_count;//唯二不同，改型別而已
-	string word;
-	while (cin >> word)
-		++word_count[word];
-	for (const auto& w : word_count)
-		cout << w.first << " occurs " << w.second
-		<< ((w.second > 1) ? " times" : " time") << endl;
+	unordered_map<string, string>mReplace;//唯3不同
+	ifstream ifs("V:\\Programming\\C++\\OCRtxtCorrect1.txt");
+	ifstream ifsInput("V:\\Programming\\C++\\input1.txt");
+	istream_iterator<string>in(ifs), end;
+	string key, value;
+	while (in != end) {
+		key = *in; value = *++in;
+		mReplace.insert(make_pair(key, value)); ++in;
+	}
+	istream_iterator<string>input(ifsInput), e;
+	unordered_map<string, string>::const_iterator mIt;//唯3不同
+	string ocr;
+	while (input != e)
+	{
+		ocr = *input;
+		mIt = mReplace.find(ocr);
+		if (mIt != mReplace.cend())
+			cout << mIt->second << endl;
+		else
+			cout << ocr << endl;
+		++input;
+	}
+
 }
 
 
