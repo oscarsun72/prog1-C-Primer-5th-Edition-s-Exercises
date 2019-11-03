@@ -17,7 +17,11 @@ int main() {
 	string key, value;
 	while (in != end) {
 		key = *in; value = *++in;
-		mReplace.insert(make_pair(key, value)); ++in;
+		//mReplace.insert(make_pair(key, value)); ++in;
+		mReplace[key]= value; ++in;
+		/*下標（subscript）者，會改動已有key的value值，
+		而插入insert()者不會（即若鍵值已存在，則不會再插入!） 
+		第76集 41:00 46:20 https://youtu.be/uv7w5Vd1yDg */
 	}
 	istream_iterator<string>input(ifsInput), e;
 	unordered_map<string, string>::const_iterator mIt;//唯3不同
