@@ -15,6 +15,10 @@ int main() {
 		b2.push_back("about");
 	}
 	cout << b1.size() << endl;
+	const StrBlob cB1({ "a", "an", "the" });	
+	cout << b1.back() << endl;
+	cout << cB1.size() << endl;
+	cout << cB1.back() << endl;
 }
 
 

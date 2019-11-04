@@ -1,4 +1,4 @@
-#ifndef STRBLOB_H
+﻿#ifndef STRBLOB_H
 #define STRBLOB_H
 #include<string>
 #include<memory>
