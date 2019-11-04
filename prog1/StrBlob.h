@@ -17,7 +17,9 @@ public:
   void pop_back();//pop_back//只有宣告，沒有實作（定義）
   // element access
   string &front();
+  const string &front()const;
   string &back();
+  const string &back()const;
 
 private:
   shared_ptr<vector<string>> data;
