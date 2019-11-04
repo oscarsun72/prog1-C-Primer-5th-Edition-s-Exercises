@@ -5,38 +5,16 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<fstream>
-#include<iterator>
-#include<unordered_map>//唯3不同，須引用而已
+#include"StrBlob.h"
 using namespace std;
 int main() {
-	unordered_map<string, string>mReplace;//唯3不同
-	ifstream ifs("V:\\Programming\\C++\\OCRtxtCorrect1.txt");
-	ifstream ifsInput("V:\\Programming\\C++\\input1.txt");
-	istream_iterator<string>in(ifs), end;
-	string key, value;
-	while (in != end) {
-		key = *in; value = *++in;
-		//mReplace.insert(make_pair(key, value)); ++in;
-		mReplace[key]= value; ++in;
-		/*下標（subscript）者，會改動已有key的value值，
-		而插入insert()者不會（即若鍵值已存在，則不會再插入!） 
-		第76集 41:00 46:20 https://youtu.be/uv7w5Vd1yDg */
+	StrBlob b1;
+	{//可以直接加大括號來畫定範疇
+		StrBlob b2 = { "a", "an", "the" };
+		b1 = b2;
+		b2.push_back("about");
 	}
-	istream_iterator<string>input(ifsInput), e;
-	unordered_map<string, string>::const_iterator mIt;//唯3不同
-	string ocr;
-	while (input != e)
-	{
-		ocr = *input;
-		mIt = mReplace.find(ocr);
-		if (mIt != mReplace.cend())
-			cout << mIt->second << endl;
-		else
-			cout << ocr << endl;
-		++input;
-	}
-
+	cout << b1.size() << endl;
 }
 
 
