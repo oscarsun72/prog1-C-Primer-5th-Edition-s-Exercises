@@ -1,13 +1,13 @@
 #include "StrBlob.h"
-#include<memory>//make_shared ­n¥Î
-#include <stdexcept>//out_of_range ­n¥Î
+#include<memory>//make_shared è¦ç”¨
+#include <stdexcept>//out_of_range è¦ç”¨
 using namespace std;
 //StrBlob::StrBlob() : data(make_shared<vector<string>>()) {}
 StrBlob::StrBlob()
 {
 	data = make_shared<vector<string>>();
 }
-//StrBlob::StrBlob(initializer_list<string> il) : data(make_shared<vector<string>>(il)) {}//¥Îil¨Ó§@¬°make_shared¤Ş¼Æ¡A´N¤£¬OªÅªºvector¤F
+//StrBlob::StrBlob(initializer_list<string> il) : data(make_shared<vector<string>>(il)) {}//ç”¨ilä¾†ä½œç‚ºmake_sharedå¼•æ•¸ï¼Œå°±ä¸æ˜¯ç©ºçš„vectoräº†
 StrBlob::StrBlob(initializer_list<string> il)
 {
 	data = make_shared<vector<string>>(il);
@@ -17,7 +17,7 @@ void StrBlob::check(size_type i, const string& msg) const
 {
 	if (i>=data->size())
 	{
-		throw out_of_range(msg);//¶·¤Ş¥Îstdexcept¼ĞÀY #include <stdexcept>
+		throw out_of_range(msg);//é ˆå¼•ç”¨stdexceptæ¨™é ­ #include <stdexcept>
 	}
 }
 
