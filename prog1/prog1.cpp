@@ -7,20 +7,22 @@
 #include<iostream>
 #include<iterator>
 #include<vector>
+//#include<memory>
 //#include<new>
 using namespace std;
-vector<int>* returnDynamicallyAllocatedVec() {
-	return new(vector<int>);
+shared_ptr<vector<int>> returnDynamicallyAllocatedVec() {
+	vector<int> vi;
+	return make_shared<vector<int>>(vi);
 }
 
-void read_give_values_to_the_elements(vector<int>* vp){
+void read_give_values_to_the_elements(const shared_ptr<vector<int>>& vp){
 	istream_iterator<int>in(cin), end;
 	while (in!=end)
 	{
 		vp->push_back(*in++);
 	}
 }
-void print_the_values_that_were_read(vector<int>* vp) {
+void print_the_values_that_were_read(const shared_ptr<vector<int>>& vp) {
 	ostream_iterator<int>out(cout, ",");
 	for (int i :*vp)
 	{
@@ -29,11 +31,19 @@ void print_the_values_that_were_read(vector<int>* vp) {
 }
 
 int main() {
-	vector<int>* vp = returnDynamicallyAllocatedVec();
+	shared_ptr<vector<int>> vp = returnDynamicallyAllocatedVec();
 	read_give_values_to_the_elements(vp);
-	print_the_values_that_were_read(vp);
-	delete vp;
-	vp = nullptr;//這一行在此例中應是可有可無
+	print_the_values_that_were_read(vp);	
+	cout << vp.use_count() << endl;
+	if (vp.unique())
+	{
+		cout << vp.use_count() << endl;
+	}
+	//vp = nullptr;
+	//cout << vp.use_count() << endl;
+	vp.reset();//和vp = nullptr是一樣的
+	//A shared_ptr stops owning a resource when it's reassigned or reset. https://docs.microsoft.com/en-us/cpp/standard-library/shared-ptr-class?f1url=https%3A%2F%2Fmsdn.microsoft.com%2Fquery%2Fdev16.query%3FappId%3DDev16IDEF1%26l%3DEN-US%26k%3Dk(MEMORY%2Fstd%3A%3Ashared_ptr%3A%3Areset);k(std%3A%3Ashared_ptr%3A%3Areset);k(reset);k(DevLang-C%2B%2B);k(TargetOS-Windows)%26rd%3Dtrue%26f%3D255%26MSPPError%3D-2147217396&view=vs-2019
+	cout << vp.use_count() << endl;
 }
 
 
