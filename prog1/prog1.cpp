@@ -10,10 +10,12 @@
 //#include<memory>
 //#include<new>
 using namespace std;
+
 bool b() {
 	int* p = new int;
 	// ...
-	return p;
+	return p;//沒有delete，則成記憶體洩漏、浪費記憶體了；因為出此範疇，則new所配置的
+	//動態記憶體就無法被清除了。p是不會變成懸置指標（dangling pointer)，因為出此b函式範疇就自動銷毀（自動物件、區域變數）。
 }
 int main() {
 	if (b() == 0) cout << "p 沒有指向任何物件" << endl;
