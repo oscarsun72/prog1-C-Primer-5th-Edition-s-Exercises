@@ -2,7 +2,8 @@
     "files.associations": {
         "iosfwd": "cpp",
         "*.txt": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "vector": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

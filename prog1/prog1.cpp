@@ -5,20 +5,35 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include"StrBlob.h"
+#include<iterator>
+#include<vector>
+//#include<new>
 using namespace std;
-int main() {
-	StrBlob b1;
-	{//可以直接加大括號來畫定範疇
-		StrBlob b2 = { "a", "an", "the" };
-		b1 = b2;
-		b2.push_back("about");
+vector<int>* returnDynamicallyAllocatedVec() {
+	return new(vector<int>);
+}
+
+void read_give_values_to_the_elements(vector<int>* vp){
+	istream_iterator<int>in(cin), end;
+	while (in!=end)
+	{
+		vp->push_back(*in++);
 	}
-	cout << b1.size() << endl;
-	const StrBlob cB1({ "a", "an", "the" });	
-	cout << b1.back() << endl;
-	cout << cB1.size() << endl;
-	cout << cB1.back() << endl;
+}
+void print_the_values_that_were_read(vector<int>* vp) {
+	ostream_iterator<int>out(cout, ",");
+	for (int i :*vp)
+	{
+		*out++=i;
+	}
+}
+
+int main() {
+	vector<int>* vp = returnDynamicallyAllocatedVec();
+	read_give_values_to_the_elements(vp);
+	print_the_values_that_were_read(vp);
+	delete vp;
+	vp = nullptr;//這一行在此例中應是可有可無
 }
 
 
