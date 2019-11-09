@@ -7,15 +7,16 @@
 #include<iostream>
 using namespace std;
 
-bool b() {
-	int* p = new int;
-	// ...
-	return p;//沒有delete，則成記憶體洩漏、浪費記憶體了；因為出此範疇，則new所配置的
-	//動態記憶體就無法被清除了。p是不會變成懸置指標（dangling pointer)，因為出此b函式範疇就自動銷毀（自動物件、區域變數）。
-}
 int main() {
-	if (b() == 0) cout << "p 沒有指向任何物件" << endl;
-	else cout << b() << endl;
+	int* q = new int(42), * r = new int(100);
+	r = q;//因為r現在不再指向new出來的int(100)，這個int(100)沒有delete掉，就成了記憶體外洩
+	//int(42)現在則有二個指標指向它
+	auto q2 = make_shared<int>(42), r2 = make_shared<int>(100);
+	r2 = q2;//r2原來指向的動態配置的「<int>(100)」因為沒有指向它的智慧指標，就隨之銷毀了
+	//"<int>(42)"這個動態配置物件則會有兩個智慧指標指向它
+	//q2.use_count=2,r2.use_count=0---印出來卻是2！
+	cout << q2.use_count()<< endl;
+	cout <<r2.use_count() << endl;
 }
 
 
