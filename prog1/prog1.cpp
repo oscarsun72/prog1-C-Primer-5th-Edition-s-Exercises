@@ -5,10 +5,6 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<iterator>
-#include<vector>
-//#include<memory>
-//#include<new>
 using namespace std;
 
 bool b() {
