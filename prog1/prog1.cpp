@@ -7,16 +7,22 @@
 #include<iostream>
 using namespace std;
 
+
+auto p = new int(1);
+auto sp = make_shared<int>(1);
+void process(shared_ptr<int> ptr)
+{
+	//cout << sp.use_count() << endl;
+	//使用ptr
+} // ptr超疇出範疇，並被摧毁了
+
 int main() {
-	int* q = new int(42), * r = new int(100);
-	r = q;//因為r現在不再指向new出來的int(100)，這個int(100)沒有delete掉，就成了記憶體外洩
-	//int(42)現在則有二個指標指向它
-	auto q2 = make_shared<int>(42), r2 = make_shared<int>(100);
-	r2 = q2;//r2原來指向的動態配置的「<int>(100)」因為沒有指向它的智慧指標，就隨之銷毀了
-	//"<int>(42)"這個動態配置物件則會有兩個智慧指標指向它
-	//q2.use_count=2,r2.use_count=0---印出來卻是2！
-	cout << q2.use_count()<< endl;
-	cout <<r2.use_count() << endl;
+	//cout << sp.use_count() << endl;
+	process(sp);//legal，sp參考計數（reference count）會加1，proecss結束後減1。然而如練習12.10，若process內的區域智慧指標結束，要注意防止sp成為懸置指標（dangling pointer）
+	//cout << sp.use_count() << endl;
+	cout << *sp << endl;
+	process(shared_ptr<int>(p)); //和（a）類似。這裡是將p所指向的物件操縱
+	cout << *p << endl;//p所指之記憶體已被釋放，p成了懸置指標（dangling pointer)
 }
 
 
