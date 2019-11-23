@@ -7,22 +7,11 @@
 #include<iostream>
 using namespace std;
 
-
-auto p = new int(1);
-auto sp = make_shared<int>(1);
-void process(shared_ptr<int> ptr)
-{
-	//cout << sp.use_count() << endl;
-	//使用ptr
-} // ptr超疇出範疇，並被摧毁了
-
 int main() {
-	//cout << sp.use_count() << endl;
-	process(sp);//legal，sp參考計數（reference count）會加1，proecss結束後減1。然而如練習12.10，若process內的區域智慧指標結束，要注意防止sp成為懸置指標（dangling pointer）
-	//cout << sp.use_count() << endl;
-	cout << *sp << endl;
-	process(shared_ptr<int>(p)); //和（a）類似。這裡是將p所指向的物件操縱
-	cout << *p << endl;//p所指之記憶體已被釋放，p成了懸置指標（dangling pointer)
+	auto sp = make_shared<int>(1);
+	auto p = sp.get();
+	sp.reset(p);
+	//delete p;//此行當改用上式來釋放p
 }
 
 
