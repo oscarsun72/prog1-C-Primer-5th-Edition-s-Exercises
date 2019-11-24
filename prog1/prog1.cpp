@@ -23,7 +23,8 @@ void f(destination & d /* other parameters */)
 void f(destination& d /* other parameters */)
 {
 	connection c = connect(&d);
-	shared_ptr<connection> p(&c, end_connection);
+	//shared_ptr<connection> p(&c, end_connection);
+	shared_ptr<connection> p(&c, (c)->{disconnect(c); });
 	// use the connection
 	// when f exits, even if by an exception, the connection will be properly closed
 }
