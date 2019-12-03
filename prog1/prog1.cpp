@@ -8,8 +8,14 @@
 using namespace std;
 
 int main() {	
-	unique_ptr<int>up(new int(12));
-	unique_ptr<int>up1=up;
+	int ix = 1024, * pi = &ix, * pi2 = new int(2048);
+	typedef unique_ptr<int> IntP;
+	//IntP p0(ix);//(a) ：不能直接用int來初始化
+	IntP p2(pi2);//(c) ：要用new回傳的pointer
+	//IntP p1(pi);//(b)竟然連普通取址運算子回傳的指標也可以。只有在編撰時才行；若執行，仍會出錯！
+	//IntP p3(&ix);//(d)和(b)是一樣的：prog1.exe has triggered a breakpoint.occurred
+	//IntP p4(new int(2048));//(e)和(c)一樣
+	IntP p5(p2.get());//(f) 和(b)(d)是一樣的,因為p2.get()回傳的是一般指標，不會new回傳的指標：prog1.exe has triggered a breakpoint. occurred
 }
 
 
