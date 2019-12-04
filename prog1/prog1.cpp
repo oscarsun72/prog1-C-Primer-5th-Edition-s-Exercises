@@ -5,17 +5,75 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<vector>
 using namespace std;
+class StrBlob
+{
+public:
+	typedef std::vector<std::string>::size_type size_type; //以型別別名定義型別成員（type member）
+	StrBlob();                                             //建構器
+	StrBlob(std::initializer_list<std::string> il);        //帶了一個initializer_list<string>參數的建構器
+	size_type size() const { return data->size(); }        //常值的const成員函式
+	bool empty() const { return data->empty(); }           //常值的const成員函式
+	// add and remove elements
+	void push_back(const std::string& t) {
+		data -> push_back(t);
+	}
+	void pop_back();
+	// element access
+	std::string& front();
+	std::string& back();
+private:
+	std::shared_ptr<std::vector<std::string>> data;
+	// throws msg if data[i] isn't valid
+	void check(size_type i, const std::string& msg) const;
+};
 
+StrBlob::StrBlob() : data(make_shared<vector<string>>()) {}
+StrBlob::StrBlob(initializer_list<string> il) : data(make_shared<vector<string>>(il)) {} //用il來作為make_shared引數，就不是空的vector了
+
+void StrBlob::check(size_type i, const string& msg) const
+{
+	if (i >= data->size())
+		throw out_of_range(msg);
+}
+
+string& StrBlob::front()
+{
+	// if the vector is empty, check will throw
+	check(0, "front on empty StrBlob");
+	return data->front();
+}
+string& StrBlob::back()
+{
+	check(0, "back on empty StrBlob");
+	return data->back();
+}
+void StrBlob::pop_back()
+{
+	check(0, "pop_back on empty StrBlob");
+	data->pop_back();
+}
+
+// StrBlobPtr會在試著存取一個不存在的元素時擲出一個例外
+class StrBlobPtr
+{
+public:
+	StrBlobPtr() : curr(0) {}
+	StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}
+	std::string& deref() const;
+	StrBlobPtr& incr(); // 前缀版本(prefix version)
+private:
+	//如果檢查成功，check會回傳一個shared_ptr指向vector
+	std::shared_ptr<std::vector<std::string>>
+		check(std::size_t, const std::string&) const;
+	//儲存一個weak_ptr，這表示底層的vector可能被摧毁了
+	// store a weak_ptr, which means the underlying vector might be destroyed
+	std::weak_ptr<std::vector<std::string>> wptr;
+	std::size_t curr; //在陣列中的目前位置// current position within the array
+};
 int main() {	
-	int ix = 1024, * pi = &ix, * pi2 = new int(2048);
-	typedef unique_ptr<int> IntP;
-	//IntP p0(ix);//(a) ：不能直接用int來初始化
-	IntP p2(pi2);//(c) ：要用new回傳的pointer
-	//IntP p1(pi);//(b)竟然連普通取址運算子回傳的指標也可以。只有在編撰時才行；若執行，仍會出錯！
-	//IntP p3(&ix);//(d)和(b)是一樣的：prog1.exe has triggered a breakpoint.occurred
-	//IntP p4(new int(2048));//(e)和(c)一樣
-	IntP p5(p2.get());//(f) 和(b)(d)是一樣的,因為p2.get()回傳的是一般指標，不會new回傳的指標：prog1.exe has triggered a breakpoint. occurred
+	
 }
 
 
