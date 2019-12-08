@@ -9,6 +9,7 @@
 using namespace std;
 class StrBlob
 {
+	friend class StrBlobPtr;//頁269-270,279-280;不加「class」的就會當作函式編譯
 public:
 	typedef std::vector<std::string>::size_type size_type; //以型別別名定義型別成員（type member）
 	StrBlob();                                             //建構器
@@ -17,7 +18,7 @@ public:
 	bool empty() const { return data->empty(); }           //常值的const成員函式
 	// add and remove elements
 	void push_back(const std::string& t) {
-		data -> push_back(t);
+		data->push_back(t);
 	}
 	void pop_back();
 	// element access
@@ -72,8 +73,20 @@ private:
 	std::weak_ptr<std::vector<std::string>> wptr;
 	std::size_t curr; //在陣列中的目前位置// current position within the array
 };
-int main() {	
-	
+std::shared_ptr<std::vector<std::string>>
+	StrBlobPtr::check(std::size_t i, const std::string& msg)
+		const
+{
+	auto ret = wptr.lock(); // is the vector still around?
+	if (!ret)
+		throw std::runtime_error("unbound StrBlobPtr");
+	if (i >= ret->size())
+		throw std::out_of_range(msg);
+	return ret; // otherwise, return a shared_ptr to the vector
+}
+
+int main() {
+
 }
 
 
