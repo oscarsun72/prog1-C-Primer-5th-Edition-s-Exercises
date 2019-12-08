@@ -7,6 +7,7 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+//class StrBlobPtr;//可以重複宣告，卻不能重複定義；若無此行，則StrBlob中成員函式用 到StrBlobPtr都會在編譯時期出錯「use of undefined type 'StrBlobPtr'」
 class StrBlob
 {
 	friend class StrBlobPtr;//頁269-270,279-280;不加「class」的就會當作函式編譯
@@ -24,6 +25,11 @@ public:
 	// element access
 	std::string& front();
 	std::string& back();
+
+	// return StrBlobPtr to the first and one past the last elements
+	StrBlobPtr begin();
+	StrBlobPtr end();
+
 private:
 	std::shared_ptr<std::vector<std::string>> data;
 	// throws msg if data[i] isn't valid
@@ -50,6 +56,7 @@ string& StrBlob::back()
 	check(0, "back on empty StrBlob");
 	return data->back();
 }
+
 void StrBlob::pop_back()
 {
 	check(0, "pop_back on empty StrBlob");
@@ -84,6 +91,32 @@ std::shared_ptr<std::vector<std::string>>
 		throw std::out_of_range(msg);
 	return ret; // otherwise, return a shared_ptr to the vector
 }
+
+std::string& StrBlobPtr::deref() const
+{
+	auto p = check(curr, "dereference past end");
+	return (*p)[curr]; // (*p) is the vector to which this object points
+}
+
+// prefix: return a reference to the incremented object
+StrBlobPtr& StrBlobPtr::incr()
+{
+	// if curr already points past the end of the container, can't increment it
+	check(curr, "increment past end of StrBlobPtr");
+	++curr; // advance the current state
+	return *this;
+}
+
+StrBlobPtr StrBlob::begin() {
+	return StrBlobPtr(*this); 
+}
+
+StrBlobPtr StrBlob::end()
+{
+	auto ret = StrBlobPtr(*this, data->size());
+	return ret;
+}
+
 
 int main() {
 
