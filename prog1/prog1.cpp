@@ -10,30 +10,30 @@
 //#include<memory>
 //#include<new>
 using namespace std;
+vector<int> vi{2,3};//由此測試發現make_shared函式是以傳值的方式來傳遞引數的
 shared_ptr<vector<int>> returnDynamicallyAllocatedVec() {
-	vector<int> vi;
-	return make_shared<vector<int>>(vi);
+	return make_shared<vector<int>>(vi);//因為make_shared引數是以傳值的方式傳遞，故vi只是拷貝副本給shared_ptr用，對shared_ptr的操作，並不會影響原來的vi
 }
 
-void read_give_values_to_the_elements(const shared_ptr<vector<int>>& vp){
+void read_give_values_to_the_elements(const shared_ptr<vector<int>>& vp) {
 	istream_iterator<int>in(cin), end;
-	while (in!=end)
+	while (in != end)
 	{
 		vp->push_back(*in++);
 	}
 }
 void print_the_values_that_were_read(const shared_ptr<vector<int>>& vp) {
 	ostream_iterator<int>out(cout, ",");
-	for (int i :*vp)
+	for (int i : *vp)
 	{
-		*out++=i;
+		*out++ = i;
 	}
 }
 
 int main() {
 	shared_ptr<vector<int>> vp = returnDynamicallyAllocatedVec();
 	read_give_values_to_the_elements(vp);
-	print_the_values_that_were_read(vp);	
+	print_the_values_that_were_read(vp);
 	cout << vp.use_count() << endl;
 	if (vp.unique())
 	{
