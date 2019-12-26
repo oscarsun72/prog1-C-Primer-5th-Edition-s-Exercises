@@ -6,16 +6,36 @@
 
 #include<iostream>
 using namespace std;
-
-bool b() {
+//int* p;
+//bool b() {
+//	p = new int;
+//	//int* p = new int;
+//	// ...	
+//	return p;//沒有delete，則成記憶體耗漏、記憶體洩漏、浪費記憶體了；因為出此範疇，則new所配置的
+//	//動態記憶體就無法被清除了。p是不會變成懸置指標（dangling pointer)，因為出此b函式範疇就自動銷毀（自動物件、區域變數）。
+//	//return是用傳值的方式（即拷貝），回傳的型別也與p型別不合，但有隱含轉型的關係存在
+//	//然而沒有delete，尤其在此例，既然要回傳指標p，就不能delete p；應該是將local p的回傳給另一個指標，以對p原所指向的動態配置的物件，可以有後續操作，包括將其delete
+//	//否則，就是將p已成公用物件，而非區域物件
+//}
+//以上是以公用物件來改寫p
+//以下則是另用一個指標來接管p原指向的動態配置的物件（dynamically allocated object）
+int* b() {
 	int* p = new int;
-	// ...
-	return p;//沒有delete，則成記憶體洩漏、浪費記憶體了；因為出此範疇，則new所配置的
-	//動態記憶體就無法被清除了。p是不會變成懸置指標（dangling pointer)，因為出此b函式範疇就自動銷毀（自動物件、區域變數）。
+	//int* p = new int;
+	// ...	
+	return p;//沒有delete，則成記憶體耗漏、記憶體洩漏、浪費記憶體了；因為出此範疇，則new所配置的
 }
 int main() {
-	if (b() == 0) cout << "p 沒有指向任何物件" << endl;
-	else cout << b() << endl;
+	int* q = b();
+	if (q == 0) cout << "p 沒有指向任何物件" << endl;
+	else {
+		cout << q << endl;
+		cout << *q << endl;
+	}
+	//if (b() == 0) cout << "p 沒有指向任何物件" << endl;
+	//else cout << b() << endl;
+	////delete p;
+	delete q;
 }
 
 
