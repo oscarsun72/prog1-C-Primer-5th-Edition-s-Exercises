@@ -33,7 +33,7 @@ int main() {
 	read_give_values_to_the_elements(vp);
 	print_the_values_that_were_read(vp);
 	delete vp;
-	vp = nullptr;//這一行在此例中應是可有可無
+	vp = nullptr;//這一行在此例中應是可有可無。因為應用程式馬上就結束了。自然也會釋放它的所有記憶體資源；但若沒有如此，就必須有此行，這樣vp才不會淪為懸置指標（dangling pointer)
 }
 
 
