@@ -9,12 +9,14 @@ using namespace std;
 
 int main() {
 	int* q = new int(42), * r = new int(100);
-	r = q;//因為r現在不再指向new出來的int(100)，這個int(100)沒有delete掉，就成了記憶體外洩
-	//int(42)現在則有二個指標指向它
+	r = q;//因為r現在不再指向new出來的int(100)，這個int(100)沒有delete掉，就成了記憶體耗漏、記憶體外洩
+	//int(42)現在則有二個指標指向它，這些指標就有淪為懸置指標（dangling pointer)的危險
 	auto q2 = make_shared<int>(42), r2 = make_shared<int>(100);
 	r2 = q2;//r2原來指向的動態配置的「<int>(100)」因為沒有指向它的智慧指標，就隨之銷毀了
-	//"<int>(42)"這個動態配置物件則會有兩個智慧指標指向它
-	//q2.use_count=2,r2.use_count=0---印出來卻是2！
+	//「<int>(42)」這個動態配置物件則會有兩個智慧指標指向它
+	//q2.use_count=2,r2.use_count=0---印出來卻是2！因為r2現在等於q2了。r2.use_count=2是表示除了r2以外，還有q2也指向同一個動態配置物件
+	//因此，所謂的參考計數（reference count），應當時屬於物件的屬性，而不是智慧指標的！
+	//一個動態配置的物件有多少參考計數，就表示它有多少智慧指標指著它。英文版好像也弄錯了
 	cout << q2.use_count()<< endl;
 	cout <<r2.use_count() << endl;
 }
