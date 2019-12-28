@@ -10,7 +10,7 @@ void test(int* q)
 	{ //新的區塊
 	//這是未定義的：因為兩個各自定義的shared_ptr卻指向相同的記憶體位址
 		shared_ptr<int>r(q);
-		cout << r.use_count() << endl;
+		cout << r.use_count() << endl;//此時r的參考計數是1，雖然r、q、p都指向了相同的動態物件
 	}// 當區塊結東，「 shared_ptr<int>(q)」（用q來初始化創建的shared_ptr<int>會被摧毁，當它摧毀時，因為它是獨立於p的，所以參考計數是1，摧毀後成了0，所以，會調用delete來刪除它所指向的物件，這個物件也是q所指向的，所以q指向的記憶體位址就會被釋放
 	// block ends, q is destroyed, and the memory to which q points is freed
 int main() {	
