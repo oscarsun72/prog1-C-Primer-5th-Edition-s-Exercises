@@ -6,29 +6,20 @@
 
 #include<iostream>
 using namespace std;
-
-shared_ptr<int>pp(new int(3));
-void process()
-{
-	int* r = new int(10);
-	shared_ptr<int> ptr(r);//此時「10」這個動態物件有 普通指標r、智慧指標ptr兩個指標指向它
-	int* q = new int(2);
-	cout << "*ptr=" << *ptr << endl;
-	cout << "ptr計數" << ptr.use_count() << endl;
-	cout << "pp計數" << pp.use_count() << endl;
-	ptr.reset(q);//此時普通指標r指向的「10」會被智慧指標ptr摧毀，r就淪為懸置指標（dangling pointer)，一個活死人（活屍）
-	if (q == nullptr)//q仍指向「2」，不會是空指標
-		cout << "yes:q == nullptr" << endl;
-	cout << "*ptr=" << *ptr << endl;
-	cout << "ptr計數" << ptr.use_count() << endl;
-	cout << "*q=" <<*q << endl;
-	r = nullptr;//這樣r就不再是懸置指標了，而是一個空指標	
-}
-
+void test(int* q)
+	{ //新的區塊
+	//這是未定義的：因為兩個各自定義的shared_ptr卻指向相同的記憶體位址
+		shared_ptr<int>r(q);
+		cout << r.use_count() << endl;
+	}// 當區塊結東，「 shared_ptr<int>(q)」（用q來初始化創建的shared_ptr<int>會被摧毁，當它摧毀時，因為它是獨立於p的，所以參考計數是1，摧毀後成了0，所以，會調用delete來刪除它所指向的物件，這個物件也是q所指向的，所以q指向的記憶體位址就會被釋放
+	// block ends, q is destroyed, and the memory to which q points is freed
 int main() {	
-	process();
-	cout << "*pp="<<*pp << endl;
-	cout << "pp計數="<<pp.use_count() << endl;
+	shared_ptr<int> p(new int(42)); // 此時p所指的動態物件其參考計數是 1
+	int* q = p.get(); //將q作為儲存p.get()回傳值的變數是ok的，但決定不要在可能刪除q所指物件的情境下用到這個q（don't use q in any way that might delete its pointer）
+	test(q);
+	int foo = *p; //這是未定義的；因為p所指的記憶體已被區塊中的shared_ptr<int>釋放了
+	//此例當即為 p與q與shared_ptr<int>三者共享了int(42)這個記憶體資源
+	//foo到底是什么意思？ https://www.zhihu.com/question/34512213
 }
 
 
