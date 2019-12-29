@@ -10,8 +10,13 @@ using namespace std;
 int main() {
 	auto sp = make_shared<int>(1);
 	auto p = sp.get();
-	sp.reset(p);
-	//delete p;//此行當改用上式來釋放p
+	//sp.reset(p);//這也會出錯！大概是不能用sp本身get出來的普通指標來作reset引數；
+	//或reset引數的指標必不能與sp指向同一個記憶體位址？非也！
+	//因「如果p是指向其物件的唯一一個shared_ptr，reset會摧毀其物件。」在此例reset會摧毀sp
+	//所指之物件，故在測試中sp與p在reset後同時失效－－成了懸置指標，故後續執行會出錯
+	//delete p;//會使用sp成了懸置指標，執行時也會出錯。此行當改用下式來釋放p
+	sp = nullptr;//此時p成了懸置指標
+	p = nullptr;//此時p成了空指標
 }
 
 

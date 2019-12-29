@@ -3,7 +3,8 @@
         "iosfwd": "cpp",
         "*.txt": "cpp",
         "xstring": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "memory": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
