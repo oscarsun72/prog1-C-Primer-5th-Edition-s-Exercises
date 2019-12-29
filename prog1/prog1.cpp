@@ -16,7 +16,7 @@ void process(shared_ptr<int> ptr)
 int main() {
 	shared_ptr<int> p(new int(42));
 	cout << "p.use_count=" << p.use_count() << endl;
-	process(shared_ptr<int>(p));
+	process(shared_ptr<int>(p));//可以，但不需要。「process(shared_ptr<int>(p));」改成「process(p);」即可，因為p在呼叫process時已是一個shared_ptr了
 	//process(p);//ok
 	cout << "p.use_count="<<p.use_count() << endl;
 }
