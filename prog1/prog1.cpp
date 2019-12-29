@@ -16,9 +16,9 @@ void process(shared_ptr<int> ptr)
 int main() {
 	shared_ptr<int> p(new int(42));
 	cout << "p.use_count=" << p.use_count() << endl;
-	process(shared_ptr<int>(p));//可以，但不需要。「process(shared_ptr<int>(p));」改成「process(p);」即可，因為p在呼叫process時已是一個shared_ptr了
-	//process(p);//ok
-	cout << "p.use_count="<<p.use_count() << endl;
+	process(shared_ptr<int>(p.get()));
+	//process執行完成後，p會變成懸置指標!
+	//cout << "p.use_count="<<p.use_count() << endl;//對懸置指標做任何事情，都是錯誤;連對它指定assign為nullptr也會出錯
 }
 
 
