@@ -15,12 +15,14 @@ void f(destination& d /* other parameters */)
 {
 	connection c = connect(&d);
 	//shared_ptr<connection> p(&c, end_connection);
-	shared_ptr<connection> p(&c, [c]{disconnect(c); });
+	//改寫第一個練習，這次使用lambda ( § 10.3.2，頁388)來取代end_connection函式。
+	shared_ptr<connection> p(&c, [](connection* c){disconnect(*c); });
 	// use the connection
 	// when f exits, even if by an exception, the connection will be properly closed
 }
 int main() {
-	destination
+	destination d;
+	f(d);
 }
 
 
