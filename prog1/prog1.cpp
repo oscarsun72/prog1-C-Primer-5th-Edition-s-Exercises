@@ -6,26 +6,33 @@
 
 #include<iostream>
 using namespace std;
-struct destination;	// represents what we are connecting to
-struct connection;           // information needed to use the connection
-connection connect(destination*); // open the connection
-void disconnect(connection);       // close the given connection
-int main() {	
-}
-void end_connection(connection* p) { disconnect(*p); }
-void f(destination & d /* other parameters */)
-	{
-		// get a connection; must remember to close it when done
-		connection c = connect(&d);
-		// use the connection
-		// if we forget to call disconnect before exiting f, there will be no way to close c
-	}
+//寫出一個你自己版本的函式，用shared_ptr來管理connection。
+struct destination {};	// represents what we are connecting to
+struct connection {};           // information needed to use the connection
+connection connect(destination*) { connection c; return c; } // open the connection
+void disconnect(connection) { ; }      // close the given connection
+//void end_connection(connection* p) { disconnect(*p); }//課本用普通指標
+void end_connection(shared_ptr<connection> p) { disconnect(*p.get()); }//我們用智慧指標
+//void f(destination & d /* other parameters */)
+//	{
+//		// get a connection; must remember to close it when done
+//		connection c = connect(&d);
+//		// use the connection
+//		// if we forget to call disconnect before exiting f, there will be no way to close c
+//	}
 void f(destination& d /* other parameters */)
 {
 	connection c = connect(&d);
 	shared_ptr<connection> p(&c, end_connection);
+	//auto cp = &c;
+	//connection* cp = &c;
+	//shared_ptr<connection> p(cp, end_connection);
 	// use the connection
 	// when f exits, even if by an exception, the connection will be properly closed
+}
+int main() {
+	destination d;
+	f(d);
 }
 
 
