@@ -6,13 +6,13 @@
 
 #include<iostream>
 using namespace std;
-//寫出一個你自己版本的函式，用shared_ptr來管理connection。
 struct destination {};	// represents what we are connecting to
 struct connection {};           // information needed to use the connection
 connection connect(destination*) { connection c; return c; } // open the connection
 void disconnect(connection) { ; }      // close the given connection
+//寫出一個你自己版本的函式，用shared_ptr來管理connection。
 //void end_connection(connection* p) { disconnect(*p); }//課本用普通指標
-void end_connection(shared_ptr<connection> p) { disconnect(*p.get()); }//我們用智慧指標
+void end_connection(shared_ptr<connection>& p) { disconnect(*p.get()); }//我們用智慧指標
 //void f(destination & d /* other parameters */)
 //	{
 //		// get a connection; must remember to close it when done
@@ -23,10 +23,8 @@ void end_connection(shared_ptr<connection> p) { disconnect(*p.get()); }//我們�
 void f(destination& d /* other parameters */)
 {
 	connection c = connect(&d);
-	shared_ptr<connection> p(&c, end_connection);
-	//auto cp = &c;
-	//connection* cp = &c;
-	//shared_ptr<connection> p(cp, end_connection);
+	shared_ptr<connection> p(&c);
+	end_connection(p);
 	// use the connection
 	// when f exits, even if by an exception, the connection will be properly closed
 }
