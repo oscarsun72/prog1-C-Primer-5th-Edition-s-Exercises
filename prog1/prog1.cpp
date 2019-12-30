@@ -11,11 +11,20 @@ int main() {
 	int ix = 1024, * pi = &ix, * pi2 = new int(2048);
 	typedef unique_ptr<int> IntP;
 	//IntP p0(ix);//(a) ：不能直接用int來初始化
-	IntP p2(pi2);//(c) ：要用new回傳的pointer
-	//IntP p1(pi);//(b)竟然連普通取址運算子回傳的指標也可以。只有在編撰時才行；若執行，仍會出錯！
+	IntP p2(pi2);//(c) ：要用new回傳的pointer;因為預設是用delete來清除記憶體的，而delete與new須搭配用
+	//(b)竟然連普通取址運算子回傳的指標也可以。只有在編撰時才行；若執行，仍會出錯！
+	//因為智慧指標（不管是shared_ptr或unique_ptr)預設是用delete來清除記憶體資源，而delete是與new搭配的，故
+	//若沒有指定刪除器（deleter）來取代delete運算，那麼就一定要時new出來的動態配置的物件才能給
+	//智慧指標初始化（作為它的初始器）
+	//IntP p1(pi);
+	
 	//IntP p3(&ix);//(d)和(b)是一樣的：prog1.exe has triggered a breakpoint.occurred
 	//IntP p4(new int(2048));//(e)和(c)一樣
-	IntP p5(p2.get());//(f) 和(b)(d)是一樣的,因為p2.get()回傳的是一般指標，不會new回傳的指標：prog1.exe has triggered a breakpoint. occurred
+	//(f)這個錯應該是在於p5和p2各有其自己的參考計數(因其彼此不是互相拷貝、指定出來的，而是各自定義出來的物件），當其一個摧毀時，會使另一個成了懸置指標
+	//因此，在p5銷毀前，須將p2對「new int(2048)」的獨佔權釋出、讓渡給p5,使它真正成了unique(獨一無二、獨佔的）才行
+	IntP p5(p2.get());//(f)
+	p2.release();//釋出獨佔權，讓渡給p5
+	
 }
 
 
