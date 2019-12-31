@@ -63,22 +63,24 @@ void StrBlob::pop_back()
 	data->pop_back();
 }
 
-// StrBlobPtr會在試著存取一個不存在的元素時擲出一個例外
+// 當企圖存取一個不存在的vector元素時， StrBlobPtr就會丟出一個例外：
 class StrBlobPtr
 {
 public:
-	StrBlobPtr() : curr(0) {}
-	StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}
+	StrBlobPtr() : curr(0) {}//第1個建構器（也是預設建構器（default　constructor）——沒有引數）
+	StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}//第2個建構器
 	std::string& deref() const;
 	StrBlobPtr& incr(); // 前缀版本(prefix version)
 private:
 	//如果檢查成功，check會回傳一個shared_ptr指向vector
 	std::shared_ptr<std::vector<std::string>>
 		check(std::size_t, const std::string&) const;
-	//儲存一個weak_ptr，這表示底層的vector可能被摧毁了
+	// wptr儲存一個weak_ptr，利用它來作為一個底層vector可能已摧毁的指示
+	//（指標；這個智慧指標不是用來管控其所指物的生死，而是用來檢查其所指物件是否還存在）
 	// store a weak_ptr, which means the underlying vector might be destroyed
 	std::weak_ptr<std::vector<std::string>> wptr;
-	std::size_t curr; //在陣列中的目前位置// current position within the array
+	std::size_t curr; // curr是用來指示vector中目前元素的位置
+					  // current position within the array——應是英文版筆誤！
 };
 std::shared_ptr<std::vector<std::string>>
 	StrBlobPtr::check(std::size_t i, const std::string& msg)
