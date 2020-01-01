@@ -7,12 +7,13 @@
 #include<iostream>
 #include<vector>
 #include"StrBlob.h"
-#include"StrBlobPtr.h"
 using namespace std;
 
 int main() {
 	StrBlob stb;
 	StrBlob stbv{"a","b"};
+	StrBlobPtr srbp(stbv);//第85集 3:53:00 臉書第428集
+	cout << srbp.incr().deref() << endl;
 
 }
 

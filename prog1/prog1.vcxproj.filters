@@ -21,9 +21,6 @@
     <ClCompile Include="StrBlob.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="StrBlobPtr.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StrBlob.h">

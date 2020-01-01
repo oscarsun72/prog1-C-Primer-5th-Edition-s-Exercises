@@ -32,6 +32,7 @@ private:
 	void check(size_type i, const std::string& msg) const;
 };
 //伙伴類別似乎是要放在同一個標頭檔中！！否則編譯（建置）時會出錯。 https://docs.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2027?f1url=https%3A%2F%2Fmsdn.microsoft.com%2Fquery%2Fdev16.query%3FappId%3DDev16IDEF1%26l%3DEN-US%26k%3Dk(C2027)%26rd%3Dtrue%26f%3D255%26MSPPError%3D-2147217396&view=vs-2019
+//伙伴類別（companion class，這裡是companion pointer class）是否就要放在同一個標頭檔中呢？！否則就會出錯
 class StrBlobPtr
 {
 	friend class StrBlob;
