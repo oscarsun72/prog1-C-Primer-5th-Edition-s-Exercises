@@ -35,7 +35,7 @@ private:
 //伙伴類別（companion class，這裡是companion pointer class）是否就要放在同一個標頭檔中呢？！否則就會出錯
 class StrBlobPtr
 {
-	friend class StrBlob;
+	//friend class StrBlob;
 public:
 	StrBlobPtr() : curr(0) {}//第1個建構器（也是預設建構器（default　constructor）——沒有引數）
 	StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}//第2個建構器

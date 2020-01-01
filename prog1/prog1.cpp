@@ -12,9 +12,10 @@ using namespace std;
 int main() {
 	StrBlob stb;
 	StrBlob stbv{"a","b"};
+	StrBlob stbv4{"a","b","c","d"};
 	StrBlobPtr srbp(stbv);//第85集 3:53:00 臉書第428集
 	cout << srbp.incr().deref() << endl;
-
+	cout << stbv4.begin().deref() << endl;
 }
 
 

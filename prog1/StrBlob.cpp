@@ -26,20 +26,30 @@ string& StrBlob::back()
 	return data->back();
 }
 
-void StrBlob::pop_back()
+StrBlobPtr StrBlob::begin()
 {
-	check(0, "pop_back on empty StrBlob");
-	data->pop_back();
-}
-StrBlobPtr StrBlob::begin() {
 	return StrBlobPtr(*this);
 }
 
 StrBlobPtr StrBlob::end()
 {
-	auto ret = StrBlobPtr(*this, data->size());
-	return ret;
+	return StrBlobPtr(*this,this->size());
 }
+//StrBlobPtr StrBlob::begin() {
+//	return StrBlobPtr(*this);
+//}
+//
+//StrBlobPtr StrBlob::end()
+//{
+//	auto ret = StrBlobPtr(*this, data->size());
+//	return ret;
+//}
+void StrBlob::pop_back()
+{
+	check(0, "pop_back on empty StrBlob");
+	data->pop_back();
+}
+
 
 // StrBlobPtr的成員函式check會傳回一個shared_ptr的智慧指標，這個指標指向的是元素型別為string的vector物件2：55：10
 std::shared_ptr<std::vector<std::string>>
