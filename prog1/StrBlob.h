@@ -1,8 +1,10 @@
-﻿#ifndef STRBLOB_H
+﻿//#pragma once
+#ifndef STRBLOB_H
 #define STRBLOB_H
 #include<string>
 #include<vector>
 #include<memory>
+
 //class StrBlobPtr;//可以重複宣告，卻不能重複定義；若無此行，則StrBlob中成員函式用 到StrBlobPtr都會在編譯時期出錯「use of undefined type 'StrBlobPtr'」
 class StrBlob
 {
@@ -35,12 +37,14 @@ private:
 //伙伴類別（companion class，這裡是companion pointer class）是否就要放在同一個標頭檔中呢？！否則就會出錯
 class StrBlobPtr
 {
-	//friend class StrBlob;
+	friend class StrBlob;
 public:
 	StrBlobPtr() : curr(0) {}//第1個建構器（也是預設建構器（default　constructor）——沒有引數）
 	StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}//第2個建構器
 	std::string& deref() const;
 	StrBlobPtr& incr(); // 前缀版本(prefix version)
+	StrBlobPtr& decr(); // 前缀版本(prefix version)
+	bool isEnd();//用來判斷已到末尾元素
 private:
 	//如果檢查成功，check會回傳一個shared_ptr指向vector
 	std::shared_ptr<std::vector<std::string>>
@@ -53,4 +57,5 @@ private:
 					  // current position within the array——應是英文版筆誤！
 
 };
+void readFromFile();
 #endif // !STRBLOB_H

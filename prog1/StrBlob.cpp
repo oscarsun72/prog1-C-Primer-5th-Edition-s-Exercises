@@ -2,8 +2,9 @@
 #include<string>
 #include<vector>
 #include<memory>
-#include<exception>
 #include <stdexcept>
+#include<fstream>
+#include<iostream>
 using namespace std;
 StrBlob::StrBlob() : data(make_shared<vector<string>>()) {}
 StrBlob::StrBlob(initializer_list<string> il) : data(make_shared<vector<string>>(il)) {} //用il來作為make_shared引數，就不是空的vector了
@@ -60,6 +61,8 @@ StrBlobPtr::check(std::size_t i, const std::string& msg) const
 		throw std::runtime_error("unbound StrBlobPtr");//要用「runtime_error」要記得「#include <stdexcept>」。「"unbound StrBlobPtr"」表示調用這個check的StrBlobPtr型別物件（它是一個指標型別）並沒有指向任何物件（在這裡是vector裡的元素）——沒有和任何物件繫結（bind）在一塊；而StrBlob的資料成員、型別為shared_ptr的data，指向的則是那個vector
 	if (i >= ret->size()) 
 		throw std::out_of_range(msg);
+	if(i<0)
+		throw std::out_of_range(msg);
 	return ret; // 只要通過了以上兩個if條件式的檢驗，就可以放心回傳那個由wptr調用lock成員函式回傳的 shared_ptr,這個shared_ptr和wptr是指向同一個的vector//要用「out_of_range」也要記得「#include <stdexcept>」。「ret」應即「return」的縮寫
 }
 //原課文（中、英文版如下）
@@ -102,4 +105,33 @@ StrBlobPtr& StrBlobPtr::incr()
 	return *this;
 }
 
+StrBlobPtr& StrBlobPtr::decr()
+{
+	auto p = check(curr-1, "遞減過頭了！");
+	--curr;	//遞減索引值
+	return *this;
+}
 
+bool StrBlobPtr::isEnd()
+{
+	auto p = wptr.lock();
+	if (p)
+	{
+		if (this->curr == p->size())
+			return true;
+	}
+	return false;
+}
+
+void readFromFile(string fFullName, StrBlob & stb) {
+	ifstream f(fFullName);
+	string str;	
+	while (f)
+	{
+		getline(f, str);
+		stb.push_back(str);
+	}
+	StrBlobPtr stbP(stb);
+	while (!stbP.isEnd)
+		cout << stbP.deref() << endl;
+}

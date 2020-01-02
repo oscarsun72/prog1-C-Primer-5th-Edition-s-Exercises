@@ -5,17 +5,24 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<vector>
 #include"StrBlob.h"
+
 using namespace std;
 
-int main() {
+int main() {//第85集 10:55:30 沒錄到的部分見臉書直播第432集
+	const string fname = "V:\\Programming\\C++\\input.txt";
 	StrBlob stb;
-	StrBlob stbv{"a","b"};
-	StrBlob stbv4{"a","b","c","d"};
-	StrBlobPtr srbp(stbv);//第85集 3:53:00 臉書第428集
+	StrBlob stbv{ "a","b" };
+	StrBlob stbv4{ "a","b","c","d" };
+	StrBlobPtr srbp(stbv);
 	cout << srbp.incr().deref() << endl;
 	cout << stbv4.begin().deref() << endl;
+	cout << stbv4.end().decr().deref() << endl;
+	for (StrBlobPtr i = stbv4.begin(); !i.isEnd(); i.incr())
+	{
+		cout << i.deref();
+	}
+	cout << endl;
 }
 
 
