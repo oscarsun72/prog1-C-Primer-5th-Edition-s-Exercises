@@ -14,10 +14,11 @@ void readFromFile(const string& fFullName) {
 	ifstream f(fFullName);
 	string str;
 	StrBlob stb;
-	while (f)
+	while (f && !f.eof())
 	{
 		getline(f, str);
 		stb.push_back(str);//最後一個元素會重複，未詳，俟考！
+		//原來要加以「!f.eof()」這個判斷，讀到檔尾時，才不會又多讀一次。C++自修入門實境秀、C++ Primer 5版研讀秀第86集先講這個！
 	}
 	StrBlobPtr stbP(stb);
 	while (!stbP.isEnd())
