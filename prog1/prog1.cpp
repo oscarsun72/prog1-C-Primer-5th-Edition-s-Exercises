@@ -6,13 +6,33 @@
 
 #include<iostream>
 #include"StrBlob.h"
+#include<fstream>
+//#include<iostream>
 
 using namespace std;
+void readFromFile(const string& fFullName) {
+	ifstream f(fFullName);
+	string str;
+	StrBlob stb;
+	while (f)
+	{
+		getline(f, str);
+		stb.push_back(str);
+	}
+	StrBlobPtr stbP(stb);
+	while (!stbP.isEnd())
+	{
+		cout << stbP.deref() << endl;
+		stbP.incr();
+	}
+}
+
 
 int main() {//第85集 10:55:30 沒錄到的部分見臉書直播第432集
-	const string fname = "V:\\Programming\\C++\\input.txt";
-	StrBlob stb;
-	StrBlob stbv{ "a","b" };
+	string fname = "V:\\Programming\\C++\\input.txt";
+	readFromFile(fname);
+
+	/*StrBlob stbv{ "a","b" };
 	StrBlob stbv4{ "a","b","c","d" };
 	StrBlobPtr srbp(stbv);
 	cout << srbp.incr().deref() << endl;
@@ -22,7 +42,7 @@ int main() {//第85集 10:55:30 沒錄到的部分見臉書直播第432集
 	{
 		cout << i.deref();
 	}
-	cout << endl;
+	cout << endl;*/
 }
 
 

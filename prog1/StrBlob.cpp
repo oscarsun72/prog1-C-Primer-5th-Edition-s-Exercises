@@ -3,8 +3,6 @@
 #include<vector>
 #include<memory>
 #include <stdexcept>
-#include<fstream>
-#include<iostream>
 using namespace std;
 StrBlob::StrBlob() : data(make_shared<vector<string>>()) {}
 StrBlob::StrBlob(initializer_list<string> il) : data(make_shared<vector<string>>(il)) {} //用il來作為make_shared引數，就不是空的vector了
@@ -123,15 +121,3 @@ bool StrBlobPtr::isEnd()
 	return false;
 }
 
-void readFromFile(string fFullName, StrBlob & stb) {
-	ifstream f(fFullName);
-	string str;	
-	while (f)
-	{
-		getline(f, str);
-		stb.push_back(str);
-	}
-	StrBlobPtr stbP(stb);
-	while (!stbP.isEnd)
-		cout << stbP.deref() << endl;
-}

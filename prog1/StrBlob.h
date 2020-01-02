@@ -57,5 +57,4 @@ private:
 					  // current position within the array——應是英文版筆誤！
 
 };
-void readFromFile();
 #endif // !STRBLOB_H
