@@ -17,7 +17,7 @@ void readFromFile(const string& fFullName) {
 	while (f)
 	{
 		getline(f, str);
-		stb.push_back(str);
+		stb.push_back(str);//最後一個元素會重複，未詳，俟考！
 	}
 	StrBlobPtr stbP(stb);
 	while (!stbP.isEnd())
