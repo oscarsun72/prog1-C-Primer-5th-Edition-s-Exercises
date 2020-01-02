@@ -18,7 +18,7 @@ void readFromFile(const string& fFullName) {
 	{
 		getline(f, str);
 		stb.push_back(str);//最後一個元素會重複，未詳，俟考！
-	}
+	}	
 	StrBlobPtr stbP(stb);
 	while (!stbP.isEnd())
 	{
@@ -28,9 +28,16 @@ void readFromFile(const string& fFullName) {
 }
 
 
-int main() {//第85集 10:55:30 沒錄到的部分見臉書直播第432集
-	string fname = "V:\\Programming\\C++\\input.txt";
-	readFromFile(fname);
+int main() {//第85集 11:50:00臉書直播第432集
+	/*string fname = "V:\\Programming\\C++\\input.txt";
+	readFromFile(fname);*/
+	const StrBlob stb{"a","b","c"};
+	StrBlobPtr sp(stb);
+	while (!sp.isEnd())
+	{
+		cout<<sp.deref()<<endl;
+		sp.incr();
+	}
 
 	/*StrBlob stbv{ "a","b" };
 	StrBlob stbv4{ "a","b","c","d" };

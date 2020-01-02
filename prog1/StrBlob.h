@@ -41,6 +41,7 @@ class StrBlobPtr
 public:
 	StrBlobPtr() : curr(0) {}//第1個建構器（也是預設建構器（default　constructor）——沒有引數）
 	StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}//第2個建構器
+	StrBlobPtr(const StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}//第3個建構器，針對常值的StrBlob練習12.22
 	std::string& deref() const;
 	StrBlobPtr& incr(); // 前缀版本(prefix version)
 	StrBlobPtr& decr(); // 前缀版本(prefix version)

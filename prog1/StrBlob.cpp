@@ -80,6 +80,9 @@ const
 
 std::string& StrBlobPtr::deref() const
 {
+	
+	//return (*check(curr, "dereference past end"))[curr];//exercise12_21
+	//與上式同，但更易看（閱讀）
 	auto p = check(curr, "dereference past end");
 	return (*p)[curr]; // (*p) is the vector to which this object points
 	/*真正「推進」元素是在這行，不是在incr()，incr()只是「推進」索引值而已。再在此deref()先檢查
