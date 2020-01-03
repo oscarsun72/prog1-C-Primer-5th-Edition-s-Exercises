@@ -14,10 +14,10 @@ void readFromFile(const string& fFullName) {
 	ifstream f(fFullName);
 	string str;
 	StrBlob stb;
-	while (f)
+	while (f&&!f.eof())//f用來判斷選取成功否；.eof()來判斷到檔案尾否（即使選取成功）
 	{
 		getline(f, str);
-		stb.push_back(str);//最後一個元素會重複，未詳，俟考！
+		stb.push_back(str);
 	}	
 	StrBlobPtr stbP(stb);
 	while (!stbP.isEnd())
@@ -28,28 +28,24 @@ void readFromFile(const string& fFullName) {
 }
 
 
-int main() {//第85集 11:50:00臉書直播第432集
+int main() {
 	/*string fname = "V:\\Programming\\C++\\input.txt";
 	readFromFile(fname);*/
 	const StrBlob stb{"a","b","c"};
 	StrBlobPtr sp(stb);
 	while (!sp.isEnd())
 	{
-		cout<<sp.deref()<<endl;
+		cout<<sp.deref()<<",";
 		sp.incr();
 	}
-
-	/*StrBlob stbv{ "a","b" };
-	StrBlob stbv4{ "a","b","c","d" };
-	StrBlobPtr srbp(stbv);
-	cout << srbp.incr().deref() << endl;
-	cout << stbv4.begin().deref() << endl;
-	cout << stbv4.end().decr().deref() << endl;
-	for (StrBlobPtr i = stbv4.begin(); !i.isEnd(); i.incr())
+	cout << endl;
+	ConstStrBlobPtr cstrbptr(stb,stb.size()-1);
+	do
 	{
-		cout << i.deref();
-	}
-	cout << endl;*/
+		cout<<cstrbptr.deref()<<",";
+		cstrbptr.decr();
+	} while (!cstrbptr.isBegin());
+	cout << endl;
 }
 
 

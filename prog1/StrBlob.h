@@ -4,11 +4,13 @@
 #include<string>
 #include<vector>
 #include<memory>
-
+using namespace std;
+ 
 //class StrBlobPtr;//可以重複宣告，卻不能重複定義；若無此行，則StrBlob中成員函式用 到StrBlobPtr都會在編譯時期出錯「use of undefined type 'StrBlobPtr'」
 class StrBlob
 {
 	friend class StrBlobPtr;//頁269-270,279-280;不加「class」的就會當作函式編譯
+	friend class ConstStrBlobPtr;
 public:
 	typedef std::vector<std::string>::size_type size_type; //以型別別名定義型別成員（type member）
 	StrBlob();                                             //建構器
@@ -33,6 +35,7 @@ private:
 	// throws msg if data[i] isn't valid
 	void check(size_type i, const std::string& msg) const;
 };
+
 //伙伴類別似乎是要放在同一個標頭檔中！！否則編譯（建置）時會出錯。 https://docs.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2027?f1url=https%3A%2F%2Fmsdn.microsoft.com%2Fquery%2Fdev16.query%3FappId%3DDev16IDEF1%26l%3DEN-US%26k%3Dk(C2027)%26rd%3Dtrue%26f%3D255%26MSPPError%3D-2147217396&view=vs-2019
 //伙伴類別（companion class，這裡是companion pointer class）是否就要放在同一個標頭檔中呢？！否則就會出錯
 class StrBlobPtr
@@ -58,4 +61,26 @@ private:
 					  // current position within the array——應是英文版筆誤！
 
 };
+
+//一個專門給常值的StrBlob用的ConstStrBlobPtr類別
+class ConstStrBlobPtr
+{
+public:
+	//ConstStrBlobPtr()=default;
+	ConstStrBlobPtr(const StrBlob& cstrb, size_t i = 0) :wptrC(cstrb.data),curr(i){}
+	//~ConstStrBlobPtr();
+	ConstStrBlobPtr incr();
+	ConstStrBlobPtr decr();
+	string& deref()const;
+	bool isEnd()const;
+	bool isBegin()const;
+private:
+	shared_ptr<vector<string>> check(size_t , const string&)const;
+	weak_ptr<vector<string>>wptrC;
+	size_t curr;
+};
+
+//ConstStrBlobPtr::~ConstStrBlobPtr()
+//{
+//}
 #endif // !STRBLOB_H
