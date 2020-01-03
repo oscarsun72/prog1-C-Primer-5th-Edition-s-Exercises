@@ -124,7 +124,7 @@ bool StrBlobPtr::isEnd()
 	return false;
 }
 
-shared_ptr<vector<string>> ConstStrBlobPtr::check(size_t i, const string& msg)const
+inline shared_ptr<vector<string>> ConstStrBlobPtr::check(size_t i, const string& msg)const
 {
 	shared_ptr<vector<string>>p = wptrC.lock();
 	if (!p)
@@ -134,7 +134,7 @@ shared_ptr<vector<string>> ConstStrBlobPtr::check(size_t i, const string& msg)co
 	return p;
 }
 
-ConstStrBlobPtr ConstStrBlobPtr::incr()
+inline ConstStrBlobPtr ConstStrBlobPtr::incr()
 {
 	auto p = check(curr, "increment past end of StrBlob");
 	++curr;

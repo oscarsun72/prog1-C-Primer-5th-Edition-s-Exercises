@@ -66,9 +66,9 @@ private:
 class ConstStrBlobPtr
 {
 public:
-	//ConstStrBlobPtr()=default;
+	ConstStrBlobPtr()=default;
 	ConstStrBlobPtr(const StrBlob& cstrb, size_t i = 0) :wptrC(cstrb.data),curr(i){}
-	//~ConstStrBlobPtr();
+	//~ConstStrBlobPtr();//要自定義解構器（destructor）才需要這個，否則應是會和編譯器預設的解構器相衝突，造成編譯錯誤
 	ConstStrBlobPtr incr();
 	ConstStrBlobPtr decr();
 	string& deref()const;
@@ -80,7 +80,7 @@ private:
 	size_t curr;
 };
 
-//ConstStrBlobPtr::~ConstStrBlobPtr()
+//ConstStrBlobPtr::~Con	stStrBlobPtr()
 //{
 //}
 #endif // !STRBLOB_H
