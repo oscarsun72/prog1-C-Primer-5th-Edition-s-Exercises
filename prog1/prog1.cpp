@@ -14,7 +14,7 @@ void readFromFile(const string& fFullName) {
 	ifstream f(fFullName);
 	string str;
 	StrBlob stb;
-	while (f && !f.eof())
+	while (f && !f.eof())//f用來判斷選取成功否；.eof()來判斷到檔案尾否（即使選取成功）
 	{
 		getline(f, str);
 		stb.push_back(str);//最後一個元素會重複，未詳，俟考！
