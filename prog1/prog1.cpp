@@ -7,7 +7,6 @@
 #include<iostream>
 #include"StrBlob.h"
 #include<fstream>
-//#include<iostream>
 
 using namespace std;
 void readFromFile(const string& fFullName) {
