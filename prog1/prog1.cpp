@@ -4,24 +4,10 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<iostream>
-#include<memory>
-
-using namespace std;
 
 int main() {
-	string s;//當輸入的資料長過動態配置的陣列大小時，可以輸入儲存，但在delete[]時卻會出錯
-	cin >> s;
-	//size_t sz = s.size()-1;
-	size_t sz = s.size();
-	unique_ptr<char[]>up(new char[sz]);//size回傳的非常值，故可應付動態長度的資料輸入
-	for (size_t i = 0; i != sz; ++i)
-		up[i] = s[i];
-	cout <<up<< endl;
-	for (size_t i = 0; i != sz; ++i)
-		cout<<up[i]<<",";
-	cout << endl;
-	//delete [] up.get();//當輸入的資料若大過陣列能接受的範圍這樣也是沒有用的。[]中指定陣列大小也無用
+	int* pa = new int[10];
+	delete[] pa;
 }
 
 
