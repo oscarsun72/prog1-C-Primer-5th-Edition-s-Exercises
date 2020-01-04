@@ -5,47 +5,16 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include"StrBlob.h"
-#include<fstream>
-//#include<iostream>
 
 using namespace std;
-void readFromFile(const string& fFullName) {
-	ifstream f(fFullName);
-	string str;
-	StrBlob stb;
-	while (f&&!f.eof())//f用來判斷選取成功否；.eof()來判斷到檔案尾否（即使選取成功）
-	{
-		getline(f, str);
-		stb.push_back(str);
-	}	
-	StrBlobPtr stbP(stb);
-	while (!stbP.isEnd())
-	{
-		cout << stbP.deref() << endl;
-		stbP.incr();
-	}
+
+void concatenate_two_string_literals() {
+	
 }
 
 
 int main() {
-	/*string fname = "V:\\Programming\\C++\\input.txt";
-	readFromFile(fname);*/
-	const StrBlob stb{"a","b","c"};
-	StrBlobPtr sp(stb);
-	while (!sp.isEnd())
-	{
-		cout<<sp.deref()<<",";
-		sp.incr();
-	}
-	cout << endl;
-	ConstStrBlobPtr cstrbptr(stb,stb.size()-1);
-	do
-	{
-		cout<<cstrbptr.deref()<<",";
-		cstrbptr.decr();
-	} while (!cstrbptr.isBegin());
-	cout << endl;
+	
 }
 
 

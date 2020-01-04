@@ -152,10 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="prog1.cpp" />
-    <ClCompile Include="StrBlob.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="StrBlob.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
