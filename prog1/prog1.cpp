@@ -5,16 +5,44 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<memory>
 
 using namespace std;
 
 void concatenate_two_string_literals() {
-	
+	unique_ptr<char[]>up(new char[7]);
+	const char* ch1 = "good"; const char* ch2 = "bye";
+	for (size_t i=0; i != 4; ++i)
+		up[i] = *(ch1 + i);
+	for (size_t i = 4; i != 4+3; ++i)
+		up[i] = *(ch2 + i-4);
+	for (size_t i = 0; i != 4+3; ++i)
+		cout<<up[i]<<",";
+	cout << endl;
+	cout<<up<<endl;	
 }
 
+void concatenate_two_string() {
+	string s1 = "good"; string s2 = "bye";
+	//for (size_t i = 0; i != s1.size(); ++i)
+	//	up[i] = s1[i];
+	//for (size_t i = 0; i != s2.size(); ++i)
+	//	up[i + s1.size()] = s2[i];
+	string concatenateS = s1 + s2;
+	//size_t sz = sizeof(up) / sizeof(up[0]);
+	size_t sz = concatenateS.size();
+	unique_ptr<char[]>up(new char[sz]);
+	for (size_t i = 0; i != sz; ++i)
+		up[i] = concatenateS[i];
+	for (size_t i = 0; i != sz; ++i)
+		cout << up[i] << ",";
+	cout << endl;
+	cout << up << endl;
+}
 
 int main() {
-	
+	concatenate_two_string_literals();
+	concatenate_two_string();
 }
 
 
