@@ -6,34 +6,39 @@
 
 #include<iostream>
 #include<memory>
+#include <vector>
 
 using namespace std;
 
-
 int main() {
-	allocator<string> alloc;/*宣告、定義一個allocator型別物件，它可以配置出一個存放string型別的記憶體資源（區塊）
-									object that can allocate strings*/
-	size_t n = 10;
-	auto const p = alloc.allocate(n); //用alloc這個allocator型別物件來配置n個未經建構（unconstructed應即是未經初始化）的字串。
-
-	auto q = p;  //q指標會指向最後一個被建構出來的元素後面的位置//此處決定有錯！英文版中文版均然。p應是指向allocate(n)配置出來的第一個元素，q才是指向最後一個元素後的位置，然auto q=p,用p將q初始化，不就是q=p了！
-	//第87集7：31:00原來這裡以下3行是分別表述的，只能擇一，不能連貫！
-	//3個都是q推進一個位置，故曰是「指向最後一個被建構出來的元素後面的位置」
-	//以下3行錯在是解參考p不是解參考q！英文版誤p為q！
-	//alloc.construct(q++);//解參考（dereference）q就會得到一個空的string字串
-	//alloc.construct(q++, 10, 'c'); //解參考q就會是一個10個c的字串字面值（string literal）（或string字串。因為是用string的建構器來建構的10個c的字串）
-	//alloc.construct(q++, "hi"); //解參考q得到的是一個"hi"字串，乃是由string建構器構成的。
-	//要改成前綴版本，才能印出解參考q，並且後面destroy也要改成後綴版本，才不會出錯（誤刪空指標）
-	alloc.construct(++q, "hi"); //解參考q得到的是一個"hi"字串，乃是由string建構器構成的。
-
-	//cout << *p << endl; //可以：使用了string的輸出運算子（output operator）
-	cout << *q << endl; //阿災（災難，但實際在Visual Studio 2019此項並不會出錯！）：q指向的是一個未經建構的記憶體區塊（就是q指向了一個不存在的物件，類似或等同於懸置指標）
-	//q在此情形下是非null的、未初始化的指針，類似懸置指標（dangling pointer），並沒有指向一個實存的物件。
-
-	while (q != p)
-		//alloc.destroy(--q); //釋放那些已經配置給string
-		alloc.destroy(q--); //釋放那些已經配置給string
-
+	size_t n; vector<string>vs;
+	allocator<string>alloc;
+	//string* const p = new string[n]; //建構n個空的string字串（預設初始化）
+	
+	string s;
+	//while (cin >> s && q != p + n) //「cin>>s」：讀取標準輸入到s
+	while (cin >> s ) 
+		vs.push_back(s);
+	n = vs.size();
+	//p要在最後delete或destroy作為引數傳入，才能清除動態陣列，故p不能更動，才為const p
+	string* const p = alloc.allocate(n); //配置n個未初始化的string原生記憶體空間block（區塊、記憶體區塊）
+	//	*q++ = s;              //將一個新值（=s）指定給q指向的元素
+	//string* q = p; //q指向了p動態陣列中的第1個字串元素	
+	string*q=uninitialized_copy(vs.cbegin(), vs.cend(), p);
+	//const size_t size = q - p; //記下已經讀取了多少個動態陣列p中的字串元素
+	const size_t size = q - p;
+	if (size==n)
+	{
+		cout << "size==n" << endl;
+	}
+	//……
+	//對這個動態陣列的使用
+	q = p;
+	while (q != p + n)
+		cout<<*(q++)<<",";//++優先權比*高，加不加()是一樣的
+	cout << endl;
+	//delete[] p; //因為普通常值（恆定）指標（內建型別為對string的指標）p指向的是一個動態陣列，所以對它delete必須加上[]空的方括號
+	alloc.destroy(p);
 }
 
 
