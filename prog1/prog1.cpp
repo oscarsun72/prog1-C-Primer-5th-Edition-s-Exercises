@@ -9,19 +9,31 @@
 
 using namespace std;
 
+
 int main() {
-	string s;//當輸入的資料長過動態配置的陣列大小時，可以輸入儲存，但在delete[]時卻會出錯
-	cin >> s;
-	//size_t sz = s.size()-1;
-	size_t sz = s.size();
-	unique_ptr<char[]>up(new char[sz]);//size回傳的非常值，故可應付動態長度的資料輸入
-	for (size_t i = 0; i != sz; ++i)
-		up[i] = s[i];
-	cout <<up<< endl;
-	for (size_t i = 0; i != sz; ++i)
-		cout<<up[i]<<",";
-	cout << endl;
-	//delete [] up.get();//當輸入的資料若大過陣列能接受的範圍這樣也是沒有用的。[]中指定陣列大小也無用
+	allocator<string> alloc;/*宣告、定義一個allocator型別物件，它可以配置出一個存放string型別的記憶體資源（區塊）
+									object that can allocate strings*/
+	size_t n = 10;
+	auto const p = alloc.allocate(n); //用alloc這個allocator型別物件來配置n個未經建構（unconstructed應即是未經初始化）的字串。
+
+	auto q = p;  //q指標會指向最後一個被建構出來的元素後面的位置//此處決定有錯！英文版中文版均然。p應是指向allocate(n)配置出來的第一個元素，q才是指向最後一個元素後的位置，然auto q=p,用p將q初始化，不就是q=p了！
+	//第87集7：31:00原來這裡以下3行是分別表述的，只能擇一，不能連貫！
+	//3個都是q推進一個位置，故曰是「指向最後一個被建構出來的元素後面的位置」
+	//以下3行錯在是解參考p不是解參考q！英文版誤p為q！
+	//alloc.construct(q++);//解參考（dereference）q就會得到一個空的string字串
+	//alloc.construct(q++, 10, 'c'); //解參考q就會是一個10個c的字串字面值（string literal）（或string字串。因為是用string的建構器來建構的10個c的字串）
+	//alloc.construct(q++, "hi"); //解參考q得到的是一個"hi"字串，乃是由string建構器構成的。
+	//要改成前綴版本，才能印出解參考q，並且後面destroy也要改成後綴版本，才不會出錯（誤刪空指標）
+	alloc.construct(++q, "hi"); //解參考q得到的是一個"hi"字串，乃是由string建構器構成的。
+
+	//cout << *p << endl; //可以：使用了string的輸出運算子（output operator）
+	cout << *q << endl; //阿災（災難，但實際在Visual Studio 2019此項並不會出錯！）：q指向的是一個未經建構的記憶體區塊（就是q指向了一個不存在的物件，類似或等同於懸置指標）
+	//q在此情形下是非null的、未初始化的指針，類似懸置指標（dangling pointer），並沒有指向一個實存的物件。
+
+	while (q != p)
+		//alloc.destroy(--q); //釋放那些已經配置給string
+		alloc.destroy(q--); //釋放那些已經配置給string
+
 }
 
 
