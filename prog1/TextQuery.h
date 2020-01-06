@@ -2,6 +2,7 @@
 #define TextQuery_H
 #include<vector>
 #include<memory>
+#include<iostream>
 #include<fstream>
 //#include<map>
 //#include<set>
@@ -15,11 +16,12 @@ public:
 	~TextQuery();
 
 private:
-
+	shared_ptr<vector<string>>spVs;
 };
 
-TextQuery::TextQuery()
+TextQuery::TextQuery(ifstream & infile)
 {
+	getline( infile
 }
 
 TextQuery::~TextQuery()
