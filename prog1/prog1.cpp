@@ -39,6 +39,7 @@ int main() {
 	cout << endl;
 	//delete[] p; //因為普通常值（恆定）指標（內建型別為對string的指標）p指向的是一個動態陣列，所以對它delete必須加上[]空的方括號
 	alloc.destroy(p);
+	alloc.deallocate(p,n);//摧毀解構後別忘了釋放（解配置） 第88集 3：26：40
 }
 
 
