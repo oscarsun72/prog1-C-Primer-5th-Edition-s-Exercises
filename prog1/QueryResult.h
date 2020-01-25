@@ -7,15 +7,16 @@ using namespace std;
 class QueryResult
 {
 public:
-	QueryResult();
+	QueryResult(shared_ptr<vector<string>>);
 	~QueryResult();
 
 private:
 
 };
 
-QueryResult::QueryResult()
+QueryResult::QueryResult(shared_ptr<vector<string>> sp)
 {
+
 }
 
 QueryResult::~QueryResult()

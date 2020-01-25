@@ -8,6 +8,8 @@
 #include<string>//要用getline函式，要引入這一行
 #include<map>
 #include<set>
+#include "QueryResult.h"
+//#include"QueryResult.h"
 using namespace std;
 class TextQuery
 {
@@ -67,6 +69,7 @@ inline  TextQuery::pair_iterator_map TextQuery::query(const string& wordForQuery
 	allocator<multimap<string,size_t>> avs;
 	//avs.allocate((wlIter.second));
 	uninitialized_copy(wlIter.first, wlIter.second, avs);	
+	QueryResult qr();
 	return wlIter;
 }
 
