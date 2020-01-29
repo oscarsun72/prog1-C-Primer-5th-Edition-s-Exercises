@@ -5,12 +5,35 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<sstream>
 #include<iterator>
 #include<list>
 #include<map>
+#include<string>
+
 using namespace std;
 int main() {
-	map<string, list<string>>m;
+	map<string, list<int>>m;
+	//istream_iterator<string>in(cin), end;
+	ostream_iterator<int>out(cout, ",");
+	string word, line;
+	int lNo = 0;
+	while (getline(cin, line))	{		
+		lNo++;
+		istringstream iss(line);
+		while (iss >> word) {
+			m[word].push_back(lNo);
+		}
+	}	
+	for (auto a : m)
+	{
+		cout << a.first << ":\t";
+		copy(a.second.cbegin(), a.second.cend(), out);
+		cout << endl;
+	}
+
+
+	/*map<string, list<string>>m;
 	istream_iterator<string>in(cin), end;
 	ostream_iterator<string>out(cout, ",");
 	string word;
@@ -23,9 +46,9 @@ int main() {
 	for (auto a : m)
 	{
 		cout << a.first <<":\t";
-		copy(a.second.cbegin(),a.second.cend(), out);			
+		copy(a.second.cbegin(),a.second.cend(), out);
 		cout << endl;
-	}
+	}*/
 }
 
 //int main(int argc, const char** argv)
