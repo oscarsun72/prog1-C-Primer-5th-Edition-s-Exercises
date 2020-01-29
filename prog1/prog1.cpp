@@ -5,12 +5,9 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<sstream>
 #include<iterator>
-#include<list>
 #include<vector>
 #include<map>
-#include<string>
 
 using namespace std;
 int main() {
