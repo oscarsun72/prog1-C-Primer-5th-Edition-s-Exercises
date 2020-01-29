@@ -6,24 +6,26 @@
 
 #include<iostream>
 #include<iterator>
-#include<vector>
+#include<list>
 #include<map>
 
 using namespace std;
 int main() {
-	typedef vector<int>::iterator viIter;
-	map<viIter,int>m;
-	vector<int>vi;
+	typedef list<int>::iterator liIter;
+	multimap<liIter,int>m;
+	list<int>li;
 	istream_iterator<int>isi(cin), end;
 	while (isi!=end)
 	{
-		vi.push_back(*isi++);
+		li.push_back(*isi++);
 	}
-	viIter vii=vi.begin();
-	for (int i : vi)
+	liIter lii=li.begin();
+	for (int i : li)
 	{
-		m[vii] = i;
-		vii++;
+		//map在加入新元素時一定要「隨機」比對鍵值！
+		//m[lii] = i;//list的迭代器沒有隨機存取的！當然就不能進行下標運算來作比對
+		m.insert(make_pair(lii, i));//map此式也是不行,multimap也不行
+		lii++;
 	}	
 	ostream_iterator<int>out(cout, ",");
 	for (auto a : m)
