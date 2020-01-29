@@ -32,7 +32,7 @@ int main() {
 		cout << endl;
 	}
 
-
+	//以下之前的蠢物，不合題旨也，今不取：
 	/*map<string, list<string>>m;
 	istream_iterator<string>in(cin), end;
 	ostream_iterator<string>out(cout, ",");
