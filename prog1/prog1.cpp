@@ -32,24 +32,6 @@ int main() {
 		out++=a.second;
 		cout << endl;
 	}
-
-	//以下之前的蠢物，不合題旨也，今不取：
-	/*map<string, list<string>>m;
-	istream_iterator<string>in(cin), end;
-	ostream_iterator<string>out(cout, ",");
-	string word;
-	while (in!=end)
-	{
-		word = *in;
-		m[word].push_back(*++in);
-		++in;
-	}
-	for (auto a : m)
-	{
-		cout << a.first <<":\t";
-		copy(a.second.cbegin(),a.second.cend(), out);
-		cout << endl;
-	}*/
 }
 
 //int main(int argc, const char** argv)
