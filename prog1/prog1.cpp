@@ -8,27 +8,31 @@
 #include<sstream>
 #include<iterator>
 #include<list>
+#include<vector>
 #include<map>
 #include<string>
 
 using namespace std;
 int main() {
-	map<string, list<int>>m;
-	//istream_iterator<string>in(cin), end;
-	ostream_iterator<int>out(cout, ",");
-	string word, line;
-	int lNo = 0;
-	while (getline(cin, line))	{		
-		lNo++;
-		istringstream iss(line);
-		while (iss >> word) {
-			m[word].push_back(lNo);
-		}
+	typedef vector<int>::iterator viIter;
+	map<viIter,int>m;
+	vector<int>vi;
+	istream_iterator<int>isi(cin), end;
+	while (isi!=end)
+	{
+		vi.push_back(*isi++);
+	}
+	viIter vii=vi.begin();
+	for (int i : vi)
+	{
+		m[vii] = i;
+		vii++;
 	}	
+	ostream_iterator<int>out(cout, ",");
 	for (auto a : m)
 	{
-		cout << a.first << ":\t";
-		copy(a.second.cbegin(), a.second.cend(), out);
+		cout << *a.first << ":\t";
+		out++=a.second;
 		cout << endl;
 	}
 
