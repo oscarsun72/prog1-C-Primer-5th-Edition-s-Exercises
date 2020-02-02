@@ -8,8 +8,7 @@
 #include<string>//要用getline函式，要引入這一行
 #include<map>
 #include<set>
-#include "QueryResult.h"
-//#include"QueryResult.h"
+//#include "QueryResult.h"
 using namespace std;
 class TextQuery
 {
@@ -24,8 +23,8 @@ public:
 private:
 	shared_ptr<vector<string>>spVs;//第89集 2:12:00
 	//一個map關聯式容器(associative container)因為一個字詞key(string)會有好幾行與之對應，故用multimap
-	multimap<string,size_t>word_lineNum;
-	set<size_t>lineNum;	
+	map<string,set<size_t>>word_lineNum;
+	//set<size_t>lineNum;	
 };
 
 TextQuery::TextQuery(ifstream & infile)
@@ -39,7 +38,7 @@ TextQuery::TextQuery(ifstream & infile)
 		getline(infile, lStr); 
 		spVs->push_back(lStr);//one line of text in an element		
 		++line_Num;
-		lineNum.insert(line_Num);
+		//lineNum.insert(line_Num);
 		istringstream isstr(lStr);		
 		while (isstr>>word)
 		{
@@ -59,7 +58,8 @@ inline  TextQuery::pair_iterator_map TextQuery::query(const string& wordForQuery
 	//臉書直播第443集、444集。第89集1:18:00
 
 	//檢索字串出現的行號集合中的第1個迭代器：回傳一對迭代器代表具有鍵值wordForQuery的那些元素。如果wordForQuery沒出現，那兩個成員都會是word_lineNum.end()。	
-	pair_iterator_map wlIter = word_lineNum.equal_range(wordForQuery);
+	//pair_iterator_map wlIter = word_lineNum.equal_range(wordForQuery);
+	pair_iterator_map wlIter = word_lineNum.find(wordForQuery);
 	cout << word_lineNum.count(wordForQuery)<<endl;
 	if (wlIter.second==word_lineNum.cend())
 	{
@@ -69,7 +69,7 @@ inline  TextQuery::pair_iterator_map TextQuery::query(const string& wordForQuery
 	allocator<multimap<string,size_t>> avs;
 	//avs.allocate((wlIter.second));
 	uninitialized_copy(wlIter.first, wlIter.second, avs);	
-	QueryResult qr();
+	//QueryResult qr();
 	return wlIter;
 }
 
