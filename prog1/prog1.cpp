@@ -7,19 +7,21 @@
 #include<iostream>
 #include<iterator>
 #include<map>
+#include<set>
 using namespace std;
 int main() {
-	// get an iterator positioned on the first element
-	map<string, unsigned>word_count;
-	istream_iterator<string>in(cin), end;
-	while (in != end) ++word_count[*++in] ;
-	map<string, unsigned>::const_iterator map_it = word_count.cbegin();
-	// compare the current iterator to the off-the-end iterator
-	while (map_it != word_count.cend()) {
-		// dereference the iterator to print the element key--value pairs
-		cout << map_it->first << " occurs "
-			<< map_it->second << " times" << endl;
-		++map_it; // increment the iterator to denote the next element
+	typedef map<string, size_t> mss;
+	map<string, size_t> m{ {"d",1},{"b",2},{"c",1} };
+	mss::iterator mssit = m.begin();
+	mssit++;
+	m.insert(mssit, {"a",3});
+	ostream_iterator<string>o(cout,",");
+	ostream_iterator<size_t>o1(cout,";");
+	mssit = m.begin();
+	while (mssit!=m.end())
+	{
+		*o++ = mssit->first;
+		*o1++ = mssit++->second;
 	}
 }
 //int main(int argc, const char** argv)
