@@ -9,7 +9,7 @@
 #include<map>
 #include<set>
 using namespace std;
-int main() {
+int main() {//關聯式容器insert運算的測試 https://play.google.com/books/reader?id=J1HMLyxqJfgC&pg=GBS.PT804.w.7.0.35
 	typedef map<string, size_t> mss;
 	map<string, size_t> m{ {"d",1},{"b",2},{"c",1} };
 	mss::iterator mssit = m.begin();
