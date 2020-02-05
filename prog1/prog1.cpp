@@ -11,17 +11,18 @@
 using namespace std;
 int main() {//關聯式容器insert運算的測試 https://play.google.com/books/reader?id=J1HMLyxqJfgC&pg=GBS.PT804.w.7.0.35
 	typedef map<string, size_t> mss;
-	map<string, size_t> m{ {"d",1},{"b",2},{"c",1} };
+	map<string, size_t> m{ {"a",1},{"b",2},{"c",1} };
 	mss::iterator mssit = m.begin();
 	mssit++;
-	m.insert(mssit, {"a",3});
+	pair<mss::iterator ,bool> pr=m.insert({"c", 1});
 	ostream_iterator<string>o(cout,",");
 	ostream_iterator<size_t>o1(cout,";");
+	*o1++ = pr.second;
 	mssit = m.begin();
 	while (mssit!=m.end())
 	{
 		*o++ = mssit->first;
-		*o1++ = mssit++->second;
+		*o1 =  mssit++->second;
 	}
 }
 //int main(int argc, const char** argv)
