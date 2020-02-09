@@ -6,16 +6,18 @@
 
 #include<iostream>
 #include<map>
+#include<unordered_map>
 using namespace std;
 int main() {
 	// count the number of times each word occurs in the input
-	map<string, size_t> word_count; // empty map from string to size_t
+	unordered_multimap<string, size_t> word_count; // empty map from string to size_t	
 	string word;
 	while (cin >> word)
 	{
-		pair<map<string, size_t>::iterator, bool> inR = word_count.insert({ word, 1 });
-		if (!inR.second) ++inR.first->second;
+		auto inR = word_count.insert({ word, 1 });
+		//if (!inR.second) ++inR.first->second;
 	}
+	auto pp=word_count.equal_range("孫守真");//無序容器有equal_range， 卻不能執行lower_bound和upper_bound！
 		//++word_count[word]; // fetch and increment the counter for word
 	for (const auto& w : word_count) // for each element in the map
 	// print the results
