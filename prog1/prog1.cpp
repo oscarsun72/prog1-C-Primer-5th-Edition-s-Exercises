@@ -6,19 +6,20 @@
 
 #include<iostream>
 #include<map>
-#include<unordered_map>
 using namespace std;
 int main() {
-	// count the number of times each word occurs in the input
-	unordered_multimap<string, size_t> word_count; // empty map from string to size_t	
+	/*哪種型別可以作為對map下標的型別？下標運算子回傳的又是什麼樣的型別？
+	寫出一個實例，來演示當要對map做下標運算時能用怎樣的型別，
+	又其下標運算子回傳的又會是什麼樣的型別。*/	
+	map<string, size_t> word_count; 
 	string word;
 	while (cin >> word)
 	{
-		auto inR = word_count.insert({ word, 1 });
-		//if (!inR.second) ++inR.first->second;
+		word_count.insert({ word, 0 }).first->second++;//前綴、後綴在這裡是沒有差的，因為都比成員存取運算子要殿後才執行		
 	}
-	auto pp=word_count.equal_range("孫守真");//無序容器有equal_range， 卻不能執行lower_bound和upper_bound！
-		//++word_count[word]; // fetch and increment the counter for word
+	map<string, size_t>::key_type mapK{"孫守真"};	
+	map<string, size_t>::mapped_type mapped = word_count[mapK];
+	cout << mapped << endl;
 	for (const auto& w : word_count) // for each element in the map
 	// print the results
 		cout << w.first << " occurs " << w.second
