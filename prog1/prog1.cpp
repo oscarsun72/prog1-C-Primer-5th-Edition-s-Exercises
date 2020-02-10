@@ -9,7 +9,7 @@
 #include<map>
 using namespace std;
 int main() {
-	//詳頁434 http://bit.ly/2sZW6zR
+	//authors的定義詳頁434 http://bit.ly/2sZW6zR
 	using mss = multimap<string, string>;
 	mss authors;
 	//加入第一個元素到authors中，它的鍵值是「Barth,John」
