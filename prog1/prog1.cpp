@@ -10,10 +10,10 @@
 using namespace std;
 int main() {
 	using mss = multimap<string, string>;
-	using pmssi = pair<mss::iterator,mss::iterator>;
+	using pmssi = pair<mss::iterator, mss::iterator>;
 	mss authors;
 	//照作品字母順序插入元素
-	istream_iterator<string>in(cin), end;	
+	istream_iterator<string>in(cin), end;
 	string s;
 	while (in != end)
 	{
@@ -28,12 +28,12 @@ int main() {
 				authors.insert(au_work);
 			else//作品排序
 			{
-				mss::iterator mp=authors.end();
+				mss::iterator mp = authors.end();
 				for (pmssi pos = authors.equal_range(au_work.first); pos.first != pos.second; pos.first++)
 				{
 					if (pos.first->second >= au_work.second)//insert都是前位插入，所以既有的作品要大於要插入的，才會插在其前
 					{
-						mp=authors.insert(pos.first,au_work);//記下有沒有插入成功
+						mp = authors.insert(pos.first, au_work);//記下有沒有插入成功
 						break;
 					}
 				}
