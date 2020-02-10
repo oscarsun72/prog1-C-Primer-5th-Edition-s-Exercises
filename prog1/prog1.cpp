@@ -7,38 +7,20 @@
 #include<iostream>
 #include<iterator>
 #include<map>
-#include<vector>
 using namespace std;
 int main() {
-	vector<int>v{ 1,2 };
-	map<string, vector<int>>m;
-	m["孫守真"] = v;
-	istream_iterator<string>in(cin), end;
-	while (in != end)
-		m.insert(make_pair(*in++, v));
-	string s("守真");
-	map<string, vector<int>>::iterator it = m.find(s);
-	map<string, vector<int>>::iterator itL = m.lower_bound(s);
-	map<string, vector<int>>::iterator itU = m.upper_bound(s);
-	pair<map<string, vector<int>>::iterator, map<string, vector<int>>::iterator>
-		itE = m.equal_range(s);
-	if (itL == itE.first)
-		cout << "lower=first" << endl;
-	if (itU == itE.second)
-		cout << "upper=second" << endl;
-	if (itL == itU)
-		cout << "not found" << endl;
-	if (itE.first == itE.second)
-	{
-		cout << "not found" << endl;
-		cout << (itE.first)->first << endl;//可見可插入位置也如前循序容器的insert都是在前位插入要插入的元素
-		m.insert(itE.first, make_pair(s, v));
-	}
-	decltype(m.cbegin()) itM = m.cbegin();
-	while (itM != m.cend())
-	{
-		cout << itM++->first << endl;
-	}
+	//詳頁434 http://bit.ly/2sZW6zR
+	using mss = multimap<string, string>;
+	mss authors;
+	//加入第一個元素到authors中，它的鍵值是「Barth,John」
+	authors.insert({ "Barth,John","Sot-Weed Factor" });
+	//這也是可以的：加入第二個也是「Barth,John」這樣鍵值的元素到authors中
+	authors.insert({ "Barth,John","Lost in the Funhouse" });
+	authors.insert({ "S,John","Lost in the Funhouse" });
+	pair<mss::iterator, mss::iterator> pos;
+	for (pos = authors.equal_range("oscarsun72");
+		pos.first != pos.second; pos.first++)
+		cout << pos.first->second << endl;	
 }
 
 
