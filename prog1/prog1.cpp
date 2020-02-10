@@ -8,21 +8,61 @@
 #include<iterator>
 #include<map>
 using namespace std;
-int main() {	
+int main() {
 	using mss = multimap<string, string>;
+	using pmssi = pair<mss::iterator,mss::iterator>;
 	mss authors;
-	//加入第一個元素到authors中，它的鍵值是「Barth,John」
-	authors.insert({ "Barth,John","Sot-Weed Factor" });
-	//這也是可以的：加入第二個也是「Barth,John」這樣鍵值的元素到authors中
+	//照作品字母順序插入元素
+	istream_iterator<string>in(cin), end;	
+	string s;
+	while (in != end)
+	{
+		s = *in++;
+		pair<string, string> au_work = make_pair(s, *in++);
+		//沒錄到的見臉書直播488集1:48:00前後 https://www.facebook.com/oscarsun72/videos/2553453558099096
+		if (authors.size() == 0)
+			authors.insert(au_work);
+		else
+		{
+			if (authors.count(au_work.first) == 0)
+				authors.insert(au_work);
+			else//作品排序
+			{
+				mss::iterator mp=authors.end();
+				for (pmssi pos = authors.equal_range(au_work.first); pos.first != pos.second; pos.first++)
+				{
+					if (pos.first->second >= au_work.second)//insert都是前位插入，所以既有的作品要大於要插入的，才會插在其前
+					{
+						mp=authors.insert(pos.first,au_work);//記下有沒有插入成功
+						break;
+					}
+				}
+				if (mp == authors.end())
+					authors.insert(au_work);//若作品字母順序是現有中最大的，直接插入，就會墊底
+			}
+		}
+	}
+	//input string:輸入用測試資料如下：
+	//Barth,John Lost　in　the　Funhouse Barth,John Sot-Weed　Factor Y,John Lost　in　the　Funhouse Y,John A　Lost　in　the　Funhouse Sun,Oscar 顧炎武經世思想研究 Sun,Oscar 翁方綱及其文獻學研究
+	//Barth,John Sot-Weed　Factor Barth,John Lost　in　the　Funhouse Y,John Lost　in　the　Funhouse Y,John A　Lost　in　the　Funhouse Sun,Oscar 顧炎武經世思想研究 Sun,Oscar 翁方綱及其文獻學研究
+	/*authors.insert({ "Barth,John","Sot-Weed Factor" });
 	authors.insert({ "Barth,John","Lost in the Funhouse" });
 	authors.insert({ "S,John","Lost in the Funhouse" });
-	cout << authors.size() << endl;
-	cout << authors.count("Barth,John") << endl;
-	while (authors.count("Barth,John")>0)
+	authors.insert({ "S,John","A Lost in the Funhouse" });
+	authors.insert({ "Oscar Sun","顧炎武經世思想研究" });
+	authors.insert({ "Oscar Sun","翁方綱及其文獻學研究" });*/
+	//cout << authors.size() << endl;
+	//cout << authors.count("Barth,John") << endl;
+	//while (authors.count("Barth,John") > 0)
+	//{
+	//	authors.erase(authors.find("Barth,John"));
+	//}
+	//cout << authors.size() << endl;
+	ostream_iterator<string>o(cout, ",");
+	for (mss::value_type elemt : authors)
 	{
-		authors.erase(authors.find("Barth,John"));
+		(o++ = elemt.first) = elemt.second; cout << endl;
 	}
-	cout << authors.size() << endl;
 }
 
 
