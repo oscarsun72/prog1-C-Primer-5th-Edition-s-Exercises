@@ -13,7 +13,8 @@ int main() {
 	map<string, vector<int>>m;//{ "營利事業所得稅",v },
 	m["孫守真"] = v;
 	string s("守真");
-	map<string, vector<int>>::iterator it = m.find(s);
+	map<string, vector<int>>::iterator it{m.begin()};//定義且初始化
+	it= m.find(s);//儲存find回傳的值
 }
 
 
