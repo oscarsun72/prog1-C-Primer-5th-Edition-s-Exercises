@@ -8,8 +8,7 @@
 #include<iterator>
 #include<map>
 using namespace std;
-int main() {
-	//詳頁434 http://bit.ly/2sZW6zR
+int main() {	
 	using mss = multimap<string, string>;
 	mss authors;
 	//加入第一個元素到authors中，它的鍵值是「Barth,John」
@@ -17,10 +16,13 @@ int main() {
 	//這也是可以的：加入第二個也是「Barth,John」這樣鍵值的元素到authors中
 	authors.insert({ "Barth,John","Lost in the Funhouse" });
 	authors.insert({ "S,John","Lost in the Funhouse" });
-	pair<mss::iterator, mss::iterator> pos;
-	for (pos = authors.equal_range("oscarsun72");
-		pos.first != pos.second; pos.first++)
-		cout << pos.first->second << endl;	
+	cout << authors.size() << endl;
+	cout << authors.count("Barth,John") << endl;
+	while (authors.count("Barth,John")>0)
+	{
+		authors.erase(authors.find("Barth,John"));
+	}
+	cout << authors.size() << endl;
 }
 
 
