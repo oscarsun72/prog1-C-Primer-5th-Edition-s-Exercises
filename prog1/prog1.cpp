@@ -7,36 +7,27 @@
 #include<iostream>
 #include<fstream>
 #include<iterator>
-#include<unordered_map>//唯3不同，須引用而已
+#include<map>
+#include<string>
 using namespace std;
-int main() {
-	unordered_map<string, string>mReplace;//唯3不同
-	ifstream ifs("V:\\Programming\\C++\\OCRtxtCorrect1.txt");
-	ifstream ifsInput("V:\\Programming\\C++\\input1.txt");
-	istream_iterator<string>in(ifs), end;
-	string key, value;
-	while (in != end) {
-		key = *in; value = *++in;
-		//mReplace.insert(make_pair(key, value)); ++in;
-		mReplace[key]= value; ++in;
-		/*下標（subscript）者，會改動已有key的value值，
-		而插入insert()者不會（即若鍵值已存在，則不會再插入!） 
-		第76集 41:00 46:20 https://youtu.be/uv7w5Vd1yDg */
-	}
-	istream_iterator<string>input(ifsInput), e;
-	unordered_map<string, string>::const_iterator mIt;//唯3不同
-	string ocr;
-	while (input != e)
-	{
-		ocr = *input;
-		mIt = mReplace.find(ocr);
-		if (mIt != mReplace.cend())
-			cout << mIt->second << endl;
-		else
-			cout << ocr << endl;
-		++input;
-	}
+map<string, string>buildMap(ifstream& map_file)
+{
+    map<string, string> trans_map; //用來儲存文字轉換規則的map容器
+    string key;                    //表示文字轉換規則中待轉之字
+    string value;                  //用來取代轉換字的片語
+    //將ifstream中的第1個字儲存到key中作為map中的鍵值，而其同一行中其餘的部分，則存放在value，作為map元素的「值」，是要取代原文字的片語
+    while (map_file >> key && getline(map_file, value))
+        if (value.size() > 1)                 //檢查若有轉換規則存在；因為包含了前綴的半形空格，所以size最少是1，而不是0。
+            trans_map[key] = value.substr(1); //略去原字串stringvalue前綴的半形空格
+            //trans_map.insert({key, value.substr(1) }); //insert若已有鍵值不會覆蓋前面的規則，而下標運算則會。
+        else
+            throw runtime_error("no rule for " + key);
+    return trans_map;
+}
 
+int main() {
+    ifstream ifs("G:\\我的雲端硬碟\\programming程式設計開發\\C++_Primer_5th_e_exercise_test_files\\exercise11_34transformRule.txt");
+    map<string,string> m= buildMap(ifs);
 }
 
 
