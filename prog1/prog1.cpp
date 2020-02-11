@@ -6,31 +6,49 @@
 
 #include<iostream>
 #include<fstream>
+#include<sstream>
 #include<iterator>
 #include<map>
+#include<string>
 using namespace std;
 int main() {
 	map<string, string>mReplace;
-	ifstream ifs("V:\\Programming\\C++\\OCRtxtCorrect1.txt");
-	ifstream ifsInput("V:\\Programming\\C++\\input1.txt");
+	ifstream ifs("V:\\Programming\\C++\\exercise11_34transformRule.txt");
+	ifstream ifsInput("V:\\Programming\\C++\\exercise11_34input.txt");
 	istream_iterator<string>in(ifs), end;
 	string key, value;
 	while (in != end) {
-		key = *in; value = *++in;
-		mReplace.insert(make_pair(key, value)); ++in;
-	}
-	istream_iterator<string>input(ifsInput), e;
-	map<string, string>::const_iterator mIt;
-	string ocr;
-	while (input != e)
-	{
-		ocr = *input;
-		mIt = mReplace.find(ocr);
-		if (mIt != mReplace.cend())
-			cout << mIt->second << endl;
+		key = *in; getline(ifs, value);
+		if (value.size() > 1)
+			mReplace.insert(make_pair(key, value.substr(1)));
 		else
-			cout << ocr << endl;
-		++input;
+			throw runtime_error("沒有轉換規則！");
+		++in;
+	}
+	map<string, string>::const_iterator mIt;
+	string ocr, transformedLine;
+	while (getline(ifsInput, transformedLine)) {
+		istringstream iss(transformedLine);
+		istream_iterator<string>input(iss), e, wPos;
+		bool wLast = false;
+		while (input != e)
+		{
+			ocr = *input;
+			wPos = ++input;
+			if (wPos == e) wLast = true;
+			mIt = mReplace.find(ocr);
+			if (mIt != mReplace.cend())
+				cout << mIt->second << ((wLast) ? "" : " ");//利用條件運算子（頁151）判斷是否是本行最後1個字，是，就不再後綴半形空格
+			else
+				cout << ocr << ((wLast) ? "" : " ");
+			//cout << mReplace[ocr] << ((wLast)?"":" ");//下標運算子
+			/*用下標運算子的結果：
+				are you
+				why  you    picture
+				okay? thanks! later
+			原本規則沒有字就會被取代為空字串*/
+		}
+		cout << endl;
 	}
 }
 
