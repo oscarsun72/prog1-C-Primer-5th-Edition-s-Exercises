@@ -7,34 +7,22 @@
 #include<iostream>
 #include<fstream>
 #include<iterator>
-#include<map>
+#include<unordered_map>
 #include<string>
 using namespace std;
-map<string, string>buildMap(ifstream& map_file)
-{
-    map<string, string> trans_map; //用來儲存文字轉換規則的map容器
-    string key;                    //表示文字轉換規則中待轉之字
-    string value;                  //用來取代轉換字的片語
-    //將ifstream中的第1個字儲存到key中作為map中的鍵值，而其同一行中其餘的部分，則存放在value，作為map元素的「值」，是要取代原文字的片語
-    while (map_file >> key && getline(map_file, value))
-        if (value.size() > 1)                 //檢查若有轉換規則存在；因為包含了前綴的半形空格，所以size最少是1，而不是0。
-            trans_map[key] = value.substr(1); //略去原字串stringvalue前綴的半形空格
-            //trans_map.insert({key, value.substr(1) }); //insert若已有鍵值不會覆蓋前面的規則，而下標運算則會。
-        else
-            /*我們這個文字轉換程式並沒有設置檢查來源檔案有效性的機制。
-            尤其是，我們的設計是基於以下這一點來做的：在作為轉換憑據的檔案中，所有的轉換規則
-            都是正確的。但如果在該檔案中有一條規則是有要轉的字，後也接了一個半形空格，可是卻
-            缺了轉成的片語或字串，那麼將會發生什麼事？想像一下，然後根據妳11.33練習寫的版本
-            來測試看看，是否如妳所想。*/
-            //若依課本版本，果然是觸發了此行：
-            throw runtime_error("no rule for " + key);
-            //break;
-    return trans_map;
-}
 
 int main() {
-    ifstream ifs("G:\\我的雲端硬碟\\programming程式設計開發\\C++_Primer_5th_e_exercise_test_files\\exercise11_34transformRule.txt");
-    map<string,string> m= buildMap(ifs);
+	//計算各個字彙出現的頻率，但是這些字彙並不會按照字母順序來排列
+	unordered_map<string, size_t> word_count;
+	string word;
+	while (cin >> word)
+		//	++word_count[word];          //提取並遞增word的字頻數
+	{
+		(word_count.count(word)) ? word_count.insert({ word, ++word_count[word] }) 
+			: word_count.insert({ word,1 });
+	}
+	for (const auto& w : word_count) //將map中的每個元素印出來
+		cout << w.first << " occurs " << w.second << ((w.second > 1) ? " times" : " time") << endl;
 }
 
 
