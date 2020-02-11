@@ -18,6 +18,9 @@ int main() {
 		//if (!inR.second) ++inR.first->second;
 	}
 	auto pp=word_count.equal_range("孫守真");//無序容器有equal_range， 卻不能執行lower_bound和upper_bound！
+	//因為無序容器的鍵值雖未照字母順序排序，但其同值的鍵值，仍會排在一起！
+	//所以可以找到某個鍵值的range，卻不能到不小於它或大放它的那個毗隣的元素lower和upper一定是
+	//要鍵值按照嚴格的弱次序（strict weak ordering）來排列，才能用上
 		//++word_count[word]; // fetch and increment the counter for word
 	for (const auto& w : word_count) // for each element in the map
 	// print the results
