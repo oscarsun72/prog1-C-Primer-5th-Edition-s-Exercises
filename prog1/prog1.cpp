@@ -21,7 +21,12 @@ map<string, string>buildMap(ifstream& map_file)
             trans_map[key] = value.substr(1); //略去原字串stringvalue前綴的半形空格
             //trans_map.insert({key, value.substr(1) }); //insert若已有鍵值不會覆蓋前面的規則，而下標運算則會。
         else
-            //果然是觸發了此行：
+            /*我們這個文字轉換程式並沒有設置檢查來源檔案有效性的機制。
+            尤其是，我們的設計是基於以下這一點來做的：在作為轉換憑據的檔案中，所有的轉換規則
+            都是正確的。但如果在該檔案中有一條規則是有要轉的字，後也接了一個半形空格，可是卻
+            缺了轉成的片語或字串，那麼將會發生什麼事？想像一下，然後根據妳11.33練習寫的版本
+            來測試看看，是否如妳所想。*/
+            //若依課本版本，果然是觸發了此行：
             throw runtime_error("no rule for " + key);
             //break;
     return trans_map;
