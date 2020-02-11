@@ -21,7 +21,9 @@ map<string, string>buildMap(ifstream& map_file)
             trans_map[key] = value.substr(1); //略去原字串stringvalue前綴的半形空格
             //trans_map.insert({key, value.substr(1) }); //insert若已有鍵值不會覆蓋前面的規則，而下標運算則會。
         else
+            //果然是觸發了此行：
             throw runtime_error("no rule for " + key);
+            //break;
     return trans_map;
 }
 
