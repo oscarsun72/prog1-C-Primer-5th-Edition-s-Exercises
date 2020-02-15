@@ -8,18 +8,37 @@
 #include<iterator>
 #include<vector>
 #include<algorithm>
+#include<map>
 using namespace std;
 int main() {
-	char ch = 'a';
-	typedef char* pstring;
-	using pstring1 = char*;
-	pstring p = &ch;
-	pstring1 p1 = &ch;
-	if (p != p1)
+	//typedef map<unsigned, unsigned> muu;
+	//0 1 2 3 4 5 6 7 8 9
+	typedef map<unsigned, string> muu;
+	//測試用資料：
+	//0 孫守真 1 任真 2 淨空老和尚 3 釋迦牟尼佛 4 維摩詰 5 常律老和尚 6 陳彩瓊居士 7 白雲老禪師 8 慧律法師 9 海賢老和尚 
+	muu m;
+	//istream_iterator<unsigned>in(cin), end;
+	istream_iterator<string>in(cin), end;
+	while (in!=end)
 	{
-		cout << "hello world!\n"<<endl;
+		m[(*in++)[0]-48] = *in++;
+		//in++;
 	}
+	cin.clear();
+	string s;
+	unsigned us(0);
+	while (true)
+	{
+		cout << "輸入一個無號整數，或按q離開" << endl;
+		cin >> s;
+		if (s=="q")
+		{
+			break;
+		}	
+		us = s[0]-48;
+		cout <<"下標"<<us<<"得到："<< m[us] << endl;
 
+	}
 }
 
 //int main(int argc, const char** argv)
