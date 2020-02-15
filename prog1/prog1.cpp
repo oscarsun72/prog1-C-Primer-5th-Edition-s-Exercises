@@ -16,8 +16,18 @@ int main() {
 	while (in != end) {
 		++unor_m[*in++];
 	}
+	cout << "unordered_map size: " << unor_m.size() << endl;
+	/*bucket_count()應該是據unordered_map size()來計算的，若2的次方容不下，就根據容得下的
+	最接近的來算，如size=39,那麼32(2^5)塞不下，就用2^6即32*2來作為的bucket_count的值
+	reserve(129)的原理也一樣，若129，128（2^7)塞不下,就用2^8（256）來作為bucket_count的值
+	*/
 	cout << "bucket_count(): " << unor_m.bucket_count() << endl;
 	cout << "max_bucket_count() : " << unor_m.max_bucket_count() << endl;
+	//unor_m.reserve(129);
+	//unor_m.rehash(129);
+	//cout << "bucket_count() after reserve: " << unor_m.bucket_count() << endl;
+	//cout << "max_bucket_count()  after reserve: " << unor_m.max_bucket_count() << endl;
+
 	for (size_t n = 0; n < unor_m.bucket_count(); n++)
 	{
 		cout << "bucket_size(" << n << "):" << unor_m.bucket_size(n) << endl;
@@ -26,11 +36,14 @@ int main() {
 			while (mFactor !=
 				unor_m.cend(n))
 			{
-				cout << mFactor->first << ":" << mFactor->second << endl;
+				cout << mFactor->first << ":" <<mFactor->second << 
+					(mFactor->second>1?" times":" time")<< endl;
 				++mFactor;
 			}
 		}
 	}
+
+	//unor_m.rehash(65);
 
 	size_t bn = unor_m.bucket("孫守真");
 	um::local_iterator bi = unor_m.begin(bn);
@@ -40,6 +53,9 @@ int main() {
 		bi++;
 	}
 	cout << endl;
+
+	cout<<"unor_m.load_factor():"<<unor_m.load_factor()<<endl;
+	cout << "unor_m.max_load_factor():" << unor_m.max_load_factor() << endl;
 
 }
 
