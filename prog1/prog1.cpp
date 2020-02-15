@@ -8,18 +8,27 @@
 #include<iterator>
 #include<vector>
 #include<algorithm>
+#include<map>
+#include"Sales_data.h"
 using namespace std;
+inline bool operatr  (const Sales_data& lhs,const Sales_data&rhs) {
+	return lhs.isbn() < rhs.isbn();
+}
 int main() {
-	char ch = 'a';
-	typedef char* pstring;
-	using pstring1 = char*;
-	pstring p = &ch;
-	pstring1 p1 = &ch;
-	if (p != p1)
+	//typedef map<Sales_data, size_t,decltype(operatr)*> mss;
+	//mss m(operatr);//頁425-426
+	typedef map<Sales_data, size_t> mp;
+	mp m;
+	Sales_data sd;
+	while (read(cin,sd))
 	{
-		cout << "hello world!\n"<<endl;
+		++m[sd];
 	}
-
+	for (mp::value_type e : m)
+	{
+		print(cout, e.first);
+		cout << "\t" << e.second << (e.second > 1 ? " copys" : " copy")<<endl;
+	}
 }
 
 //int main(int argc, const char** argv)
