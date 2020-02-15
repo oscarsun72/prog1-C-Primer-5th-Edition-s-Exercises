@@ -5,11 +5,42 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<iterator>
 #include<map>
 #include<unordered_map>
 using namespace std;
 int main() {
-	
+	using um = unordered_map<string, size_t>;
+	unordered_map<string, size_t>unor_m;
+	istream_iterator<string>in(cin), end;
+	while (in != end) {
+		++unor_m[*in++];
+	}
+	cout << "bucket_count(): " << unor_m.bucket_count() << endl;
+	cout << "max_bucket_count() : " << unor_m.max_bucket_count() << endl;
+	for (size_t n = 0; n < unor_m.bucket_count(); n++)
+	{
+		cout << "bucket_size(" << n << "):" << unor_m.bucket_size(n) << endl;
+		if (unor_m.bucket_size(n) > 0) {
+			um::const_local_iterator mFactor = unor_m.cbegin(n);
+			while (mFactor !=
+				unor_m.cend(n))
+			{
+				cout << mFactor->first << ":" << mFactor->second << endl;
+				++mFactor;
+			}
+		}
+	}
+
+	size_t bn = unor_m.bucket("孫守真");
+	um::local_iterator bi = unor_m.begin(bn);
+	while (bi != unor_m.end(unor_m.bucket("孫守真")))
+	{
+		cout << bi->first << ":" << bi->second << ",";
+		bi++;
+	}
+	cout << endl;
+
 }
 
 //int main(int argc, const char** argv)
