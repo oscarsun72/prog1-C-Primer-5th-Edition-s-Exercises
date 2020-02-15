@@ -14,23 +14,26 @@ size_t hasher(const Sales_data& sd) {
 }
 
 bool eqOp(const Sales_data& lhs, const Sales_data rhs) {
+	/*	return lhs.isbn() == rhs.isbn()&&lhs.bookSize==rhs.bookSize
+	&& lhs.revenue == rhs.revenue;*/
 	return lhs.isbn() == rhs.isbn();
 }
 
 int main() {
 	Sales_data sd;
-	typedef unordered_map<Sales_data,size_t, decltype(hasher)*
+	typedef unordered_map<Sales_data, size_t, decltype(hasher)*
 		, bool(*)(const Sales_data & lhs, const Sales_data rhs)> um;
-	/*arguments are the bucket size and pointers to the hash function 
+	/*arguments are the bucket size and pointers to the hash function
 		and equality operator*/
-	um m(42,hasher,eqOp	);//頁466
-	while (read(cin,sd))
+	um m(42, hasher, eqOp);//頁466。也就是這種自定義類別為鍵值的無序容器是沒有預設建構器，一定都要傳入這樣的引數才行
+	while (read(cin, sd))
 	{
 		++m[sd];
 	}
-	for (um::value_type	i:m)
+	for (um::value_type i : m)
 	{
 		print(cout, i.first);
+		cout << "\t has " << i.second << (i.second > 1 ? " copys" : " copy") << endl;
 	}
 }
 
