@@ -13,7 +13,7 @@ int main() {
 	string word;
 	while (cin >> word)
 		++word_count[word];
-	for (const auto& w : word_count)
+	for (const auto& w : word_count)//印出來的順序也會與有序版的不同
 		cout << w.first << " occurs " << w.second
 		<< ((w.second > 1) ? " times" : " time") << endl;
 }
