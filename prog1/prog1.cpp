@@ -5,11 +5,33 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<map>
 #include<unordered_map>
+#include"Sales_data.h"
+
 using namespace std;
+size_t hasher(const Sales_data& sd) {
+	return hash<string>()(sd.isbn());
+}
+
+bool eqOp(const Sales_data& lhs, const Sales_data rhs) {
+	return lhs.isbn() == rhs.isbn();
+}
+
 int main() {
-	
+	Sales_data sd;
+	typedef unordered_map<Sales_data,size_t, decltype(hasher)*
+		, bool(*)(const Sales_data & lhs, const Sales_data rhs)> um;
+	/*arguments are the bucket size and pointers to the hash function 
+		and equality operator*/
+	um m(42,hasher,eqOp	);//頁466
+	while (read(cin,sd))
+	{
+		++m[sd];
+	}
+	for (um::value_type	i:m)
+	{
+		print(cout, i.first);
+	}
 }
 
 //int main(int argc, const char** argv)
