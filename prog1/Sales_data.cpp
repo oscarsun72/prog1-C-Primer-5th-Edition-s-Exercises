@@ -62,3 +62,10 @@ Sales_data add(const Sales_data& sales_data1, const Sales_data& sales_data2)
 {//不能用inline
 	return Lsd.isbn()<Rsd.isbn();
 }
+
+bool operator==(const Sales_data&lhs, const Sales_data&rhs)//自定義Sales_data的等於運算子
+ {
+	 if (lhs.isbn() == rhs.isbn())
+		 return true;
+	 return false;
+ }

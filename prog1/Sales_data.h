@@ -24,4 +24,5 @@ ostream& print(ostream& , const Sales_data&);
 istream& read(istream& , Sales_data& );
 Sales_data add(const Sales_data&, const Sales_data&);
 bool compareIsbn(const Sales_data&, const Sales_data&);//不能用inline
+bool operator==(const Sales_data&,const Sales_data&);//自定義Sales_data的等於運算子之宣告部分
 #endif // !SALES_DATA_H

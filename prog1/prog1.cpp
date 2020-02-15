@@ -13,19 +13,18 @@ size_t hasher(const Sales_data& sd) {
 	return hash<string>()(sd.isbn());
 }
 
-bool eqOp(const Sales_data& lhs, const Sales_data rhs) {
-	/*	return lhs.isbn() == rhs.isbn()&&lhs.bookSize==rhs.bookSize
-	&& lhs.revenue == rhs.revenue;*/
-	return lhs.isbn() == rhs.isbn();
-}
+//bool eqOp(const Sales_data& lhs, const Sales_data rhs) {
+//	/*	return lhs.isbn() == rhs.isbn()&&lhs.bookSize==rhs.bookSize
+//	&& lhs.revenue == rhs.revenue;*/
+//	return lhs.isbn() == rhs.isbn();
+//}
 
 int main() {
 	Sales_data sd;
-	typedef unordered_map<Sales_data, size_t, decltype(hasher)*
-		, bool(*)(const Sales_data & lhs, const Sales_data rhs)> um;
+	typedef unordered_map<Sales_data, size_t, decltype(hasher)*> um;
 	/*arguments are the bucket size and pointers to the hash function
 		and equality operator*/
-	um m(42, hasher, eqOp);//頁466。也就是這種自定義類別為鍵值的無序容器是沒有預設建構器，一定都要傳入這樣的引數才行
+	um m(42, hasher);//頁466。也就是這種自定義類別為鍵值的無序容器是沒有預設建構器，一定都要傳入這樣的引數才行
 	while (read(cin, sd))
 	{
 		++m[sd];
