@@ -9,6 +9,7 @@
 #include <vector>
 #include <fstream>
 #include"TextQuery.h"
+#include"QueryResult.h"
 
 using namespace std;
 
@@ -30,7 +31,9 @@ int main() {
 	{
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
 		if (!(cin >> strSearch)|| strSearch == "q") break;
-		tq.query(strSearch);
+		QueryResult qr= tq.query(strSearch);
+		if (qr.found)
+			qr.print();
 	}
 
 	//V:\\Programming\\C++\\input.txt
