@@ -6,21 +6,18 @@
 
 #include<iostream>
 #include<memory>
-#include <vector>
 #include <fstream>
 #include"TextQuery.h"
 #include"QueryResult.h"
-
 using namespace std;
-
 int main() {
-	string strSearch; 	
-	cout <<"請指定要檢索的檔案全名(fullname,含路徑與副檔名)" <<endl;
+	string strSearch;
+	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
 	if (cin >> strSearch);
-		//必須檢查檔案存不存在	
+	//必須檢查檔案存不存在	
 	else//若沒有指定檔案的話
 	{
-		strSearch="V:\\Programming\\C++\\input.txt";
+		strSearch = "V:\\Programming\\C++\\input.txt";
 	}
 	ifstream ifs(strSearch);
 	TextQuery tq(ifs);
@@ -30,13 +27,10 @@ int main() {
 	while (true)
 	{
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
-		if (!(cin >> strSearch)|| strSearch == "q") break;
-		QueryResult qr= tq.query(strSearch);
-		if (qr.found)
-			qr.print();
-	}
-
-	//V:\\Programming\\C++\\input.txt
+		if (!(cin >> strSearch) || strSearch == "q") break;
+		QueryResult qr = tq.query(strSearch);		
+		qr.print();
+	}	
 }
 
 
