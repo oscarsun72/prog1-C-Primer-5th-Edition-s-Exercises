@@ -10,27 +10,30 @@
 #include"TextQuery.h"
 #include"QueryResult.h"
 using namespace std;
+QueryResult textquery(ifstream& ifs,const string & strSearch) {
+	TextQuery tq(ifs);
+	QueryResult qr = tq.query(strSearch);
+	return qr;
+}
 int main() {
-	string strSearch;
+	string fName,strSearch;
 	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
-	if (cin >> strSearch);
+	if (cin >> fName);
 	//必須檢查檔案存不存在	
 	else//若沒有指定檔案的話
 	{
-		strSearch = "V:\\Programming\\C++\\input.txt";
+		fName = "V:\\Programming\\C++\\input.txt";
 	}
-	ifstream ifs(strSearch);
-	TextQuery tq(ifs);
 	cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
 	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
 	//第89集1：4：00//可參考前面談資料流（stream）的部分
-	while (true)
-	{
+	while(true){
+		ifstream ifs(fName);
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
 		if (!(cin >> strSearch) || strSearch == "q") break;
-		QueryResult qr = tq.query(strSearch);		
-		qr.print();
-	}	
+		QueryResult qr= textquery(ifs,strSearch);
+		qr.print();		
+	}
 }
 
 
