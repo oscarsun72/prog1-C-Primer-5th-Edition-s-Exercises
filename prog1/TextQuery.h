@@ -20,6 +20,8 @@ class TextQuery
 public:
 	//TextQuery() ;
 	TextQuery(ifstream& infile);
+	TextQuery(pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>>spPair):
+		spVs(spPair.first),word_lineNum(*spPair.second){};
 	~TextQuery();
 	QueryResult query(const string&);
 private:
@@ -56,8 +58,10 @@ TextQuery::TextQuery(ifstream& infile)
 	}
 }
 
+
 TextQuery::~TextQuery()
 {
+
 }
 
 QueryResult TextQuery::query(const string& wordForQuery)
