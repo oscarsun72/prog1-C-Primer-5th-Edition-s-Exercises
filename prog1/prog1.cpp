@@ -11,7 +11,7 @@
 #include"QueryResult.h"
 using namespace std;
 
-pair<shared_ptr<vector<string>>,shared_ptr<map<string,set<size_t>>>> queryData(ifstream& infile)
+pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>> queryData(ifstream& infile)
 {
 	string lStr;
 	size_t line_Num{ 0 };
@@ -19,14 +19,14 @@ pair<shared_ptr<vector<string>>,shared_ptr<map<string,set<size_t>>>> queryData(i
 	map<string, set<size_t>>word_lineNum;
 	shared_ptr<vector<string>>spVs(make_shared<vector<string>>(vs));//利用智慧指標shared_ptr來達到
 	shared_ptr<map<string, set<size_t>>>spWord_lineNum(
-		make_shared<map<string,set<size_t>>>(word_lineNum));//資源共用的目的
+		make_shared<map<string, set<size_t>>>(word_lineNum));//資源共用的目的
 	while (infile && !infile.eof())//第98集6:46:00
 	{
 		getline(infile, lStr);
 		spVs->push_back(lStr);//one line of text in an element		
 		++line_Num;
 		istringstream isstr(lStr);
-		string word;		
+		string word;
 		while (isstr >> word)
 		{
 			map<string, set<size_t>>::iterator mIter = spWord_lineNum->find(word);
@@ -39,11 +39,11 @@ pair<shared_ptr<vector<string>>,shared_ptr<map<string,set<size_t>>>> queryData(i
 				mIter->second.insert(line_Num);//若原已有此行號，用insert就不會插入（何況set本來鍵值（就是「值」）就不能重複
 		}
 	}
-	return make_pair(spVs,spWord_lineNum);
+	return make_pair(spVs, spWord_lineNum);
 }
 
 int main() {
-	string fName,strSearch;
+	string fName, strSearch;
 	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
 	if (cin >> fName);
 	//必須檢查檔案存不存在	
@@ -56,13 +56,14 @@ int main() {
 	//第89集1：4：00//可參考前面談資料流（stream）的部分
 	ifstream ifs(fName);
 	TextQuery tq(queryData(ifs));
-	while(true){
+	while (true) {
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
 		if (!(cin >> strSearch) || strSearch == "q") break;
-		QueryResult qr= tq.query(strSearch);
-		qr.print();		
+		QueryResult qr = tq.query(strSearch);
+		qr.print();
 	}
 }
+
 
 
 

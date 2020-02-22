@@ -16,12 +16,12 @@ class TextQuery
 	typedef pair<map<string, size_t>::const_iterator, map<string, size_t>::const_iterator>
 		pair_iterator_map;
 	typedef pair<shared_ptr<vector<string>>, shared_ptr<pair<string, set<size_t>>>> pair_sp_vec_str_sp_pair_str_set;
-	using iterator_map= map<string, set<size_t>>::iterator;
+	using iterator_map = map<string, set<size_t>>::iterator;
 public:
 	//TextQuery() ;
 	TextQuery(ifstream& infile);
-	TextQuery(pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>>spPair):
-		spVs(spPair.first),word_lineNum(*spPair.second){};
+	TextQuery(pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>>spPair) :
+		spVs(spPair.first), word_lineNum(*spPair.second) {};
 	~TextQuery();
 	QueryResult query(const string&);
 private:
@@ -46,7 +46,7 @@ TextQuery::TextQuery(ifstream& infile)
 		string word;
 		while (isstr >> word)
 		{
-			map<string, set<size_t>>::iterator mIter = word_lineNum.find(word);			
+			map<string, set<size_t>>::iterator mIter = word_lineNum.find(word);
 			if (mIter == word_lineNum.end()) {//如果文字行號的map還沒有此文字的話
 				set<size_t> line_num_st;
 				line_num_st.insert(line_Num);
@@ -68,20 +68,16 @@ QueryResult TextQuery::query(const string& wordForQuery)
 {
 	/*第88集4:18:23//4:31:30回傳的應該是檢索結果，
 	 *（此行註文但作參考）或者試用allocator物件記錄在動態記憶體(dynamic memory),再與QueryResult物件共用此資料*/
-	//臉書直播第443集、444集。第89集1:18:00
+	 //臉書直播第443集、444集。第89集1:18:00
 
 	iterator_map wlIter = word_lineNum.find(wordForQuery);
 	if (wlIter == word_lineNum.end())
 	{
-		cout << "沒有找到您要找的字串！" << endl; 
+		cout << "沒有找到您要找的字串！" << endl;
 		set<size_t>st;
 		return QueryResult(make_shared<pair<string, set<size_t>>>
-			(make_pair(wordForQuery,st)));//()呼叫運算子（call operator）這裡表示呼叫預設建構器（default constructor）
-	}		
+			(make_pair(wordForQuery, st)));//()呼叫運算子（call operator）這裡表示呼叫預設建構器（default constructor）
+	}
 	//shared_ptr<pair<string, set<size_t>>> sp = make_shared<pair<string,set<size_t>>>(*wlIter);
 	//QueryResult qrfound(spVs, sp);
-	return QueryResult(spVs,make_shared<pair<string,set<size_t>>>(*wlIter));//「()」：呼叫建構器
-}
-
-
-#endif // !TextQuery_H
+	return QueryResult(spVs, make_shared<pair<string, set<size_t>>>(*wlIter));//「()」：呼叫建構器

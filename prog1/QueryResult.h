@@ -9,7 +9,7 @@ using namespace std;
 class QueryResult
 {
 public:
-	QueryResult(shared_ptr<pair<string,set<size_t>>>sp_key) :pair_str_set(sp_key) { found = false; }
+	QueryResult(shared_ptr<pair<string, set<size_t>>>sp_key) :pair_str_set(sp_key) { found = false; }
 	QueryResult(shared_ptr<vector<string>>, shared_ptr<pair<string, set<size_t>>>);
 	~QueryResult();
 	void print();
