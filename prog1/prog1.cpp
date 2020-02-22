@@ -3,47 +3,19 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-
 #include<iostream>
 #include<memory>
 #include <fstream>
 #include"TextQuery.h"
 #include"QueryResult.h"
 using namespace std;
-
-pair<shared_ptr<vector<string>>,shared_ptr<map<string,set<size_t>>>> queryData(ifstream& infile)
-{
-	string lStr;
-	size_t line_Num{ 0 };
-	vector<string>vs;
-	shared_ptr<vector<string>>spVs(make_shared<vector<string>>(vs));
-	map<string, set<size_t>>word_lineNum;
-	shared_ptr<map<string, set<size_t>>>spWord_lineNum(
-		make_shared<map<string,set<size_t>>>(word_lineNum));
-	while (infile && !infile.eof())//第98集6:46:00
-	{
-		getline(infile, lStr);
-		spVs->push_back(lStr);//one line of text in an element		
-		++line_Num;
-		istringstream isstr(lStr);
-		string word;		
-		while (isstr >> word)
-		{
-			map<string, set<size_t>>::iterator mIter = spWord_lineNum->find(word);
-			if (mIter == spWord_lineNum->end()) {//如果文字行號的map還沒有此文字的話
-				set<size_t> line_num_st;
-				line_num_st.insert(line_Num);
-				spWord_lineNum->insert(make_pair(word, line_num_st));
-			}
-			else//如果文字行號的map已經有此文字的話
-				mIter->second.insert(line_Num);//若原已有此行號，用insert就不會插入（何況set本來鍵值（就是「值」）就不能重複
-		}
-	}
-	return make_pair(spVs,spWord_lineNum);
+QueryResult textquery(ifstream& ifs, const string& strSearch) {
+	TextQuery tq(ifs);
+	QueryResult qr = tq.query(strSearch);
+	return qr;
 }
-
 int main() {
-	string fName,strSearch;
+	string fName, strSearch;
 	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
 	if (cin >> fName);
 	//必須檢查檔案存不存在	
@@ -54,16 +26,14 @@ int main() {
 	cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
 	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
 	//第89集1：4：00//可參考前面談資料流（stream）的部分
-	ifstream ifs(fName);
-	TextQuery tq(queryData(ifs));
-	while(true){
+	while (true) {
+		ifstream ifs(fName);
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
 		if (!(cin >> strSearch) || strSearch == "q") break;
-		QueryResult qr= tq.query(strSearch);
-		qr.print();		
+		QueryResult qr = textquery(ifs, strSearch);
+		qr.print();
 	}
 }
-
 
 
 

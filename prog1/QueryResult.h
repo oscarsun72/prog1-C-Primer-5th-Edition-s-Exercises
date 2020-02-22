@@ -1,4 +1,5 @@
-﻿#ifndef QueryResult_H
+﻿
+#ifndef QueryResult_H
 #define QueryResult_H
 #include<vector>
 #include<memory>
@@ -9,7 +10,7 @@ using namespace std;
 class QueryResult
 {
 public:
-	QueryResult(shared_ptr<pair<string,set<size_t>>>sp_key) :pair_str_set(sp_key) { found = false; }
+	QueryResult(shared_ptr<pair<string, set<size_t>>>sp_key) :pair_str_set(sp_key) { found = false; }
 	QueryResult(shared_ptr<vector<string>>, shared_ptr<pair<string, set<size_t>>>);
 	~QueryResult();
 	void print();
