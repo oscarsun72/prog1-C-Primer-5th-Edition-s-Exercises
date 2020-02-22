@@ -15,11 +15,11 @@ pair<shared_ptr<vector<string>>,shared_ptr<map<string,set<size_t>>>> queryData(i
 {
 	string lStr;
 	size_t line_Num{ 0 };
-	vector<string>vs;
-	shared_ptr<vector<string>>spVs(make_shared<vector<string>>(vs));
+	vector<string>vs;//主要就是這兩個（vector、map）容器要作為TexQuery與QueryResult資源共享者
 	map<string, set<size_t>>word_lineNum;
+	shared_ptr<vector<string>>spVs(make_shared<vector<string>>(vs));//利用智慧指標shared_ptr來達到
 	shared_ptr<map<string, set<size_t>>>spWord_lineNum(
-		make_shared<map<string,set<size_t>>>(word_lineNum));
+		make_shared<map<string,set<size_t>>>(word_lineNum));//資源共用的目的
 	while (infile && !infile.eof())//第98集6:46:00
 	{
 		getline(infile, lStr);
