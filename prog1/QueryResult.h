@@ -1,5 +1,4 @@
-﻿
-#ifndef QueryResult_H
+﻿#ifndef QueryResult_H
 #define QueryResult_H
 #include<vector>
 #include<memory>
