@@ -17,6 +17,9 @@ pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>> queryData
 	size_t line_Num{ 0 };
 	vector<string>vs;//主要就是這兩個（vector、map）容器要作為TexQuery與QueryResult資源共享者
 	map<string, set<size_t>>word_lineNum;
+	/*用了make_shared函式，就已經動用到了動態記憶體區了：
+	這個函式會在動態記憶體區中配置並初始化（即建置）一個物件，然後回傳一個shared_ptr指向該物件。和智慧指標一樣，make_shared也是定義在memory標頭檔中。(頁451）
+	*/
 	shared_ptr<vector<string>>spVs(make_shared<vector<string>>(vs));//利用智慧指標shared_ptr來達到
 	shared_ptr<map<string, set<size_t>>>spWord_lineNum(
 		make_shared<map<string, set<size_t>>>(word_lineNum));//資源共用的目的
