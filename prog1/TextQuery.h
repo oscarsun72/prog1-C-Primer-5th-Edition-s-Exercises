@@ -81,3 +81,7 @@ QueryResult TextQuery::query(const string& wordForQuery)
 	//shared_ptr<pair<string, set<size_t>>> sp = make_shared<pair<string,set<size_t>>>(*wlIter);
 	//QueryResult qrfound(spVs, sp);
 	return QueryResult(spVs, make_shared<pair<string, set<size_t>>>(*wlIter));//「()」：呼叫建構器
+}
+
+
+#endif // !TextQuery_H
