@@ -49,13 +49,7 @@ pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>> queryData
 
 int main() {
 	string fName, strSearch;
-	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
-	if (cin >> fName);
-	//必須檢查檔案存不存在	
-	else//若沒有指定檔案的話
-	{
-		fName = "V:\\Programming\\C++\\input.txt";
-	}
+	fName = "V:\\Programming\\C++\\成品\\cj5.txt";
 	cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
 	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
 	//第89集1：4：00//可參考前面談資料流（stream）的部分
