@@ -1,52 +1,77 @@
 ﻿// prog1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
-//
-
-//using std::cout; using std::cin;using std::endl;
-//#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
+#include<fstream>
+#include<sstream>
+#include<string>
+#include<vector>
+#include<map>
+#include<set>
 #include<memory>
-#include <vector>
-#include <fstream>
-#include"TextQuery.h"
 
 using namespace std;
+vector<string>vs;
+map<string, set<size_t>>mpWord_lineNum;
+map<string, set<size_t>>::iterator mpIter;
+
+void qureyData(ifstream& ifs) {//配置好檢索資料
+	string wordLine;
+	size_t lineNum(0);
+	while (!ifs.eof() && getline(ifs, wordLine))
+	{
+		vs.push_back(wordLine);
+		lineNum++;
+		istringstream is(wordLine);
+		string word;
+		while (is >> word)
+		{
+			mpIter = mpWord_lineNum.find(word);
+			if (mpIter == mpWord_lineNum.end()) {
+				set<size_t>st_lineNum;
+				st_lineNum.insert(lineNum);
+				mpWord_lineNum.insert(make_pair(word, st_lineNum));
+			}
+			else//若map中已有此字
+				mpIter->second.insert(lineNum);
+		}
+	}
+}
+void query(string& searchWord) {
+	mpIter = mpWord_lineNum.find(searchWord);
+	if (mpIter == mpWord_lineNum.end())
+	{
+		cout << "沒有找到\"" << searchWord << "\"字！" << endl;
+	}
+	else
+	{
+		size_t s = mpIter->second.size();
+		cout << endl;
+		cout << searchWord << " occurs " << s << ((s > 1) ? " times" : " time") << endl;
+		for (size_t s : mpIter->second)
+			cout << "\t(line " << s << ") " << vs[s] <<endl;		
+		cout << endl;
+	}
+}
 
 int main() {
-	string strSearch; 	
-	cout <<"請指定要檢索的檔案全名(fullname,含路徑與副檔名)" <<endl;
+	string strSearch;
+	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
 	if (cin >> strSearch);
-		//必須檢查檔案存不存在	
+	//必須檢查檔案存不存在	
 	else//若沒有指定檔案的話
 	{
-		strSearch="V:\\Programming\\C++\\input.txt";
+		strSearch = "V:\\Programming\\C++\\input.txt";
 	}
 	ifstream ifs(strSearch);
-	TextQuery tq(ifs);
-	cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
-	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
-	//第89集1：4：00//可參考前面談資料流（stream）的部分
+	qureyData(ifs);
+	cin.clear();
 	while (true)
 	{
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
-		if (!(cin >> strSearch)|| strSearch == "q") break;
-		tq.query(strSearch);
+		if (!(cin >> strSearch) || strSearch == "q") break;
+		query(strSearch);
 	}
-
-	//V:\\Programming\\C++\\input.txt
 }
-
-
-
-
-//int main(int argc, const char** argv)
-//{
-//	return 0;
-//}
-
-
-			//printf("%i\n", i);
-			//std::cout << "Hello World!\n";
 
 
 
