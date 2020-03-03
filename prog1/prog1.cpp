@@ -60,7 +60,7 @@ int main() {
 	//必須檢查檔案存不存在	
 	else//若沒有指定檔案的話
 	{
-		strSearch = "V:\\Programming\\C++\\input.txt";
+		strSearch = R"(V:\Programming\C++\input.txt)";//"V:\\Programming\\C++\\input.txt";
 	}
 	ifstream ifs(strSearch);
 	qureyData(ifs);
