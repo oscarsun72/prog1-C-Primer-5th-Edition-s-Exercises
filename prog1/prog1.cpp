@@ -64,12 +64,13 @@ int main() {
 	ifstream ifs(strSearch);
 	qureyData(ifs);
 	cin.clear();
-	while (true)
+	do
 	{
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
 		if (!(cin >> strSearch) || strSearch == "q") break;
 		query(strSearch);
-	}
+	}while (true);
+	
 }
 
 
