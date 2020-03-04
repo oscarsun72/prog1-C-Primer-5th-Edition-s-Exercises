@@ -7,7 +7,6 @@
 #include<vector>
 #include<map>
 #include<set>
-#include<memory>
 
 using namespace std;
 vector<string>vs;
@@ -48,7 +47,7 @@ void query(string& searchWord) {
 		cout << endl;
 		cout << searchWord << " occurs " << s << ((s > 1) ? " times" : " time") << endl;
 		for (size_t s : mpIter->second)
-			cout << "\t(line " << s << ") " << vs[s] <<endl;		
+			cout << "\t(line " << s << ") " << vs[s-1] <<endl;		
 		cout << endl;
 	}
 }
