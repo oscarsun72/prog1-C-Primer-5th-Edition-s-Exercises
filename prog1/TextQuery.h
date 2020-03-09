@@ -18,7 +18,7 @@ public:
 	QueryResult query(const std::string&)const;
 private:
 	std::shared_ptr<std::vector<std::string>>file;
-	std::map<std::string, std::shared_ptr<std::set<size_t>>>wm;
+	std::map<std::string, std::shared_ptr<std::vector<line_no>>>wm;
 };
 
 TextQuery::TextQuery(std::ifstream& is) :file(new std::vector<std::string>)
