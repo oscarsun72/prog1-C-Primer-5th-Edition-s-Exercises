@@ -68,9 +68,9 @@ QueryResult TextQuery::query(const std::string& sought)const
 }
 std::ostream& print(std::ostream& os, const QueryResult& qr) {
 	os << qr.sought << " occurs " << qr.lines->size() <<
-		((qr.lines->size() > 1) ? "times" : "time") << std::endl;
+		((qr.lines->size() > 1) ? " times" : " time") << std::endl;
 	for (auto num : *qr.lines)
-		os << "(line " << num + 1 << ") " << *(qr.file->begin() + num) << std::endl;
+		os << "\t(line " << num + 1 << ") " << *(qr.file->begin() + num) << std::endl;
 	return os;
 }
 
