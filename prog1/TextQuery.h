@@ -1,6 +1,6 @@
 ﻿#ifndef TextQuery_H
 #define TextQuery_H
-#include<vector>
+#include"StrBlob.h"
 #include<memory>
 #include<iostream>
 #include<fstream>
@@ -13,15 +13,15 @@ class QueryResult;
 class TextQuery
 {
 public:
-	using line_no = std::vector<std::string>::size_type;
+	using line_no = StrBlob::size_type;
 	TextQuery(std::ifstream&);
 	QueryResult query(const std::string&)const;
 private:
-	std::shared_ptr<std::vector<std::string>>file;
+	std::shared_ptr<StrBlob>file;
 	std::map<std::string, std::shared_ptr<std::set<line_no>>>wm;
 };
 
-TextQuery::TextQuery(std::ifstream& is) :file(new std::vector<std::string>)
+TextQuery::TextQuery(std::ifstream& is) :file(new StrBlob)
 {
 	std::string text;
 	while (getline(is, text))//課本頁488沒有「&&!is.eof()」恐怕會出問題
@@ -48,12 +48,12 @@ class QueryResult
 	friend std::ostream& print(std::ostream&, const QueryResult&);
 public:
 	QueryResult(std::string s, std::shared_ptr<std::set<TextQuery::line_no>>p,
-		std::shared_ptr<std::vector<std::string>>f)
+		std::shared_ptr<StrBlob>f)
 		:sought(s), lines(p), file(f) {};//英文版這裡和下面對lines的宣告「TextQuery::line_no」又錯了（中文版照錯，頁489） https://play.google.com/books/reader?id=J1HMLyxqJfgC&pg=GBS.PT906.w.2.0.0
 private:
 	std::string sought;
 	std::shared_ptr<std::set<TextQuery::line_no>>lines;
-	std::shared_ptr<std::vector<std::string>>file;
+	std::shared_ptr<StrBlob>file;
 };
 
 QueryResult TextQuery::query(const std::string& sought)const
@@ -70,7 +70,9 @@ std::ostream& print(std::ostream& os, const QueryResult& qr) {
 	os << qr.sought << " occurs " << qr.lines->size() <<
 		((qr.lines->size() > 1) ? " times" : " time") << std::endl;
 	for (auto num : *qr.lines)
-		os << "\t(line " << num + 1 << ") " << *(qr.file->begin() + num) << std::endl;
+		//以下2式效果相同
+		//os << "\t(line " << num + 1 << ") " << *(qr.file->begin() + num) << std::endl;
+		os << "\t(line " << num + 1 << ") " << (*qr.file)[num] << std::endl;
 	return os;
 }
 
