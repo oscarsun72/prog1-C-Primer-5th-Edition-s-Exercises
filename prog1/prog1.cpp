@@ -5,20 +5,20 @@
 #include<string>
 #include"TextQuery.h"
 using namespace std;
-void runQueries(ifstream& infile){//頁486，引數infile是一個檔案資料流（stream ifstream）代表一個準備作為檢索對象的檔案
-		TextQuery tq(infile); //讀入檔案並建置（build）檢索用的map
-		// iterate with the user: 提示使用者輸入檢索字詞來進行檢索並印出其檢索結果
-		while (true)
-		{
-			cout << "enter word to look for, or q to quit:";
-			string s;
-			//如果讀取使用者輸入的字詞失敗（hit end-of-file on the input），或者是使用者輸入了「q」，就中止
-			if (!(cin >> s) || s == "q")
-				break;
-			//執行檢索並印出結果
-			print(cout, tq.query(s)) << endl;
-		}
+void runQueries(ifstream& infile) {//頁486，引數infile是一個檔案資料流（stream ifstream）代表一個準備作為檢索對象的檔案
+	TextQuery tq(infile); //讀入檔案並建置（build）檢索用的map
+	// iterate with the user: 提示使用者輸入檢索字詞來進行檢索並印出其檢索結果
+	while (true)
+	{
+		cout << "enter word to look for, or q to quit:";
+		string s;
+		//如果讀取使用者輸入的字詞失敗（hit end-of-file on the input），或者是使用者輸入了「q」，就中止
+		if (!(cin >> s) || s == "q")
+			break;
+		//執行檢索並印出結果
+		print(cout, tq.query(s)) << endl;
 	}
+}
 
 int main() {
 	ifstream ifs(R"(V:\Programming\C++\input.txt)");
