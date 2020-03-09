@@ -35,9 +35,9 @@ TextQuery::TextQuery(std::ifstream& is) :file(new std::vector<std::string>)
 			auto& lines = wm[word];
 			if (!lines)
 			{
-				lines.reset(new std::set<line_no>);
+				lines.reset(new std::vector<line_no>);
 			}
-			lines->insert(n);
+			lines->push_back(n);
 		}
 	}
 }
@@ -47,19 +47,19 @@ class QueryResult
 {
 	friend std::ostream& print(std::ostream&, const QueryResult&);
 public:
-	QueryResult(std::string s, std::shared_ptr<std::set<TextQuery::line_no>>p,
+	QueryResult(std::string s, std::shared_ptr<std::vector<TextQuery::line_no>>p,
 		std::shared_ptr<std::vector<std::string>>f)
 		:sought(s), lines(p), file(f) {};//英文版這裡和下面對lines的宣告「TextQuery::line_no」又錯了（中文版照錯，頁489） https://play.google.com/books/reader?id=J1HMLyxqJfgC&pg=GBS.PT906.w.2.0.0
 private:
 	std::string sought;
-	std::shared_ptr<std::set<TextQuery::line_no>>lines;
+	std::shared_ptr<std::vector<TextQuery::line_no>>lines;
 	std::shared_ptr<std::vector<std::string>>file;
 };
 
 QueryResult TextQuery::query(const std::string& sought)const
 {
-	static std::shared_ptr<std::set<TextQuery::line_no >>
-		nodata(new std::set<line_no>);
+	static std::shared_ptr<std::vector<TextQuery::line_no >>
+		nodata(new std::vector<line_no>);
 	auto loc = wm.find(sought);
 	if (loc == wm.end())
 		return QueryResult(sought, nodata, file);
