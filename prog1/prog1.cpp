@@ -2,74 +2,27 @@
 
 #include<iostream>
 #include<fstream>
-#include<sstream>
 #include<string>
-#include<vector>
-#include<map>
-#include<set>
-
+#include"TextQuery.h"
 using namespace std;
-vector<string>vs;
-map<string, set<size_t>>mpWord_lineNum;
-map<string, set<size_t>>::iterator mpIter;
-
-void qureyData(ifstream& ifs) {//配置好檢索資料
-	string wordLine;
-	size_t lineNum(0);
-	while (!ifs.eof() && getline(ifs, wordLine))
-	{
-		vs.push_back(wordLine);
-		lineNum++;
-		istringstream is(wordLine);
-		string word;
-		while (is >> word)
+void runQueries(ifstream& infile){//頁486，引數infile是一個檔案資料流（stream ifstream）代表一個準備作為檢索對象的檔案
+		TextQuery tq(infile); //讀入檔案並建置（build）檢索用的map
+		// iterate with the user: 提示使用者輸入檢索字詞來進行檢索並印出其檢索結果
+		while (true)
 		{
-			mpIter = mpWord_lineNum.find(word);
-			if (mpIter == mpWord_lineNum.end()) {
-				set<size_t>st_lineNum;
-				st_lineNum.insert(lineNum);
-				mpWord_lineNum.insert(make_pair(word, st_lineNum));
-			}
-			else//若map中已有此字
-				mpIter->second.insert(lineNum);
+			cout << "enter word to look for, or q to quit:";
+			string s;
+			//如果讀取使用者輸入的字詞失敗（hit end-of-file on the input），或者是使用者輸入了「q」，就中止
+			if (!(cin >> s) || s == "q")
+				break;
+			//執行檢索並印出結果
+			print(cout, tq.query(s)) << endl;
 		}
 	}
-}
-void query(string& searchWord) {
-	mpIter = mpWord_lineNum.find(searchWord);
-	if (mpIter == mpWord_lineNum.end())
-	{
-		cout << "沒有找到\"" << searchWord << "\"字！" << endl;
-	}
-	else
-	{
-		size_t s = mpIter->second.size();
-		cout << endl;
-		cout << searchWord << " occurs " << s << ((s > 1) ? " times" : " time") << endl;
-		for (size_t s : mpIter->second)
-			cout << "\t(line " << s << ") " << vs[s-1] <<endl;		
-		cout << endl;
-	}
-}
 
 int main() {
-	string strSearch;
-	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
-	if (cin >> strSearch);
-	//必須檢查檔案存不存在	
-	else//若沒有指定檔案的話
-	{
-		strSearch = R"(V:\Programming\C++\input.txt)";//"V:\\Programming\\C++\\input.txt";
-	}
-	ifstream ifs(strSearch);
-	qureyData(ifs);
-	cin.clear();
-	while (true)
-	{
-		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
-		if (!(cin >> strSearch) || strSearch == "q") break;
-		query(strSearch);
-	}
+	ifstream ifs(R"(V:\Programming\C++\input.txt)");
+	runQueries(ifs);
 }
 
 
