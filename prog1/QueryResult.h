@@ -73,8 +73,12 @@ inline set<size_t>::iterator QueryResult::end()
 }
 
 inline const shared_ptr<vector<string>>& QueryResult::get_file()const
-{
-	return vs;
+{ 
+	weak_ptr<vector<string>>w(vs);
+	if (!w.expired())
+		return vs;
+	else
+		throw runtime_error("不是有效的檔案");
 }
 
 #endif // !QueryResult_H
