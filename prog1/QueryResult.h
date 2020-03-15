@@ -4,6 +4,7 @@
 #include<memory>
 #include<iostream>
 #include<iterator>
+#include<set>
 #include"TextQuery.h"
 using namespace std;
 class QueryResult
@@ -13,6 +14,9 @@ public:
 	QueryResult(shared_ptr<vector<string>>, shared_ptr<pair<string, set<size_t>>>);
 	~QueryResult();
 	void print();
+	set<size_t>::iterator begin();
+	set<size_t>::iterator end();
+	const shared_ptr<vector<string>>&get_file()const;
 
 private:
 	shared_ptr<vector<string>>vs;
@@ -56,6 +60,21 @@ inline void QueryResult::print()
 		}
 	}
 	cout << endl;
+}
+
+inline set<size_t>::iterator QueryResult::begin(){
+	
+	return pair_str_set->second.begin();
+}
+
+inline set<size_t>::iterator QueryResult::end()
+{
+	return pair_str_set->second.end();
+}
+
+inline const shared_ptr<vector<string>>& QueryResult::get_file()const
+{
+	return vs;
 }
 
 #endif // !QueryResult_H

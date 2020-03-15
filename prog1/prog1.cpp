@@ -66,6 +66,9 @@ int main() {
 		if (!(cin >> strSearch) || strSearch == "q") break;
 		QueryResult qr = tq.query(strSearch);
 		qr.print();
+		cout <<"the context of the first line in the file is \""<< *qr.get_file()->begin() << "\""<<endl;
+		cout << "the FIRST line is line " << *qr.begin() << endl;
+		cout <<"the LAST line is line " <<*--qr.end() << endl;
 	}
 }
 
