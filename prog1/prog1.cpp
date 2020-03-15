@@ -1,87 +1,30 @@
 ﻿// prog1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
-//
-
-//using std::cout; using std::cin;using std::endl;
-//#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<memory>
-#include <fstream>
+#include<fstream>
+#include<string>
 #include"TextQuery.h"
-#include"QueryResult.h"
 using namespace std;
-
-pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>> queryData(ifstream& infile)
-{
-	string lStr;
-	size_t line_Num{ 0 };
-	vector<string>vs;//主要就是這兩個（vector、map）容器要作為TexQuery與QueryResult資源共享者
-	map<string, set<size_t>>word_lineNum;
-	/*用了make_shared函式，就已經動用到了動態記憶體區了：
-	這個函式會在動態記憶體區中配置並初始化（即建置）一個物件，然後回傳一個shared_ptr指向該物件。和智慧指標一樣，make_shared也是定義在memory標頭檔中。(頁451）
-	而shared_ptr類別是會保證只要還有任何的shared_ptr依附在那個記憶體上，那個記憶體就不會被釋放。（頁454）
-	https://play.google.com/books/reader?id=J1HMLyxqJfgC&pg=GBS.PT842.w.7.0.42
-	*/
-	shared_ptr<vector<string>>spVs(make_shared<vector<string>>(vs));//利用智慧指標shared_ptr來達到
-	shared_ptr<map<string, set<size_t>>>spWord_lineNum(
-		make_shared<map<string, set<size_t>>>(word_lineNum));//資源共用的目的
-	while (infile && !infile.eof())//第98集6:46:00
-	{
-		getline(infile, lStr);
-		spVs->push_back(lStr);//one line of text in an element		
-		++line_Num;
-		istringstream isstr(lStr);
-		string word;
-		while (isstr >> word)
+void runQueries(ifstream& infile){//頁486，引數infile是一個檔案資料流（stream ifstream）代表一個準備作為檢索對象的檔案
+		TextQuery tq(infile); //讀入檔案並建置（build）檢索用的map
+		// iterate with the user: 提示使用者輸入檢索字詞來進行檢索並印出其檢索結果
+		while (true)
 		{
-			map<string, set<size_t>>::iterator mIter = spWord_lineNum->find(word);
-			if (mIter == spWord_lineNum->end()) {//如果文字行號的map還沒有此文字的話
-				set<size_t> line_num_st;
-				line_num_st.insert(line_Num);
-				spWord_lineNum->insert(make_pair(word, line_num_st));
-			}
-			else//如果文字行號的map已經有此文字的話
-				mIter->second.insert(line_Num);//若原已有此行號，用insert就不會插入（何況set本來鍵值（就是「值」）就不能重複
+			cout << "enter word to look for, or q to quit:";
+			string s;
+			//如果讀取使用者輸入的字詞失敗（hit end-of-file on the input），或者是使用者輸入了「q」，就中止
+			if (!(cin >> s) || s == "q")
+				break;
+			//執行檢索並印出結果
+			print(cout, tq.query(s)) << endl;
 		}
 	}
-	return make_pair(spVs, spWord_lineNum);
-}
 
 int main() {
-	string fName, strSearch;
-	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
-	if (cin >> fName);
-	//必須檢查檔案存不存在	
-	else//若沒有指定檔案的話
-	{
-		fName = "V:\\Programming\\C++\\input.txt";
-	}
-	cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
-	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
-	//第89集1：4：00//可參考前面談資料流（stream）的部分
-	ifstream ifs(fName);
-	TextQuery tq(queryData(ifs));
-	while (true) {
-		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
-		if (!(cin >> strSearch) || strSearch == "q") break;
-		QueryResult qr = tq.query(strSearch);
-		qr.print();
-		cout <<"the context of the first line in the file is \""<< *qr.get_file()->begin() << "\""<<endl;
-		cout << "the FIRST line is line " << *qr.begin() << endl;
-		cout <<"the LAST line is line " <<*--qr.end() << endl;
-	}
+	ifstream ifs(R"(V:\Programming\C++\input.txt)");
+	runQueries(ifs);
 }
 
-
-
-//int main(int argc, const char** argv)
-//{
-//	return 0;
-//}
-
-
-			//printf("%i\n", i);
-			//std::cout << "Hello World!\n";
 
 
 
