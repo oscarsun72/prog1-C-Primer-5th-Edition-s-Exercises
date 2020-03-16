@@ -3,23 +3,23 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
+#include<string>
+class HasPtr
+{
+public:
+	HasPtr(const std::string& s = std::string()) :
+		ps(new std::string(s)), i(0) {}
+	HasPtr(const HasPtr& ) :ps(new std::string(*ps)),i(i){}//拷貝建構器
+private:
+	std::string* ps;
+	int i;
+};
 
-#include<iostream>
-#include<iterator>
-#include<vector>
-#include<algorithm>
-using namespace std;
 int main() {
-	char ch = 'a';
-	typedef char* pstring;
-	using pstring1 = char*;
-	pstring p = &ch;
-	pstring1 p1 = &ch;
-	if (p != p1)
-	{
-		cout << "hello world!\n"<<endl;
-	}
-
+	HasPtr hp;	
+	HasPtr hp2("守真"),hp1(std::string("阿彌陀佛"));	
+	hp = hp1;
+	hp1 = hp2;
 }
 
 //int main(int argc, const char** argv)
