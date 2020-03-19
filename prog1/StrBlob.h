@@ -26,6 +26,8 @@ public:
 	StrBlobPtr begin();
 	StrBlobPtr end();
 
+	StrBlob& operator=(const StrBlob&);// 拷貝指定運算子
+
 private:
 	std::shared_ptr<std::vector<std::string>> data;
 	// throws msg if data[i] isn't valid
@@ -41,6 +43,7 @@ public:
 	StrBlobPtr(StrBlob& a, size_t sz = 0) : wptr(a.data), curr(sz) {}//第2個建構器
 	std::string& deref() const;
 	StrBlobPtr& incr(); // 前缀版本(prefix version)
+	StrBlobPtr& operator=(const StrBlobPtr&); // 拷貝指定運算子
 private:
 	//如果檢查成功，check會回傳一個shared_ptr指向vector
 	std::shared_ptr<std::vector<std::string>>

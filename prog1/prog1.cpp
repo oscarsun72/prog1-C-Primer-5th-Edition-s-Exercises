@@ -11,9 +11,13 @@ using namespace std;
 
 int main() {
 	StrBlob stb;
-	StrBlob stbv{"a","b"};
-	StrBlob stbv4{"a","b","c","d"};
-	StrBlobPtr srbp(stbv);//第85集 3:53:00 臉書第428集
+	StrBlob stbv{"孫守真","阿彌陀佛"};
+	StrBlob stbv4{"孫守真","任真","法藏比丘","阿彌陀佛"};
+	//第102集 8:46:00 臉書第530集
+	stb = stbv;	//使用StrBlob的拷貝指定運算子（模擬編譯器湊合版的）
+	StrBlobPtr srbp1(stb);
+	StrBlobPtr srbp;
+	srbp = srbp1;//使用StrBlobPtr的拷貝指定運算子（模擬編譯器湊合版的）
 	cout << srbp.incr().deref() << endl;
 	cout << stbv4.begin().deref() << endl;
 }

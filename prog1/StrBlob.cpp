@@ -35,6 +35,11 @@ StrBlobPtr StrBlob::end()
 {
 	return StrBlobPtr(*this,this->size());
 }
+StrBlob& StrBlob::operator=(const StrBlob&rhs)
+{
+	data = rhs.data;
+	return *this;
+}
 //StrBlobPtr StrBlob::begin() {
 //	return StrBlobPtr(*this);
 //}
@@ -99,6 +104,13 @@ StrBlobPtr& StrBlobPtr::incr()
 	//auto sp = check(curr, "increment past end of StrBlobPtr");
 	shared_ptr<vector<string>> sp = check(curr, "increment past end of StrBlobPtr");
 	++curr; // advance the current state
+	return *this;
+}
+
+StrBlobPtr& StrBlobPtr::operator=(const StrBlobPtr&rhs)
+{
+	wptr = rhs.wptr;
+	curr = rhs.curr;
 	return *this;
 }
 
