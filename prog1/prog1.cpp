@@ -5,7 +5,6 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<vector>
 #include"StrBlob.h"
 using namespace std;
 
