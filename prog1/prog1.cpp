@@ -11,7 +11,7 @@ public:
 		ps(new std::string(s)), i(0) {}
 	HasPtr(const HasPtr& ) :ps(new std::string(*ps)),i(i){}//拷貝建構器
 	HasPtr& operator=(const HasPtr&); //拷貝指定運算子
-	~HasPtr() {};
+	~HasPtr() {};//解構器（destructor）
 private:
 	std::string* ps;
 	int i;
