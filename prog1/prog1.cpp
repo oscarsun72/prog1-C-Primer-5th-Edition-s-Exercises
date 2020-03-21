@@ -11,6 +11,7 @@ public:
 		ps(new std::string(s)), i(0) {}
 	HasPtr(const HasPtr& ) :ps(new std::string(*ps)),i(i){}//拷貝建構器
 	HasPtr& operator=(const HasPtr&); //拷貝指定運算子
+	~HasPtr() {};
 private:
 	std::string* ps;
 	int i;
@@ -27,6 +28,8 @@ int main() {
 	HasPtr hp2("守真"),hp1(std::string("阿彌陀佛"));	
 	hp = hp1;
 	hp1 = hp2;
+	HasPtr* p = new HasPtr("南無阿彌陀佛");
+	delete p;
 }
 
 //int main(int argc, const char** argv)
