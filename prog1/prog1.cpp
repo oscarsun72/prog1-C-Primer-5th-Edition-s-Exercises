@@ -7,6 +7,7 @@
 using namespace std;
 struct numbered{
 	numbered():mysn(2*rand()) {};
+	numbered(const numbered&):mysn(2*rand()) {};
 	unsigned mysn;
 };
 void f(numbered s) { cout << s.mysn << endl; }
