@@ -3,33 +3,40 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<string>
-class HasPtr
+#include<vector>
+#include<iostream>
+using namespace std;
+struct X
 {
-public:
-	HasPtr(const std::string& s = std::string()) :
-		ps(new std::string(s)), i(0) {}
-	HasPtr(const HasPtr& ) :ps(new std::string(*ps)),i(i){}//拷貝建構器
-	HasPtr& operator=(const HasPtr&); //拷貝指定運算子
-	~HasPtr() {};//解構器（destructor）
-private:
-	std::string* ps;
-	int i;
+	X(const string& s) :s(s){ std::cout << "X()" << std::endl; }//建構器
+	X(const X&,const string&s="南無阿彌陀佛"):s(s) { std::cout << "X(const X&)" << std::endl; }//拷貝建構器
+	X& operator=(const X&x){//拷貝指定運算子
+		std::cout<<"operator="<<endl;
+		s=x.s;
+		return *this;	
+	}
+	~X() { cout << "~X()" << endl; };//解構器
+	string s;
 };
-HasPtr& HasPtr::operator=(const HasPtr&rhH)
-{
-	i = rhH.i;
-	*ps = *rhH.ps;
-	return *this;
-}
+
 
 int main() {
-	HasPtr hp;	
-	HasPtr hp2("守真"),hp1(std::string("阿彌陀佛"));	
-	hp = hp1;
-	hp1 = hp2;
-	HasPtr* p = new HasPtr("南無阿彌陀佛");
-	delete p;
+	X x("阿彌陀佛"); //普通一般的
+	const X xc("const南無阿彌陀佛");//常值的
+	X& xRef{x};//參考型別
+	X x1(x,x.s);
+	X x2(xc,xc.s);
+	X xr(xRef,xRef.s);
+	X* xp = new X("new孫守真");
+	//vector<X>vec{*xp,xr,x2,x1,x };
+	vector<X>vec;
+	vec.push_back(*xp);
+	vec.push_back(xr);
+	vec.push_back(x2);
+	vec.push_back(x1);
+	vec.push_back(x);
+	vec.pop_back();
+	delete xp;
 }
 
 //int main(int argc, const char** argv)
