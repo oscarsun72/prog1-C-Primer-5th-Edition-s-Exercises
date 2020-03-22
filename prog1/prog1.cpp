@@ -3,40 +3,17 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<vector>
 #include<iostream>
 using namespace std;
-struct X
-{
-	X(const string& s) :s(s){ std::cout << "X()" << std::endl; }//建構器
-	X(const X&,const string&s="南無阿彌陀佛"):s(s) { std::cout << "X(const X&)" << std::endl; }//拷貝建構器
-	X& operator=(const X&x){//拷貝指定運算子
-		std::cout<<"operator="<<endl;
-		s=x.s;
-		return *this;	
-	}
-	~X() { cout << "~X()" << endl; };//解構器
-	string s;
+struct numbered{
+	numbered():mysn(2*rand()) {};
+	unsigned mysn;
 };
-
-
+void f(numbered s) { cout << s.mysn << endl; }
 int main() {
-	X x("阿彌陀佛"); //普通一般的
-	const X xc("const南無阿彌陀佛");//常值的
-	X& xRef{x};//參考型別
-	X x1(x,x.s);
-	X x2(xc,xc.s);
-	X xr(xRef,xRef.s);
-	X* xp = new X("new孫守真");
-	//vector<X>vec{*xp,xr,x2,x1,x };
-	vector<X>vec;
-	vec.push_back(*xp);
-	vec.push_back(xr);
-	vec.push_back(x2);
-	vec.push_back(x1);
-	vec.push_back(x);
-	vec.pop_back();
-	delete xp;
+	//f(numbered());
+	numbered a, b = a, c = b;
+	f(a);f(b); f(c);
 }
 
 //int main(int argc, const char** argv)
