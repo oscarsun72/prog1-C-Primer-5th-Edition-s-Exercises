@@ -10,6 +10,7 @@ struct numbered{
 	numbered(const numbered&):mysn(2*rand()) {};
 	unsigned mysn;
 };
+//「numbered s」還要再調用一次拷貝建構器，所以s與a、b、c的mysn成員值未必一致
 void f(numbered s) { cout << s.mysn << endl; }
 int main() {
 	//f(numbered());
