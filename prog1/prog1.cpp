@@ -3,64 +3,30 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-
-#include<iostream>
-#include<memory>
-#include <fstream>
-#include"TextQuery.h"
+#include<string>
 using namespace std;
-string make_plural(size_t ctr, const string& word,//頁224
-					const string &ending)
+class HasPtr
 {
-	return (ctr > 1) ? word + ending : word;
-}
-ostream& print(ostream& os, const QueryResult& qr)
-{
-	//如果要找的字有找到，就印出它出現的次數及所有找到的內容
-	//os << qr.sought << " occurs " << qr.lines->size() << " "
-	//	<< make_plural(qr.lines->size(), "time", "s") << endl;
-	os << qr.sought << " occurs " << qr.lines->size() << " "
-		<< make_plural(qr.lines->size(), "time", "s") << endl;
-	//印出所有要找的字詞所在行的內容
-	for (auto num : *qr.lines) //處理set中的每個元素
-	//避免出現「第0行」這樣的訊息來使人困擾
-		os
-		<< "\t(line " << num + 1 << ")"
-		<< *(qr.file->begin() + num) << endl;
-	return os;
-}
+public:
+    HasPtr(const std::string& s = std::string()) :
+        ps(new std::string(s)), i(0) {}
+    //HasPtr(const HasPtr& hp):ps(&(*hp.ps)),i(hp.i) {}//拷貝建構器
+    HasPtr(const HasPtr& hp):ps(&(*hp.ps)),i(hp.i) {}//拷貝建構器
+    HasPtr& operator=(const HasPtr& hp) { 
+        ps = &(*hp.ps);
+        i = hp.i;
+        return *this;
+    }
+//private:
+    std::string* ps;
+    int i;
+};
+
 int main() {
-	string fName, strSearch;
-	//cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
-	//if (cin >> fName);
-	////必須檢查檔案存不存在	
-	//else//若沒有指定檔案的話
-	//{
-		fName = "V:\\Programming\\C++\\input.txt";
-	//}
-	//cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
-	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
-	//第103集8：58：00//可參考前面談資料流（stream）的部分
-	ifstream ifs(fName);
-	TextQuery tq1(ifs);
-	//TextQuery tq(tq1);//使用編譯器湊合的拷貝建構器，會將TextQuery的二個成員都複製（拷貝）
-	//TextQuery tq=tq1;//使用編譯器湊合的拷貝指定運算子，一樣會將TextQuery的二個成員都複製（拷貝）
-	TextQuery* p= new TextQuery(tq1);//使用編譯器湊合的拷貝建構器
-	TextQuery tq = *p;//使用編譯器湊合的拷貝指定運算子，拷貝一個副本出來存在tq裡，故當p所指的被清除了，tq依然有效，二者是互不相干的獨立物件
-	delete p;//使用TextQuery自行定義的解構器
-
-
-	while (true) {
-		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
-		if (!(cin >> strSearch) || strSearch == "q") break;
-		QueryResult qr1 = tq.query(strSearch);
-		//QueryResult qr(qr1);//使用編譯器湊合的拷貝建構器
-		//QueryResult qr=qr1;//使用編譯器湊合的拷貝指定運算子
-		QueryResult* p=new QueryResult(qr1);//使用編譯器湊合的拷貝建構器
-		QueryResult qr = *p;
-		delete p;//使用QueryResult自訂的解構器
-		print(cout,qr);
-	}
+    HasPtr hp("海賢老和尚"), hp1(hp), hp2("孫守真"), hp3("阿彌陀佛");
+    hp2 = hp1;
+    hp2 = hp3;
+    hp2.i = 2;//the hp3.i still is 0;
 }
 
 
