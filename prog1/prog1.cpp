@@ -8,7 +8,6 @@
 #include<memory>
 #include <fstream>
 #include"TextQuery.h"
-#include"QueryResult.h"
 using namespace std;
 string make_plural(size_t ctr, const string& word,//頁224
 					const string &ending)

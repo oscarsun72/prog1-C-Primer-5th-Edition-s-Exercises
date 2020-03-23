@@ -8,7 +8,6 @@
 #include<string>//要用getline函式，要引入這一行
 #include<map>
 #include<set>
-#include "QueryResult.h"
 using namespace std;
 class QueryResult; //對於query成員函式的回傳值而言，這個宣告是必須，因為QueryResult就是query函式的回傳型別
 class TextQuery//頁487
