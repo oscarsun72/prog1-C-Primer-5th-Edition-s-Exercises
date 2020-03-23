@@ -10,10 +10,14 @@ struct Employee {
 //public:
 	Employee() :ID(++myID),employeeName("十方三世佛，共同一法身，一心一智慧，力無畏亦然"){};
 	Employee(const string& employeeName) :ID(++myID),employeeName(employeeName) {};
+	Employee(const Employee& e) :ID(e.ID),employeeName(e.employeeName) {};
+	//string employeeName;
+	//unsigned ID;
 	const string employeeName;
 	const unsigned ID;
 private:
 	static unsigned myID;//此類似宣告-配置資源（宣告類別內的靜態成員）
+	//可見static成員因不屬於物件所有，所以在拷貝控制成員操作時，並不會受到影響
 };
 unsigned Employee::myID = 0;/*此類似定義-建構實例，初始化已經宣告的類別靜態成員
 							如何初始化靜態資料成員
@@ -29,7 +33,11 @@ unsigned Employee::myID = 0;/*此類似定義-建構實例，初始化已經宣�
 void f(Employee s) { cout << s.employeeName << "'s ID is :"<< s.ID << endl; }
 int main() {	
 	Employee a,b("孫守真"),c("阿彌陀佛");
-	f(a);f(b); f(c);
+	//f(a);f(b); f(c);
+	Employee d(c),e;
+	//e = b;
+	Employee fe;
+	f(d); f(e); f(fe);
 }
 
 //int main(int argc, const char** argv)
