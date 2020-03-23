@@ -71,7 +71,12 @@ int main() {
 	while (true) {
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
 		if (!(cin >> strSearch) || strSearch == "q") break;
-		QueryResult qr = tq.query(strSearch);
+		QueryResult qr1 = tq.query(strSearch);
+		//QueryResult qr(qr1);//使用編譯器湊合的拷貝建構器
+		//QueryResult qr=qr1;//使用編譯器湊合的拷貝指定運算子
+		QueryResult* p=new QueryResult(qr1);//使用編譯器湊合的拷貝建構器
+		QueryResult qr = *p;
+		delete p;//使用QueryResult自訂的解構器
 		qr.print();
 	}
 }
