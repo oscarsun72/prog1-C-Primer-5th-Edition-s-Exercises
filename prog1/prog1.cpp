@@ -49,18 +49,25 @@ pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>> queryData
 
 int main() {
 	string fName, strSearch;
-	cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
-	if (cin >> fName);
-	//必須檢查檔案存不存在	
-	else//若沒有指定檔案的話
-	{
+	//cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
+	//if (cin >> fName);
+	////必須檢查檔案存不存在	
+	//else//若沒有指定檔案的話
+	//{
 		fName = "V:\\Programming\\C++\\input.txt";
-	}
-	cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
+	//}
+	//cin.clear();//cin前面已經移動它的迭代器（iterator）了到讀取失敗的位置，故要歸零清除，
 	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
-	//第89集1：4：00//可參考前面談資料流（stream）的部分
+	//第103集8：58：00//可參考前面談資料流（stream）的部分
 	ifstream ifs(fName);
-	TextQuery tq(queryData(ifs));
+	TextQuery tq1(queryData(ifs));
+	//TextQuery tq(tq1);//使用編譯器湊合的拷貝建構器，會將TextQuery的二個成員都複製（拷貝）
+	//TextQuery tq=tq1;//使用編譯器湊合的拷貝指定運算子，一樣會將TextQuery的二個成員都複製（拷貝）
+	TextQuery* p= new TextQuery(tq1);//使用編譯器湊合的拷貝建構器
+	TextQuery tq = *p;//使用編譯器湊合的拷貝指定運算子，拷貝一個副本出來存在tq裡，故當p所指的被清除了，tq依然有效，二者是互不相干的獨立物件
+	delete p;//使用TextQuery自行定義的解構器
+
+
 	while (true) {
 		cout << "請輸入檢索字串,或輸入「q」離開" << endl;
 		if (!(cin >> strSearch) || strSearch == "q") break;
