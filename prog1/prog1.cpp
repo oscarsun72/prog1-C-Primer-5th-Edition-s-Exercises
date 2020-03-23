@@ -5,16 +5,29 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<iostream>
 using namespace std;
-struct numbered{
-	numbered():mysn(2*rand()) {};
-	numbered(const numbered&):mysn(2*rand()) {};
-	unsigned mysn;
+
+struct Employee {
+//public:
+	Employee() :ID(++myID),employeeName("十方三世佛，共同一法身，一心一智慧，力無畏亦然"){};
+	Employee(const string& employeeName) :ID(++myID),employeeName(employeeName) {};
+	const string employeeName;
+	const unsigned ID;
+private:
+	static unsigned myID;//此類似宣告-配置資源（宣告類別內的靜態成員）
 };
-//「numbered s」還要再調用一次拷貝建構器，所以s與a、b、c的mysn成員值未必一致
-void f(numbered s) { cout << s.mysn << endl; }
-int main() {
-	//f(numbered());
-	numbered a, b = a, c = b;
+unsigned Employee::myID = 0;/*此類似定義-建構實例，初始化已經宣告的類別靜態成員
+							https://openhome.cc/Gossip/CppGossip/staticMember.html
+							static 資料成員屬於類別，而非個別實例，想在類別內初始 static 資料成員的話，必須是個 constexpr，也就是必須是編譯時期常數，若否，必須在類別外指定，例如：
+							class Math {
+							public:
+								static double PI;
+							};
+							double Math::PI = 3.14159;
+							*/
+
+void f(Employee s) { cout << s.employeeName << "'s ID is :"<< s.ID << endl; }
+int main() {	
+	Employee a,b("孫守真"),c("阿彌陀佛");
 	f(a);f(b); f(c);
 }
 
