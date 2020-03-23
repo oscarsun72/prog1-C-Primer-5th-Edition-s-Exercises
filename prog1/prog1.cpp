@@ -10,43 +10,26 @@
 #include"TextQuery.h"
 #include"QueryResult.h"
 using namespace std;
-
-pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>> queryData(ifstream& infile)
+string make_plural(size_t ctr, const string& word,//頁224
+					const string &ending)
 {
-	string lStr;
-	size_t line_Num{ 0 };
-	vector<string>vs;//主要就是這兩個（vector、map）容器要作為TexQuery與QueryResult資源共享者
-	map<string, set<size_t>>word_lineNum;
-	/*用了make_shared函式，就已經動用到了動態記憶體區了：
-	這個函式會在動態記憶體區中配置並初始化（即建置）一個物件，然後回傳一個shared_ptr指向該物件。和智慧指標一樣，make_shared也是定義在memory標頭檔中。(頁451）
-	而shared_ptr類別是會保證只要還有任何的shared_ptr依附在那個記憶體上，那個記憶體就不會被釋放。（頁454）
-	https://play.google.com/books/reader?id=J1HMLyxqJfgC&pg=GBS.PT842.w.7.0.42
-	*/
-	shared_ptr<vector<string>>spVs(make_shared<vector<string>>(vs));//利用智慧指標shared_ptr來達到
-	shared_ptr<map<string, set<size_t>>>spWord_lineNum(
-		make_shared<map<string, set<size_t>>>(word_lineNum));//資源共用的目的
-	while (infile && !infile.eof())//第98集6:46:00
-	{
-		getline(infile, lStr);
-		spVs->push_back(lStr);//one line of text in an element		
-		++line_Num;
-		istringstream isstr(lStr);
-		string word;
-		while (isstr >> word)
-		{
-			map<string, set<size_t>>::iterator mIter = spWord_lineNum->find(word);
-			if (mIter == spWord_lineNum->end()) {//如果文字行號的map還沒有此文字的話
-				set<size_t> line_num_st;
-				line_num_st.insert(line_Num);
-				spWord_lineNum->insert(make_pair(word, line_num_st));
-			}
-			else//如果文字行號的map已經有此文字的話
-				mIter->second.insert(line_Num);//若原已有此行號，用insert就不會插入（何況set本來鍵值（就是「值」）就不能重複
-		}
-	}
-	return make_pair(spVs, spWord_lineNum);
+	return (ctr > 1) ? word + ending : word;
 }
-
+ostream& print(ostream& os, const QueryResult& qr)
+{
+	//如果要找的字有找到，就印出它出現的次數及所有找到的內容
+	//os << qr.sought << " occurs " << qr.lines->size() << " "
+	//	<< make_plural(qr.lines->size(), "time", "s") << endl;
+	os << qr.sought << " occurs " << qr.lines->size() << " "
+		<< make_plural(qr.lines->size(), "time", "s") << endl;
+	//印出所有要找的字詞所在行的內容
+	for (auto num : *qr.lines) //處理set中的每個元素
+	//避免出現「第0行」這樣的訊息來使人困擾
+		os
+		<< "\t(line " << num + 1 << ")"
+		<< *(qr.file->begin() + num) << endl;
+	return os;
+}
 int main() {
 	string fName, strSearch;
 	//cout << "請指定要檢索的檔案全名(fullname,含路徑與副檔名)" << endl;
@@ -60,7 +43,7 @@ int main() {
 	//否則如果這裡讀取失敗，後面的cin >> strSearch判斷就會永遠都是false（讀取失敗）了
 	//第103集8：58：00//可參考前面談資料流（stream）的部分
 	ifstream ifs(fName);
-	TextQuery tq1(queryData(ifs));
+	TextQuery tq1(ifs);
 	//TextQuery tq(tq1);//使用編譯器湊合的拷貝建構器，會將TextQuery的二個成員都複製（拷貝）
 	//TextQuery tq=tq1;//使用編譯器湊合的拷貝指定運算子，一樣會將TextQuery的二個成員都複製（拷貝）
 	TextQuery* p= new TextQuery(tq1);//使用編譯器湊合的拷貝建構器
@@ -77,7 +60,7 @@ int main() {
 		QueryResult* p=new QueryResult(qr1);//使用編譯器湊合的拷貝建構器
 		QueryResult qr = *p;
 		delete p;//使用QueryResult自訂的解構器
-		qr.print();
+		print(cout,qr);
 	}
 }
 

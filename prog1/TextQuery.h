@@ -10,77 +10,68 @@
 #include<set>
 #include "QueryResult.h"
 using namespace std;
-class TextQuery
+class QueryResult; //對於query成員函式的回傳值而言，這個宣告是必須，因為QueryResult就是query函式的回傳型別
+class TextQuery//頁487
 {
-	friend class QueryResult;
-	typedef pair<map<string, size_t>::const_iterator, map<string, size_t>::const_iterator>
-		pair_iterator_map;
-	typedef pair<shared_ptr<vector<string>>, shared_ptr<pair<string, set<size_t>>>> pair_sp_vec_str_sp_pair_str_set;
-	using iterator_map = map<string, set<size_t>>::iterator;
 public:
-	//TextQuery() ;
-	TextQuery(ifstream& infile);
-	TextQuery(pair<shared_ptr<vector<string>>, shared_ptr<map<string, set<size_t>>>>spPair) :
-		spVs(spPair.first), word_lineNum(*spPair.second) {};
-	~TextQuery();
-	QueryResult query(const string&);
+    using line_no = vector<string>::size_type;
+    TextQuery(ifstream&);
+    QueryResult query(const string&) const;
+
 private:
-	shared_ptr<vector<string>>spVs;//第89集 2:12:00
-	//一個map關聯式容器(associative container)因為一個字詞key(string)會有好幾行與之對應，故用
-	//map,而其「值」為set容器
-	map<string, set<size_t>>word_lineNum;
+    shared_ptr<vector<string>> file; //指向要被檢索的檔案資料
+    //
+    map<string, shared_ptr<set<line_no>>> wm;
 };
 
-TextQuery::TextQuery(ifstream& infile)
+//讀取要檢索的檔案內容以建構含有其每行內容及箭號的map
+TextQuery::TextQuery(ifstream& is) : file(new vector<string>)
 {
-	string lStr;
-	size_t line_Num{ 0 };
-	vector<string>vs;
-	spVs = make_shared<vector<string>>(vs);
-	while (infile && !infile.eof())//第89集2:4:00
-	{
-		getline(infile, lStr);
-		spVs->push_back(lStr);//one line of text in an element		
-		++line_Num;
-		istringstream isstr(lStr);
-		string word;
-		while (isstr >> word)
-		{
-			map<string, set<size_t>>::iterator mIter = word_lineNum.find(word);
-			if (mIter == word_lineNum.end()) {//如果文字行號的map還沒有此文字的話
-				set<size_t> line_num_st;
-				line_num_st.insert(line_Num);
-				word_lineNum.insert(make_pair(word, line_num_st));
-			}
-			else//如果文字行號的map已經有此文字的話
-				mIter->second.insert(line_Num);//若原已有此行號，用insert就不會插入（何況set本來鍵值（就是「值」）就不能重複
-		}
-	}
+    string text;
+    while (getline(is, text))
+    {                             //一行行處理要檢索的檔案
+        file->push_back(text);  //將這行的內容存放到vector裡頭
+        int n = file->size() - 1; //當前這行的行號
+        istringstream line(text); //讀取此行內的各個詞彙
+        string word;
+        while (line >> word)
+        { //處理這行內的個個字彙
+            //如果這個字彙並不在wm這個map裡面，就對wm下標來新增這個字彙進去
+            auto& lines = wm[word];            //lines這個變數的型別是shared_ptr
+            if (!lines)                        //如果這個shared_ptr是個空值的話，那麼這就是第一次加入這個新字彙到wm中
+                lines.reset(new set<line_no>); //若此字彙是第一次加入到wm中就配置一個新的set給wm作「值」用
+            lines->insert(n);                  //將此行的行號，在set中記下來
+        }
+    }
 }
 
 
-TextQuery::~TextQuery()
+class QueryResult//頁489
 {
+    friend std::ostream& print(std::ostream&, const QueryResult&);
 
-}
+public:
+    QueryResult(std::string s,
+        std::shared_ptr<std::set<TextQuery::line_no>> p,
+        std::shared_ptr<std::vector<std::string>> f) :
+        sought(s), lines(p), file(f) {}
 
-QueryResult TextQuery::query(const string& wordForQuery)
+private:
+    std::string sought; //這次要找的字
+    std::shared_ptr<std::set<TextQuery::line_no>>lines;//要找的字所在的行號
+    std::shared_ptr<std::vector<std::string>> file; //要被檢索的檔案內容
+};
+QueryResult TextQuery::query(const string& sought) const
 {
-	/*第88集4:18:23//4:31:30回傳的應該是檢索結果，
-	 *（此行註文但作參考）或者試用allocator物件記錄在動態記憶體(dynamic memory),再與QueryResult物件共用此資料*/
-	 //臉書直播第443集、444集。第89集1:18:00
-
-	iterator_map wlIter = word_lineNum.find(wordForQuery);
-	if (wlIter == word_lineNum.end())
-	{
-		cout << "沒有找到您要找的字串！" << endl;
-		set<size_t>st;
-		return QueryResult(make_shared<pair<string, set<size_t>>>
-			(make_pair(wordForQuery, st)));//()呼叫運算子（call operator）這裡表示呼叫預設建構器（default constructor）
-	}
-	//shared_ptr<pair<string, set<size_t>>> sp = make_shared<pair<string,set<size_t>>>(*wlIter);
-	//QueryResult qrfound(spVs, sp);
-	return QueryResult(spVs, make_shared<pair<string, set<size_t>>>(*wlIter));//「()」：呼叫建構器
+    //如果要找的字沒找到的話，就回傳這個指向空set的shared_ptr
+    static shared_ptr<set<line_no>> nodata(new set<line_no>);
+    //用find來找而不是用下標運算，以避免動到wm中的元素
+    auto loc = wm.find(sought);
+    if (loc == wm.end())
+        return QueryResult(sought, nodata, file);
+    //沒有找到的話，就回傳這個QueryResult
+    else
+        return QueryResult(sought, loc->second, file);
 }
 
 
