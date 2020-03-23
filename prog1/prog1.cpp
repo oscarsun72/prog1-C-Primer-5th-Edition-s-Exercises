@@ -16,6 +16,7 @@ private:
 	static unsigned myID;//此類似宣告-配置資源（宣告類別內的靜態成員）
 };
 unsigned Employee::myID = 0;/*此類似定義-建構實例，初始化已經宣告的類別靜態成員
+							如何初始化靜態資料成員
 							https://openhome.cc/Gossip/CppGossip/staticMember.html
 							static 資料成員屬於類別，而非個別實例，想在類別內初始 static 資料成員的話，必須是個 constexpr，也就是必須是編譯時期常數，若否，必須在類別外指定，例如：
 							class Math {
