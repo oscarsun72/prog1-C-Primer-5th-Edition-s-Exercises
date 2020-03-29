@@ -7,6 +7,15 @@
 using namespace std;
 StrBlob::StrBlob() : data(make_shared<vector<string>>()) {}
 StrBlob::StrBlob(initializer_list<string> il) : data(make_shared<vector<string>>(il)) {} //用il來作為make_shared引數，就不是空的vector了
+//類值型的拷貝建構器
+StrBlob::StrBlob(const StrBlob& sb) : data(new vector<string>(*sb.data)){}
+//類值型的拷貝指定運算子
+StrBlob& StrBlob::operator=(const StrBlob& sb) {
+	vector<string>* vp= new vector<string>(*sb.data);
+	//reset成員函式同時做了解構與指定
+	data.reset(vp);//智慧指標shared_ptr在經reset後，其原來指向的物件參考計數就歸零，就自動解構，故不需要解構器；如果用解構器，就會刪除data，參考計數歸零後，連帶的它所指向的物件也被刪除，甚至可能被2次刪除！詳頁465：Table 12.3. Other Ways to Define and Change shared_ptrs
+	return *this;
+};
 
 void StrBlob::check(size_type i, const string& msg) const
 {

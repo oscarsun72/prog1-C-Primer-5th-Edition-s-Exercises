@@ -11,6 +11,10 @@ public:
 	typedef std::vector<std::string>::size_type size_type; //以型別別名定義型別成員（type member）
 	StrBlob();                                             //建構器
 	StrBlob(std::initializer_list<std::string> il);        //帶了一個initializer_list<string>參數的建構器
+	StrBlob(const StrBlob&);//拷貝建構器
+	StrBlob& operator=(const StrBlob&);////拷貝指定運算子
+	//inline ~StrBlob() = delete;
+
 	size_type size() const { return data->size(); }        //常值的const成員函式
 	bool empty() const { return data->empty(); }           //常值的const成員函式
 	// add and remove elements

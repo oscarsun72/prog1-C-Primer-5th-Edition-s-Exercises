@@ -5,17 +5,23 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
 #include<iostream>
-#include<vector>
 #include"StrBlob.h"
 using namespace std;
 
 int main() {
 	StrBlob stb;
-	StrBlob stbv{"a","b"};
-	StrBlob stbv4{"a","b","c","d"};
-	StrBlobPtr srbp(stbv);//第85集 3:53:00 臉書第428集
-	cout << srbp.incr().deref() << endl;
-	cout << stbv4.begin().deref() << endl;
+	StrBlob stbv{"孫守真","阿彌陀佛"};
+	StrBlob stbv4{"孫守真","任真","妙音如來","阿彌陀佛"};
+	StrBlob stbcopy(stbv4);
+	StrBlobPtr sp(stbv4);
+	cout << sp.deref() << endl;//孫守真
+	stbv4 = stbcopy;	
+	//cout << sp.deref() << endl;//sp無效了
+	StrBlob stbassign;
+	stbassign = stbcopy;
+	StrBlobPtr srbp(stbassign);//第104集 1:52:00 臉書第538集 https://www.facebook.com/oscarsun72/videos/2656331044478013
+	cout << srbp.incr().deref() << endl;//任真
+	cout << stbv4.begin().deref() << endl;//孫守真
 }
 
 
