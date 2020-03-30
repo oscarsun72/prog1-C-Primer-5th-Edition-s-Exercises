@@ -4,22 +4,14 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
-class HasPtr
-{
-public:
-	HasPtr(const std::string& s = std::string()) :
-		ps(new std::string(s)), i(0) {}
-	HasPtr(const HasPtr& ) :ps(new std::string(*ps)),i(i){}//拷貝建構器
-private:
-	std::string* ps;
-	int i;
-};
-
+#include"HasPtr.h"
 int main() {
 	HasPtr hp;	
 	HasPtr hp2("守真"),hp1(std::string("阿彌陀佛"));	
 	hp = hp1;
 	hp1 = hp2;
+	HasPtr hp3(hp1);
+	hp = hp;
 }
 
 //int main(int argc, const char** argv)
