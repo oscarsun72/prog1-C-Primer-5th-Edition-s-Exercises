@@ -4,14 +4,14 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
-#include"HasPtr.h"
+#include"TreeNode.h"
+using namespace std;
 int main() {
-	HasPtr hp;	
-	HasPtr hp2("守真"),hp1(std::string("阿彌陀佛"));	
-	hp = hp1;
-	hp1 = hp2;
-	HasPtr hp3(hp1);
-	hp = hp;
+	TreeNode tn,tn1("孫守真"),tn2(string("阿彌陀佛"));
+	tn = tn1;
+	TreeNode tn3(tn2);
+	tn = tn2;
+	tn1 = tn3;
 }
 
 //int main(int argc, const char** argv)
