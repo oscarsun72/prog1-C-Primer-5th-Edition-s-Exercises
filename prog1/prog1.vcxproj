@@ -154,6 +154,7 @@
     <ClCompile Include="prog1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinStrTree.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

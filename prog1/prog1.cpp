@@ -5,6 +5,7 @@
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
 #include"TreeNode.h"
+#include"BinStrTree.h"
 using namespace std;
 int main() {
 	TreeNode tn,tn1("孫守真"),tn2(string("阿彌陀佛"));
@@ -12,6 +13,9 @@ int main() {
 	TreeNode tn3(tn2);
 	tn = tn2;
 	tn1 = tn3;
+	BinStrTree bst("妙音如來"),bst1(bst),bst2,bstp(new TreeNode(tn3));
+	bst2 = bst;
+	bstp = bst2;
 }
 
 //int main(int argc, const char** argv)
