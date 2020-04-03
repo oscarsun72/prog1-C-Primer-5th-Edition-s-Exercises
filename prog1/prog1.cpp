@@ -8,7 +8,6 @@
 #include<algorithm>
 #include<iterator>
 #include"HasPtr.h"
-#include"Foo.h"
 using namespace std;
 int main() {
 	HasPtr hp,hp1("孫守真"),hp2(string("阿彌陀佛")),hp3("淨空老法師"),hp4("海賢老和尚"),hp5("阿彌陀佛");

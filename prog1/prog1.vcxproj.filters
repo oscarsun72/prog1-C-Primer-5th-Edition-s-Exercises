@@ -23,8 +23,5 @@
     <ClInclude Include="HasPtr.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Foo.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
