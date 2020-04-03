@@ -10,6 +10,8 @@ public:
     //拷貝建構器：每個HasPtr物件都有一個ps指標指向的那個string的副本
     HasPtr(const HasPtr& p) : ps(new std::string(*p.ps)), i(p.i) {}
     HasPtr& operator=(HasPtr);
+    bool operator<(const HasPtr&);
+    std::string& getStr();
     ~HasPtr() { delete ps; }
     
 private:
@@ -26,7 +28,15 @@ inline HasPtr& HasPtr::operator=(HasPtr rhs) {//頁518
     swap(rhs, *this);
     return *this;
 }
-
-
+inline bool HasPtr::operator<(const HasPtr& rhs) {
+    if ((*ps < *rhs.ps) && (i<=rhs.i))
+    {
+        return true;
+    }
+    return false;
+}
+inline std::string& HasPtr::getStr() {
+    return *ps;
+}
 
 #endif // !HASPTR_H
