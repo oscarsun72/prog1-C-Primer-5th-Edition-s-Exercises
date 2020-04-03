@@ -4,18 +4,17 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 #include<string>
-#include"TreeNode.h"
-#include"BinStrTree.h"
+#include"HasPtr.h"
+#include"Foo.h"
 using namespace std;
 int main() {
-	TreeNode tn,tn1("孫守真"),tn2(string("阿彌陀佛"));
-	tn = tn1;
-	TreeNode tn3(tn2);
-	tn = tn2;
-	tn1 = tn3;
-	BinStrTree bst("妙音如來"),bst1(bst),bst2,bstp(new TreeNode(tn3));
-	bst2 = bst;
-	bstp = bst2;
+	HasPtr hp,hp1("孫守真"),hp2(string("阿彌陀佛"));
+	hp = hp1;
+	Foo f(hp2),f1(hp1);
+	hp = hp2;
+	swap(f, f1);
+	swap(hp, hp1);
+	hp = hp;
 }
 
 //int main(int argc, const char** argv)

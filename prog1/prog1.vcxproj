@@ -154,8 +154,8 @@
     <ClCompile Include="prog1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BinStrTree.h" />
-    <ClInclude Include="TreeNode.h" />
+    <ClInclude Include="HasPtr.h" />
+    <ClInclude Include="Foo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

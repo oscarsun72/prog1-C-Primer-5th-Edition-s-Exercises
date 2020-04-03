@@ -20,10 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TreeNode.h">
+    <ClInclude Include="HasPtr.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="BinStrTree.h">
+    <ClInclude Include="Foo.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
