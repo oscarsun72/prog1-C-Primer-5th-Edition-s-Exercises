@@ -9,7 +9,8 @@
 using namespace std;
 
 int main() {
-	HasPtr hp("孫守真"), hp1("南無阿彌陀佛"), hp2("淨空老法師"), hp3("海賢老和尚"),hp4("常律老和尚"),hp5("白雲老禪師");
+	HasPtr hp("孫守真"), hp1("南無阿彌陀佛"), hp2("淨空老法師"), hp3("海賢老和尚"),hp4("常律老和尚"),hp5("白雲老禪師"),hp6;
+	hp6 = hp;
 	hp = hp1;
 }
 
