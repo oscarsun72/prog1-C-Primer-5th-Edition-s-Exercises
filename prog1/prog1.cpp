@@ -3,16 +3,18 @@
 
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
-#include<string>
+
+#include<iostream>
 #include"HasPtr.h"
+using namespace std;
+
 int main() {
-	HasPtr hp;	
-	HasPtr hp2("守真"),hp1(std::string("阿彌陀佛"));	
+	HasPtr hp("孫守真"), hp1("南無阿彌陀佛"), hp2("淨空老法師"), hp3("海賢老和尚"),hp4("常律老和尚"),hp5("白雲老禪師");
 	hp = hp1;
-	hp1 = hp2;
-	HasPtr hp3(hp1);
-	hp = hp;
 }
+
+
+
 
 //int main(int argc, const char** argv)
 //{
