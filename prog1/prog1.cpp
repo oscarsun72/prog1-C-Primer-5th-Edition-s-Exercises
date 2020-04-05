@@ -4,7 +4,7 @@
 //using std::cout; using std::cin;using std::endl;
 //#include<cassert>//前置處理器（preprocessor）偵錯、斷言（assert）
 
-#include<iostream>
+#include<iostream>//因為這裡include，所以HasPtr.h才可以不用再次include它；如果這行省略，HasPtr.h編譯上就會出現錯誤
 #include"HasPtr.h"
 using namespace std;
 

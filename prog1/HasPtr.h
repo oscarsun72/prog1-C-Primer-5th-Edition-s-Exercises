@@ -1,6 +1,7 @@
 ﻿#ifndef HASPTR_H
 #define HASPTR_H
 #include<string>
+//#include<iostream> //因為.cpp檔已include了，所以此可省略引用iostream
 class HasPtr//類指標行為的類別
 {
 	friend void swap(HasPtr&,HasPtr&);
